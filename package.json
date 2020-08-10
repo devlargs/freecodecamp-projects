@@ -1,7 +1,8 @@
 {
-  "name": "learn-starter",
+  "name": "freecodecamp-projects",
   "version": "0.1.0",
   "private": true,
+  "author": "Ralph Largo",
   "scripts": {
     "dev": "next dev -p 8000",
     "build": "next build",
