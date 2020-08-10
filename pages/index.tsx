@@ -6,6 +6,7 @@ export default function App() {
       <Head>
         <title>Free Code Camp</title>
       </Head>
+
       <h1>Initial Commit</h1>
     </>
   );
