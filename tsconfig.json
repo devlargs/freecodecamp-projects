@@ -19,11 +19,5 @@
     "baseUrl": "."
   },
   "exclude": ["node_modules"],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "pages/_app.tsx",
-    "hooks/useAxios"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_app.tsx"]
 }
