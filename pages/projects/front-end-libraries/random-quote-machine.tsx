@@ -5,9 +5,10 @@ import axios from "axios";
 import config from "constants/config";
 import getFontColor from "utils/getFontColor";
 import getRandomColor from "utils/getRandomColor";
-import { TwitterOutlined } from "@ant-design/icons";
+import { TwitterOutlined, LoadingOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTumblr } from "@fortawesome/free-brands-svg-icons";
+import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Root = styled.div`
   display: grid;
@@ -38,6 +39,7 @@ const Root = styled.div`
       color: ${(props) => getFontColor(props.bg)};
       height: 40px;
       margin-right: 5px;
+      mid-width: 40px;
     }
     .social {
       width: 40px;
@@ -79,8 +81,18 @@ export default ({ data }) => {
       </Head>
       <div id="quote-box">
         <div id="text">
-          <h1>{random.quote}</h1>
-          <h2 id="author">- {random.author} -</h2>
+          <h1>
+            {loading ? (
+              <LoadingOutlined />
+            ) : (
+              <>
+                <FontAwesomeIcon icon={faQuoteLeft} />
+                &nbsp;
+                {random.quote}
+              </>
+            )}
+          </h1>
+          {!loading && <h2 id="author">- {random.author} -</h2>}
           <br />
           <a
             style={{ float: "left" }}
@@ -107,9 +119,7 @@ export default ({ data }) => {
             id="new-quote"
             style={{ float: "right" }}
           >
-            <span style={{ opacity: loading ? 0.3 : 1 }}>
-              {loading ? "loading" : "Get New Quote"}
-            </span>
+            <span>{loading ? <LoadingOutlined /> : "Get New Quote"}</span>
           </a>
         </div>
       </div>
