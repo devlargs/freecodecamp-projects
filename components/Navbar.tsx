@@ -7,14 +7,14 @@ const { Header } = Layout;
 export default (): ReactElement => {
   return (
     <Root>
-      <Header>
+      <StyledHeader>
         <div className="logo" />
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="1">nav 1</Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>
           <Menu.Item key="3">nav 3</Menu.Item>
         </Menu>
-      </Header>
+      </StyledHeader>
     </Root>
   );
 };
@@ -27,5 +27,11 @@ const Root = styled.div`
     background: rgba(255, 255, 255, 0.2);
     margin: 16px 24px 16px 0;
     float: left;
+  }
+`;
+
+const StyledHeader = styled(Header)`
+  .ant-layout-header {
+    height: 20px;
   }
 `;

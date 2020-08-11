@@ -1,6 +1,7 @@
 import { Layout, Menu, Dropdown } from "antd";
 import Link from "next/link";
-import "../styles/global.css";
+import styled from "styled-components";
+import "styles/global.css";
 
 const { SubMenu } = Menu;
 const { Header, Footer, Content } = Layout;
@@ -39,18 +40,8 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <Layout className="layout">
-      <Header>
-        <div
-          className="logo"
-          style={{
-            width: 120,
-            height: 31,
-            color: "white",
-            background: "rgba(255, 255, 255, 0.2)",
-            margin: "16px 24px 16px 0",
-            float: "left",
-          }}
-        />
+      <StyledHeader>
+        <HeaderBox />
         <Menu theme="dark" mode="horizontal">
           <Menu.Item>
             <Dropdown
@@ -67,7 +58,7 @@ const App = ({ Component, pageProps }) => {
             </Dropdown>
           </Menu.Item>
         </Menu>
-      </Header>
+      </StyledHeader>
       <Content style={{ height: "calc(100vh - 64px - 70px)" }}>
         <Component {...pageProps} />
       </Content>
@@ -77,5 +68,16 @@ const App = ({ Component, pageProps }) => {
     </Layout>
   );
 };
+
+const HeaderBox = styled.div`
+  width: 120px;
+  height: 31px;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left;
+`;
+
+const StyledHeader = styled(Header)``;
 
 export default App;
