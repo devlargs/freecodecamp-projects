@@ -6,6 +6,8 @@ import config from "constants/config";
 import getFontColor from "utils/getFontColor";
 import getRandomColor from "utils/getRandomColor";
 import { TwitterOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTumblr } from "@fortawesome/free-brands-svg-icons";
 
 const Root = styled.div`
   display: grid;
@@ -36,6 +38,10 @@ const Root = styled.div`
       color: ${(props) => getFontColor(props.bg)};
       height: 40px;
       margin-right: 5px;
+    }
+    .social {
+      width: 40px;
+      text-align: center;
     }
   }
 `;
@@ -78,7 +84,8 @@ export default ({ data }) => {
           <br />
           <a
             style={{ float: "left" }}
-            className="random-button"
+            className="random-button social"
+            id="tweet-quote"
             href={`https://twitter.com/intent/tweet?hashtags=quotes&text=${encodeURIComponent(
               `"${random.quote}" \n ~ ${random.author}`
             )}`}
@@ -86,8 +93,13 @@ export default ({ data }) => {
           >
             <TwitterOutlined />
           </a>
-          <a style={{ float: "left" }} className="random-button">
-            t
+          <a
+            style={{ float: "left" }}
+            className="random-button social"
+            target="_blank"
+            href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp,devlargs&caption=${random.author}&content=${random.quote}&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button`}
+          >
+            <FontAwesomeIcon icon={faTumblr} />
           </a>
           <a
             onClick={generateNewQuote}
@@ -96,7 +108,7 @@ export default ({ data }) => {
             style={{ float: "right" }}
           >
             <span style={{ opacity: loading ? 0.3 : 1 }}>
-              {loading ? "loading..." : "Get New Quote"}
+              {loading ? "loading" : "Get New Quote"}
             </span>
           </a>
         </div>
