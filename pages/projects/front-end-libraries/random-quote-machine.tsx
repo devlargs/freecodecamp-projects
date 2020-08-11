@@ -1,21 +1,37 @@
 import Head from "next/head";
 import styled from "styled-components";
 import axios from "axios";
-import { useEffect, useState } from "react";
 
-export default (props) => {
+const Root = styled.div`
+  display: grid;
+  place-items: center;
+  height: 100%;
+  background-color: red;
+  color: white;
+  #quote-box {
+    width: 50vh;
+    #text {
+      h1,
+      h2 {
+        text-align: center;
+      }
+    }
+  }
+`;
+
+export default ({ data }) => {
   return (
-    <>
+    <Root>
       <Head>
         <title>Random Quote Machine</title>
       </Head>
       <div id="quote-box">
         <div id="text">
-          <h1>Random Quote Machine</h1>
-          <h2 id="author">Ralph Largo</h2>
+          <h1>{data[0].quote}</h1>
+          <h2 id="author">{data[0].author}</h2>
         </div>
       </div>
-    </>
+    </Root>
   );
 };
 
