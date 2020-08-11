@@ -8,7 +8,7 @@ export default function App() {
       <Head>
         <title>Free Code Camp Projects</title>
       </Head>
-      <Root className="h-calculated">
+      <Root>
         <Particles
           params={{
             particles: {
@@ -64,6 +64,7 @@ export default function App() {
         />
         <div id="container">
           <img
+            style={{ marginBottom: 20 }}
             src="https://design-style-guide.freecodecamp.org/downloads/fcc_secondary_small.svg"
             width={100}
             height={100}
@@ -84,9 +85,18 @@ export default function App() {
   );
 }
 
+export async function getStaticProps(context) {
+  return {
+    props: {
+      path: "/",
+    },
+  };
+}
+
 const Root = styled.div`
   display: flex;
   width: 100vw;
+  height: calc(100vh - 64px);
   align-items: center;
   justify-content: center;
   background-color: #c3a9ff;
@@ -106,7 +116,7 @@ const Root = styled.div`
     }
   }
   #tsparticles {
-    height: calc(100vh - 64px - 70px);
+    height: calc(100vh - 64px);
     position: absolute;
     width: 100vw;
     z-index: 1;

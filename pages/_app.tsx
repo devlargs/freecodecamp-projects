@@ -6,6 +6,7 @@ import "styles/global.css";
 const { SubMenu } = Menu;
 const { Header, Footer, Content } = Layout;
 const App = ({ Component, pageProps }) => {
+  console.log(pageProps);
   const menu = (
     <Menu style={{ marginTop: 10 }}>
       <SubMenu title="Front End Libraries">
@@ -44,6 +45,9 @@ const App = ({ Component, pageProps }) => {
         <HeaderBox />
         <Menu theme="dark" mode="horizontal">
           <Menu.Item>
+            <Link href="/">Home</Link>
+          </Menu.Item>
+          <Menu.Item>
             <Dropdown
               overlay={menu}
               getPopupContainer={() => document.getElementById("projects")}
@@ -62,12 +66,17 @@ const App = ({ Component, pageProps }) => {
       <Content style={{ height: "calc(100vh - 64px - 70px)" }}>
         <Component {...pageProps} />
       </Content>
-      <Footer style={{ textAlign: "center" }}>
-        Free Code Camp Projects © 2020 Created by{" "}
-        <a href="http://github.com/devlargs" target="_blank">
-          Ralph Largo
-        </a>
-      </Footer>
+
+      {pageProps?.path === "/" ? (
+        <></>
+      ) : (
+        <Footer style={{ textAlign: "center" }}>
+          Free Code Camp Projects © 2020 Created by{" "}
+          <a href="http://github.com/devlargs" target="_blank">
+            Ralph Largo
+          </a>
+        </Footer>
+      )}
     </Layout>
   );
 };
