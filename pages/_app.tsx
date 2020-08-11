@@ -63,7 +63,10 @@ const App = ({ Component, pageProps }) => {
         <Component {...pageProps} />
       </Content>
       <Footer style={{ textAlign: "center" }}>
-        freeCodeCampProjects © 2020 Created by @devlargs
+        Free Code Camp Projects © 2020 Created by{" "}
+        <a href="http://github.com/devlargs" target="_blank">
+          Ralph Largo
+        </a>
       </Footer>
     </Layout>
   );
