@@ -9,6 +9,7 @@ import { TwitterOutlined, LoadingOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTumblr } from "@fortawesome/free-brands-svg-icons";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 const Root = styled.div`
   display: grid;
@@ -58,6 +59,7 @@ export default ({ data }) => {
   ] = useState(data);
   const [loading, setLoading] = useState(false);
   const [randomColor, setRandomColor] = useState(getRandomColor());
+  const [rotation, setRotation] = useState(360);
 
   const generateNewQuote = async () => {
     setLoading(true);
@@ -71,6 +73,7 @@ export default ({ data }) => {
       setLoading(false);
     }
     setRandomColor(getRandomColor());
+    setRotation((val) => val + 360);
   };
 
   return (
@@ -79,9 +82,17 @@ export default ({ data }) => {
         <title>Random Quote Machine</title>
         <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
       </Head>
-      <div id="quote-box">
+      <motion.div id="quote-box">
         <div id="text">
-          <h1>
+          <motion.h1
+            // animate={{
+            //   rotate: 360,
+            // }}
+            // transition={{ ease: "easeIn", duration: 2 }}
+            // transition={{ duration: 1 }}
+            animate={{ rotate: rotation }}
+            transition={{ ease: "easeOut", duration: 0.8 }}
+          >
             {loading ? (
               <LoadingOutlined />
             ) : (
@@ -91,10 +102,11 @@ export default ({ data }) => {
                 {random.quote}
               </>
             )}
-          </h1>
+          </motion.h1>
           {!loading && <h2 id="author">- {random.author} -</h2>}
           <br />
-          <a
+          <motion.a
+            whileHover={{ scale: 1.1 }}
             style={{ float: "left" }}
             className="random-button social"
             id="tweet-quote"
@@ -104,25 +116,27 @@ export default ({ data }) => {
             target="_blank"
           >
             <TwitterOutlined />
-          </a>
-          <a
+          </motion.a>
+          <motion.a
+            whileHover={{ scale: 1.1 }}
             style={{ float: "left" }}
             className="random-button social"
             target="_blank"
             href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp,devlargs&caption=${random.author}&content=${random.quote}&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button`}
           >
             <FontAwesomeIcon icon={faTumblr} />
-          </a>
-          <a
+          </motion.a>
+          <motion.a
+            whileHover={{ scale: 1.1 }}
             onClick={generateNewQuote}
             className="random-button"
             id="new-quote"
             style={{ float: "right" }}
           >
             <span>{loading ? <LoadingOutlined /> : "Get New Quote"}</span>
-          </a>
+          </motion.a>
         </div>
-      </div>
+      </motion.div>
     </Root>
   );
 };
