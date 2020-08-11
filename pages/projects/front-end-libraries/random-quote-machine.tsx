@@ -127,7 +127,7 @@ export default ({ data }) => {
   );
 };
 
-export async function getStaticProps(context) {
+export async function getInitialProps() {
   try {
     const res = (await axios.get(`${config.API_URL}/quotes/random`)) as any;
 
