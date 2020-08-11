@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "antd": "^4.5.3",
+    "axios": "^0.19.2",
+    "mongoose": "^5.9.28",
     "next": "9.3.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",

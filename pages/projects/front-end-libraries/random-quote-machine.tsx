@@ -1,35 +1,30 @@
 import Head from "next/head";
 import styled from "styled-components";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-export default () => {
+export default (props) => {
   return (
     <>
       <Head>
         <title>Random Quote Machine</title>
-        {/* <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> */}
       </Head>
-      <Root id="quote-box">
+      <div id="quote-box">
         <div id="text">
           <h1>Random Quote Machine</h1>
           <h2 id="author">Ralph Largo</h2>
         </div>
-      </Root>
+      </div>
     </>
   );
 };
 
-const Root = styled.div`
-  display: grid;
-  background-color: 
-  place-items: center;
-  height: calc(100vh - 64px - 70px);
-  h1,
-  h2 {
-    text-align: center;
-  }
-  #text {
-    padding: 20px;
-    border: 2px solid black;
-    background-color: gray;
-  }
-`;
+export async function getStaticProps(context) {
+  const res = (await axios.get("http://api.ralphlargo.com/quotes")) as any;
+
+  return {
+    props: {
+      data: res?.data?.data || [],
+    },
+  };
+}

@@ -10,55 +10,27 @@ const App = ({ Component, pageProps }) => {
       <SubMenu title="Front End Libraries">
         <Menu.Item>
           <Link href="/projects/front-end-libraries/random-quote-machine">
-            Random Quote Machine
+            <a>Random Quote Machine</a>
           </Link>
         </Menu.Item>
         <Menu.Item>
           <Link href="/projects/front-end-libraries/markdown-previewer">
-            Markdown Previewer
+            <a>Markdown Previewer</a>
           </Link>
         </Menu.Item>
         <Menu.Item>
           <Link href="/projects/front-end-libraries/drum-machine">
-            Drum Machine
+            <a>Drum Machine</a>
           </Link>
         </Menu.Item>
         <Menu.Item>
           <Link href="/projects/front-end-libraries/javascript-calculator">
-            Javascript Calculator
+            <a>Javascript Calculator</a>
           </Link>
         </Menu.Item>
         <Menu.Item>
           <Link href="/projects/front-end-libraries/pomodoro-clock">
-            Pomodoro Clock
-          </Link>
-        </Menu.Item>
-      </SubMenu>
-
-      <SubMenu title="Data Visualization">
-        <Menu.Item>
-          <Link href="/projects/front-end-libraries/random-quote-machine">
-            Random Quote Machine
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link href="/projects/front-end-libraries/markdown-previewer">
-            Markdown Previewer
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link href="/projects/front-end-libraries/drum-machine">
-            Drum Machine
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link href="/projects/front-end-libraries/javascript-calculator">
-            Javascript Calculator
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link href="/projects/front-end-libraries/pomodoro-clock">
-            Pomodoro Clock
+            <a>Pomodoro Clock</a>
           </Link>
         </Menu.Item>
       </SubMenu>
