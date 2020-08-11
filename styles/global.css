@@ -1,4 +1,8 @@
 @import "~antd/dist/antd.css";
+/* 
+@tailwind base;
+@tailwind components;
+@tailwind utilities; */
 
 html,
 body {
@@ -8,4 +12,8 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+.h-calculated {
+  height: calc(100vh - 64px - 70px);
 }
