@@ -1,3 +1,3 @@
 export default {
-  API_URL: "https://api-ralphlargo.herokuapp.com/",
+  API_URL: "https://api-ralphlargo.herokuapp.com",
 };
