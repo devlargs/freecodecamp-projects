@@ -85,11 +85,6 @@ export default ({ data }) => {
       <motion.div id="quote-box">
         <div id="text">
           <motion.h1
-            // animate={{
-            //   rotate: 360,
-            // }}
-            // transition={{ ease: "easeIn", duration: 2 }}
-            // transition={{ duration: 1 }}
             animate={{ rotate: rotation }}
             transition={{ ease: "easeOut", duration: 0.8 }}
           >
@@ -103,7 +98,7 @@ export default ({ data }) => {
               </>
             )}
           </motion.h1>
-          {!loading && <h2 id="author">- {random.author} -</h2>}
+          <h2 id="author">{loading ? <></> : `- ${random.author} -`}</h2>
           <br />
           <motion.a
             whileHover={{ scale: 1.1 }}
