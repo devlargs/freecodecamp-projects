@@ -17,9 +17,7 @@ export default () => {
             <h1 style={{ color: "#041429" }}>{project.name} Projects</h1>
             <Flexbox>
               {project.list.map((q) => {
-                console.log(q);
                 const title = convertString(q, "sentence", "kebab");
-                console.log(title);
                 return (
                   <Link href={`/projects/${key}/${title}`}>
                     <motion.div

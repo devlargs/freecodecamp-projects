@@ -2,7 +2,6 @@ import { useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import axios from "axios";
-import config from "constants/config";
 import getFontColor from "utils/getFontColor";
 import getRandomColor from "utils/getRandomColor";
 import { TwitterOutlined, LoadingOutlined } from "@ant-design/icons";
@@ -10,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTumblr } from "@fortawesome/free-brands-svg-icons";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
+import staticQuote from "constants/quotes";
 
 const Root = styled.div`
   display: grid;
@@ -49,11 +49,8 @@ const Root = styled.div`
   }
 `;
 
-export default () => {
-  const [random, setRandom] = useState({
-    quote: "The way to get started is to quit talking and begin doing",
-    author: "Walt Disney",
-  });
+export default ({ data }) => {
+  const [random, setRandom] = useState(data?.author ? data : staticQuote());
   const [loading, setLoading] = useState(false);
   const [randomColor, setRandomColor] = useState(getRandomColor());
   const [rotation, setRotation] = useState(360);
@@ -61,10 +58,8 @@ export default () => {
   const generateNewQuote = async () => {
     setLoading(true);
     try {
-      const { data } = (await axios.get(
-        `${config.API_URL}/quotes/random`
-      )) as any;
-      setRandom(data.data);
+      const { data } = (await axios.get(`/api/quotes/random`)) as any;
+      setRandom(data.edges);
       setLoading(false);
     } catch (ex) {
       setLoading(false);
@@ -132,3 +127,23 @@ export default () => {
     </Root>
   );
 };
+
+export async function getServerSideProps() {
+  try {
+    const response = await axios.get(`${process.env.API_URL}/quotes/random`);
+
+    if (response?.data?.success) {
+      return {
+        props: {
+          data: response?.data?.edges,
+        },
+      };
+    } else {
+      throw new Error();
+    }
+  } catch (ex) {
+    return {
+      props: {},
+    };
+  }
+}
