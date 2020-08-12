@@ -64,7 +64,16 @@ const App = ({ Component, pageProps }) => {
       {pageProps?.path === "/" ? (
         <></>
       ) : (
-        <Footer style={{ textAlign: "center" }}>
+        <Footer
+          style={{
+            textAlign: "center",
+
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+          }}
+        >
           Free Code Camp Projects © 2020 Created by{" "}
           <a href="http://github.com/devlargs" target="_blank">
             Ralph Largo
