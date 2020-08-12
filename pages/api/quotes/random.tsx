@@ -9,8 +9,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case "GET":
       try {
-        const quotes = await Quotes.find({});
-        res.status(200).json({ success: true, data: quotes });
+        const count = await Quotes.count();
+        const quotes = await Quotes.findOne().skip(
+          Math.floor(Math.random() * count)
+        );
+        res.status(200).json({ success: true, edges: quotes });
       } catch (error) {
         res.status(400).json({ success: false, error });
       }
