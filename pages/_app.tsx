@@ -6,7 +6,6 @@ import "styles/global.css";
 const { SubMenu } = Menu;
 const { Header, Footer, Content } = Layout;
 const App = ({ Component, pageProps }) => {
-  console.log(pageProps);
   const menu = (
     <Menu style={{ marginTop: 10 }}>
       <SubMenu title="Front End Libraries">

@@ -49,14 +49,11 @@ const Root = styled.div`
   }
 `;
 
-export default ({ data }) => {
-  const [
-    random = {
-      quote: "The way to get started is to quit talking and begin doing",
-      author: "Walt Disney",
-    },
-    setRandom,
-  ] = useState(data);
+export default () => {
+  const [random, setRandom] = useState({
+    quote: "The way to get started is to quit talking and begin doing",
+    author: "Walt Disney",
+  });
   const [loading, setLoading] = useState(false);
   const [randomColor, setRandomColor] = useState(getRandomColor());
   const [rotation, setRotation] = useState(360);
@@ -135,21 +132,3 @@ export default ({ data }) => {
     </Root>
   );
 };
-
-export async function getInitialProps() {
-  try {
-    const res = (await axios.get(`${config.API_URL}/quotes/random`)) as any;
-
-    return {
-      props: {
-        data: res?.data?.data || {},
-      },
-    };
-  } catch (ex) {
-    return {
-      props: {
-        data: {},
-      },
-    };
-  }
-}

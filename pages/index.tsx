@@ -65,9 +65,9 @@ export default function App() {
         <div id="container">
           <img
             style={{ marginBottom: 20 }}
-            src="https://design-style-guide.freecodecamp.org/downloads/fcc_secondary_small.svg"
-            width={100}
-            height={100}
+            src="/assets/images/freecodecamp.png"
+            width={200}
+            height={200}
           />
           <h1>
             Free Code Camp Projects
@@ -99,17 +99,19 @@ const Root = styled.div`
   height: calc(100vh - 64px);
   align-items: center;
   justify-content: center;
-  background-color: #c3a9ff;
+  background-color: #20a76e;
   text-align: center;
   line-height: 5rem;
   #container {
     h1 {
-      color: #041529;
+      color: white;
       font-size: 5rem;
+      font-weight: bold;
+      margin-top: -30px;
       span {
         font-size: 2rem;
         a {
-          color: #349dd0;
+          color: black;
           z-index: 999;
         }
       }
