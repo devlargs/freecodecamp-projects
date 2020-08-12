@@ -61,7 +61,7 @@ const Root = styled.div`
   background-color: #20a76e;
   padding: 40px;
   h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
   }
 `;
