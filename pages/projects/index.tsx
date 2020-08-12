@@ -27,6 +27,12 @@ export default () => {
                         scale: 1.1,
                         transition: { duration: 0.5 },
                       }}
+                      initial="hidden"
+                      animate="visible"
+                      variants={{
+                        visible: { opacity: 1 },
+                        hidden: { opacity: 0 },
+                      }}
                       className="container"
                     >
                       <Card
