@@ -47,6 +47,9 @@ const App = ({ Component, pageProps }) => {
             <Link href="/">Home</Link>
           </Menu.Item>
           <Menu.Item>
+            <Link href="/projects">Projects</Link>
+          </Menu.Item>
+          <Menu.Item>
             <Dropdown
               overlay={menu}
               getPopupContainer={() => document.getElementById("projects")}
