@@ -40,31 +40,23 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <Layout className="layout">
-      <StyledHeader>
-        <HeaderBox />
-        <Menu theme="dark" mode="horizontal">
-          <Menu.Item>
-            <Link href="/">Home</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link href="/projects">Projects</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Dropdown
-              overlay={menu}
-              getPopupContainer={() => document.getElementById("projects")}
-            >
-              <a
-                id="projects"
-                className="ant-dropdown-link"
-                onClick={(e) => e.preventDefault()}
-              >
-                Projects
-              </a>
-            </Dropdown>
-          </Menu.Item>
-        </Menu>
-      </StyledHeader>
+      <Header style={{ padding: 0, paddingTop: 10 }}>
+        <HeaderContent>
+          <div className="header">
+            <Link href="/">
+              <a className="logo">FCC</a>
+            </Link>
+            <div className="header-right">
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+              <Link href="/projects">
+                <a>Projects</a>
+              </Link>
+            </div>
+          </div>
+        </HeaderContent>
+      </Header>
       <Content style={{ height: "calc(100vh - 64px - 70px)" }}>
         <Component {...pageProps} />
       </Content>
@@ -83,15 +75,54 @@ const App = ({ Component, pageProps }) => {
   );
 };
 
-const HeaderBox = styled.div`
-  width: 120px;
-  height: 31px;
-  color: white;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px 24px 16px 0;
-  float: left;
-`;
+const HeaderContent = styled.div`
+  .header {
+    overflow: hidden;
+    background-color: #041529;
+    padding: 0 50px 0px 50px;
+  }
 
-const StyledHeader = styled(Header)``;
+  .header a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+  }
+
+  .header a.logo {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .header a:hover {
+    color: white;
+  }
+
+  .header a.active {
+    background-color: #20a76e;
+    color: white;
+  }
+
+  .header-right {
+    float: right;
+  }
+
+  @media screen and (max-width: 500px) {
+    .header a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+
+    .header-right {
+      float: none;
+    }
+  }
+`;
 
 export default App;
