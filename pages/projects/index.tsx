@@ -41,7 +41,7 @@ export default () => {
                         cover={
                           <img
                             height="200"
-                            alt="example"
+                            alt={`${title}-image`}
                             src={`/assets/images/projects/${title}.png`}
                           />
                         }
