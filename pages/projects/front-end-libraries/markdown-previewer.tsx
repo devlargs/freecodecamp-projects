@@ -2,18 +2,21 @@ import { useState, useEffect } from "react";
 import Markdown from "react-markdown";
 import styled from "styled-components";
 import { Card } from "antd";
-import Head from "next/head";
 import markdownExample from "constants/markdown";
+import meta from "constants/meta";
+import SEO from "components/SEO";
 
 export default () => {
   const [source, setSource] = useState(markdownExample);
 
   return (
     <Root>
-      <Head>
-        <title>Markdown Previewer</title>
-        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
-      </Head>
+      <SEO
+        title="Markdown Previewer"
+        withFCCScript
+        description={meta.description("Markdown Previewer")}
+        imageUrl={`/assets/images/projects/markdown-previewer.png`}
+      />
       <StyledHeading>Markdown Previewer</StyledHeading>
       <Content>
         <div id="editor-div">

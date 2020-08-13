@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Head from "next/head";
+import meta from "constants/meta";
+import SEO from "components/SEO";
 
 export default () => {
   const [currentKey, setCurrentKey] = useState("Drum Machine");
@@ -33,14 +34,16 @@ export default () => {
 
   return (
     <>
-      <Head>
-        <title>Drum Machine</title>
-        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
-      </Head>
+      <SEO
+        title="Drum Machine"
+        withFCCScript
+        description={meta.description("Drum Machine")}
+        imageUrl={`/assets/images/projects/drum-machine.png`}
+      />
       <Root className="h-calculated" id="drum-machine">
         <div className="d-grid">
           <div className="d-grid-container">
-            <h1 id="display">{currentKey.replace("-", " ")}</h1>
+            <h1 id="display">{currentKey?.replace("-", " ")}</h1>
 
             <div className="grid-content">
               {"QWEASDZXC".split("").map((q: string) => (
@@ -50,7 +53,9 @@ export default () => {
                   id={`drum-pad-${q}`}
                   onClick={() => playKey(`Key${q}`, false)}
                   whileTap={{
-                    rotate: Math.floor(Math.random() * 10),
+                    rotate:
+                      Math.floor(Math.random() * 20) *
+                      (Math.random() > 0.5 ? -1 : 1),
                     scale: 1.1,
                   }}
                 >

@@ -1,11 +1,31 @@
+import { useRouter } from "next/router";
 import { Layout, Menu, Dropdown } from "antd";
 import Link from "next/link";
 import styled from "styled-components";
 import "styles/global.css";
+import NProgress from "nprogress";
+import { useEffect } from "react";
 
 const { SubMenu } = Menu;
 const { Header, Footer, Content } = Layout;
 const App = ({ Component, pageProps }) => {
+  const router = useRouter();
+  useEffect(() => {
+    const nprogressStart = () => NProgress.start();
+    const nprogressDone = () => {
+      NProgress.done();
+    };
+    router.events.on("routeChangeStart", nprogressStart);
+    router.events.on("routeChangeComplete", nprogressDone);
+    router.events.on("routeChangeError", nprogressDone);
+
+    return () => {
+      router.events.off("routeChangeStart", nprogressStart);
+      router.events.off("routeChangeComplete", nprogressDone);
+      router.events.off("routeChangeError", nprogressDone);
+    };
+  }, []);
+
   const menu = (
     <Menu style={{ marginTop: 10 }}>
       <SubMenu title="Front End Libraries">
