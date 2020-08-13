@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Markdown from "react-markdown";
 import styled from "styled-components";
 import { Card } from "antd";
@@ -7,6 +7,7 @@ import markdownExample from "constants/markdown";
 
 export default () => {
   const [source, setSource] = useState(markdownExample);
+
   return (
     <Root>
       <Head>
@@ -17,7 +18,7 @@ export default () => {
       <Content>
         <div id="editor-div">
           <div id="textarea">
-            <Card title="Editor" bordered={false}>
+            <StyledCard title="Editor" bordered={false}>
               <textarea
                 id="editor"
                 value={source}
@@ -25,23 +26,31 @@ export default () => {
                   setSource(e.target.value);
                 }}
               />
-            </Card>
+            </StyledCard>
           </div>
         </div>
         <div id="preview-div">
-          <Card title="Markdown Preview" bordered={false}>
+          <StyledCard title="Markdown Preview" bordered={false}>
             <div id="preview">
               <Markdown source={source} escapeHtml={false} />
             </div>
-          </Card>
+          </StyledCard>
         </div>
       </Content>
     </Root>
   );
 };
 
+const StyledCard = styled(Card)`
+  .ant-card-head {
+    background-color: #041429;
+    color: white;
+  }
+`;
+
 const StyledHeading = styled.div`
   text-align: center;
+  // border: 1px solid black;
   font-size: 2rem;
   color: white;
   padding-top: 1rem;
@@ -66,9 +75,25 @@ const Content = styled.div`
     border: 1px solid lightgray;
     padding: 20px;
   }
+  #preview {
+    pre {
+      background-color: #282828;
+      padding: 10px;
+      code {
+        color: white;
+      }
+    }
+    table {
+      padding: 5px;
+      thead,
+      tbody {
+        border: 1px solid black;
+      }
+    }
+  }
 `;
 
 const Root = styled.div`
-  background-color: #20a76e;
+  background-color: #2993a5;
   height: 100%;
 `;

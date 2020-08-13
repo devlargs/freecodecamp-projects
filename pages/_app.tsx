@@ -39,7 +39,7 @@ const App = ({ Component, pageProps }) => {
   );
 
   return (
-    <Layout className="layout">
+    <Layout className="layout" style={{ background: "#20A76E" }}>
       <Header style={{ padding: 0, paddingTop: 10 }}>
         <HeaderContent>
           <div className="header">
