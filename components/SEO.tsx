@@ -5,7 +5,8 @@ type Props = {
   withFCCScript?: boolean;
   title: string;
   description: string;
-  imageUrl: string;
+  imageUrl?: string;
+  imageLink?: string;
 };
 
 export default ({
@@ -13,6 +14,7 @@ export default ({
   withFCCScript = false,
   title,
   imageUrl,
+  imageLink,
 }: Props) => {
   const router = useRouter();
   const origin = process.browser
@@ -20,7 +22,8 @@ export default ({
     : process.env.WEBSITE_URL;
 
   const url = `${origin}${router?.pathname}`;
-  const imgUrl = `${origin}${imageUrl}`;
+  console.log(imageLink);
+  const imgUrl = imageLink ? imageLink : `${origin}${imageUrl}`;
 
   return (
     <Head>

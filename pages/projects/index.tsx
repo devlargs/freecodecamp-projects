@@ -4,59 +4,71 @@ import { motion } from "framer-motion";
 import projects from "constants/projects";
 import convertString from "utils/convertString";
 import Link from "next/link";
+import meta from "constants/meta";
+import SEO from "components/SEO";
 
 const { Meta } = Card;
 
 export default () => {
   return (
-    <Root>
-      {projects.map((project) => {
-        const key = convertString(project.name, "sentence", "kebab");
-        return (
-          <Container key={key}>
-            <h1 style={{ color: "#041429" }}>{project.name} Projects</h1>
-            <Flexbox>
-              {project.list.map((q, i) => {
-                const title = convertString(q, "sentence", "kebab");
-                return (
-                  <Link key={`${key}-${i}`} href={`/projects/${key}/${title}`}>
-                    <motion.div
-                      whileHover={{
-                        scale: 1.1,
-                        transition: { duration: 0.5 },
-                      }}
-                      initial="hidden"
-                      animate="visible"
-                      variants={{
-                        visible: { opacity: 1 },
-                        hidden: { opacity: 0 },
-                      }}
-                      className="container"
+    <>
+      <SEO
+        title="Free Code Camp Projects"
+        description="List of some of the freecodecamp.org projects created by Ralph Largo"
+        imageLink={`https://www.freecodecamp.org/news/content/images/2019/11/fcc_ghost_publication_cover.png`}
+      />
+      <Root>
+        {projects.map((project) => {
+          const key = convertString(project.name, "sentence", "kebab");
+          return (
+            <Container key={key}>
+              <h1 style={{ color: "#041429" }}>{project.name} Projects</h1>
+              <Flexbox>
+                {project.list.map((q, i) => {
+                  const title = convertString(q, "sentence", "kebab");
+                  return (
+                    <Link
+                      key={`${key}-${i}`}
+                      href={`/projects/${key}/${title}`}
                     >
-                      <Card
-                        style={{
-                          width: 300,
-                          cursor: "pointer",
+                      <motion.div
+                        whileHover={{
+                          scale: 1.1,
+                          transition: { duration: 0.5 },
                         }}
-                        cover={
-                          <img
-                            height="200"
-                            alt={`${title}-image`}
-                            src={`/assets/images/projects/${title}.png`}
-                          />
-                        }
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                          visible: { opacity: 1 },
+                          hidden: { opacity: 0 },
+                        }}
+                        className="container"
                       >
-                        <Meta title={q} />
-                      </Card>
-                    </motion.div>
-                  </Link>
-                );
-              })}
-            </Flexbox>
-          </Container>
-        );
-      })}
-    </Root>
+                        <Card
+                          style={{
+                            width: 300,
+                            cursor: "pointer",
+                          }}
+                          cover={
+                            <img
+                              height="200"
+                              alt={`${title}-image`}
+                              src={`/assets/images/projects/${title}.png`}
+                            />
+                          }
+                        >
+                          <Meta title={q} />
+                        </Card>
+                      </motion.div>
+                    </Link>
+                  );
+                })}
+              </Flexbox>
+            </Container>
+          );
+        })}
+      </Root>
+    </>
   );
 };
 
