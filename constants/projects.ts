@@ -4,7 +4,7 @@ export default [
     list: [
       "Random Quote Machine",
       "Markdown Previewer",
-      // "Drum Machine",
+      "Drum Machine",
       // "Javascript Calculator",
       // "Pomodoro Clock",
     ],
