@@ -7,6 +7,7 @@ type Props = {
   description: string;
   imageUrl?: string;
   imageLink?: string;
+  imgAlt?: string;
 };
 
 export default ({
@@ -15,6 +16,7 @@ export default ({
   title,
   imageUrl,
   imageLink,
+  imgAlt,
 }: Props) => {
   const router = useRouter();
   const origin = process.browser
@@ -37,6 +39,7 @@ export default ({
       <meta name="twitter:description" content={description} />
       <meta name="og:url" content={url} />
       <meta name="og:image" content={imgUrl} />
+      <meta name="og:image_alt" content={imgAlt || "freecodecamp-image"} />
       <meta name="twitter:url" content={url} />
       <meta name="twitter:image" content={imgUrl} />
 

@@ -40,7 +40,23 @@ export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-175345501-1"
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `<script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+  
+            gtag('config', 'UA-175345501-1');
+          </script>`,
+            }}
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
