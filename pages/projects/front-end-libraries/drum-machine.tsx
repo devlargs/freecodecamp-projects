@@ -1,7 +1,38 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 export default () => {
+  const playKey = (e, keypress = true) => {
+    const key = (keypress ? e.code : e).split("Key")[1];
+
+    const file = {
+      Q: "Heater-1",
+      W: "Heater-2",
+      E: "Heater-3",
+      A: "Break-Snare",
+      S: "Disc",
+      D: "Dry",
+      Z: "Kick",
+      X: "Punchy-Kick",
+      C: "Side-Stick",
+    };
+
+    if (Object.keys(file).includes(key)) {
+      var snd = new Audio(`/assets/sounds/${file[key]}.mp3`);
+      snd.currentTime = 0;
+      snd.play();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", playKey);
+
+    return () => {
+      window.removeEventListener("keydown", playKey);
+    };
+  }, []);
+
   return (
     <Root className="h-calculated">
       <div className="d-grid">
@@ -11,8 +42,11 @@ export default () => {
           <div className="grid-content">
             {"QWEASDZXC".split("").map((q: string) => (
               <motion.div
+                key={q}
+                id={q}
+                onClick={() => playKey(`Key${q}`, false)}
                 whileTap={{
-                  rotate: Math.floor(Math.random() * 90),
+                  rotate: Math.floor(Math.random() * 10),
                   scale: 1.1,
                 }}
               >
@@ -30,11 +64,6 @@ const Root = styled.div`
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
-
-  /*
-     Introduced in IE 10.
-     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-   */
   -ms-user-select: none;
   user-select: none;
   background-color: #ececec;
@@ -44,6 +73,7 @@ const Root = styled.div`
     place-items: center;
     h1 {
       text-align: center;
+      font-size: 2rem;
     }
     .d-grid-container {
       background-color: #e17b20;
