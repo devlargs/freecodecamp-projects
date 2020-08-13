@@ -47,13 +47,12 @@ export default class MyDocument extends Document {
           ></script>
           <script
             dangerouslySetInnerHTML={{
-              __html: `<script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-  
-            gtag('config', 'UA-175345501-1');
-          </script>`,
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'UA-175345501-1');
+            `,
             }}
           />
         </Head>
