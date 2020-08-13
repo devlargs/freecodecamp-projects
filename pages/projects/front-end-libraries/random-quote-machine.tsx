@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Head from "next/head";
 import styled from "styled-components";
 import axios from "axios";
 import getFontColor from "utils/getFontColor";
@@ -10,6 +9,8 @@ import { faTumblr } from "@fortawesome/free-brands-svg-icons";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import staticQuote from "constants/quotes";
+import meta from "constants/meta";
+import SEO from "components/SEO";
 
 const Root = styled.div`
   display: grid;
@@ -70,10 +71,12 @@ export default ({ data }) => {
 
   return (
     <Root bg={randomColor}>
-      <Head>
-        <title>Random Quote Machine</title>
-        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
-      </Head>
+      <SEO
+        title="Random Quote Machine"
+        withFCCScript
+        description={meta.description("Random Quote Machine")}
+        imageUrl={`/assets/images/projects/random-quote-machine.png`}
+      />
       <motion.div id="quote-box">
         <div id="text">
           <motion.h1
@@ -130,7 +133,9 @@ export default ({ data }) => {
 
 export async function getServerSideProps() {
   try {
-    const response = await axios.get(`${process.env.API_URL}/quotes/random`);
+    const response = await axios.get(
+      `${process.env.WEBSITE_URL}/api/quotes/random`
+    );
 
     if (response?.data?.success) {
       return {
