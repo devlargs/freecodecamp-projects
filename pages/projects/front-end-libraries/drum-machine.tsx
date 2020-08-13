@@ -1,21 +1,25 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export default () => {
   return (
     <Root className="h-calculated">
-      <h1>Ralphlargo</h1>
-
       <div className="d-grid">
-        <div className="grid">
-          <div>Q</div>
-          <div>W</div>
-          <div>E</div>
-          <div>A</div>
-          <div>S</div>
-          <div>D</div>
-          <div>Z</div>
-          <div>X</div>
-          <div>C</div>
+        <div className="d-grid-container">
+          <h1>Drum Machine</h1>
+
+          <div className="grid-content">
+            {"QWEASDZXC".split("").map((q: string) => (
+              <motion.div
+                whileTap={{
+                  rotate: Math.floor(Math.random() * 90),
+                  scale: 1.1,
+                }}
+              >
+                {q}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </Root>
@@ -23,7 +27,17 @@ export default () => {
 };
 
 const Root = styled.div`
-  background-color: red;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+
+  /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #ececec;
   .d-grid {
     display: grid;
     height: 100%;
@@ -31,27 +45,37 @@ const Root = styled.div`
     h1 {
       text-align: center;
     }
-    .grid {
-      display: grid;
-      grid-gap: 10px;
-      grid-template-columns: repeat(3, 1fr);
-      place-items: center;
-    }
+    .d-grid-container {
+      background-color: #e17b20;
+      border: 10px solid white;
 
-    div {
-      display: grid;
-      place-items: center;
-    }
-
-    div > div {
-      width: 100px;
-      height: 100px;
-      border: 5px solid black;
-      padding: 10px;
-      background-color: white;
-      font-weight: bold;
-      border-radius: 10px;
-      font-size: 1.5rem;
+      h1 {
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+      }
+      padding: 20px;
+      .grid-content {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+        place-items: center;
+        div {
+          width: 100px;
+          height: 100px;
+          border: 3px solid white;
+          padding: 10px;
+          background-color: #53616f;
+          font-weight: bold;
+          color: white;
+          border-radius: 10px;
+          font-size: 1.5rem;
+        }
+      }
+      div {
+        display: grid;
+        place-items: center;
+      }
     }
   }
 `;
