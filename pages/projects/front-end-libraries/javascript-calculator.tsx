@@ -1,31 +1,109 @@
 import styled from "styled-components";
+import SEO from "components/SEO";
+import meta from "constants/meta";
+import { useState } from "react";
+
+const operations = ["+", "-", "X", "/"];
+const operandRegex = /[+-]|[\/]|[*]/gi;
+const numbers = "1234567890";
 
 export default () => {
+  const [value, setValue] = useState("0");
+
+  const numpads = {
+    clear: "CLEAR",
+    divide: "/",
+    multiply: "X",
+    seven: "7",
+    eight: "8",
+    nine: "9",
+    subtract: "-",
+    four: "4",
+    five: "5",
+    six: "6",
+    add: "+",
+    one: "1",
+    two: "2",
+    three: "3",
+    equals: "=",
+    zero: "0",
+    decimal: ".",
+  };
+
+  const click = (key) => {
+    if (key === ".") {
+      const hasDecimal = value.split(operandRegex).filter(Boolean);
+      const lastValue = hasDecimal[hasDecimal.length - 1];
+      if (!lastValue.includes(".")) {
+        setValue((value) => `${value}.`);
+      }
+      return;
+    }
+
+    if (key === "CLEAR") {
+      setValue("0");
+      return;
+    }
+
+    if (key === "=") {
+      let newVal = value.replace("X", "*");
+      if (operations.includes(value[value.length - 1])) {
+        newVal = newVal.slice(0, -1);
+      }
+      try {
+        setValue(`${eval(newVal)}`);
+      } catch (Ex) {
+        setValue(`Syntax Error`);
+        setTimeout(() => setValue("0"), 500);
+      }
+      return;
+    }
+
+    if (numbers.split("").includes(key)) {
+      let newVal = `${value}${key}`.replace(/^0/, "");
+      setValue(newVal);
+      return;
+    }
+
+    if (operations.includes(key)) {
+      if (!(value[value.length - 1] === key)) {
+        if (
+          operations.includes(value[value.length - 1]) &&
+          operations.includes(value[value.length - 2])
+        ) {
+          const temp = value.slice(0, -1).replace(/.$/, `${key}`);
+          setValue(temp);
+        } else {
+          setValue(`${value}${key}`);
+        }
+      }
+    }
+  };
+
   return (
     <Root>
+      <SEO
+        title="Javascript Calculator"
+        withFCCScript
+        description={meta.description("Javascript Calculator")}
+        imageUrl={`/assets/images/projects/javascript-calculator.png`}
+      />
       <Container>
         <div>
           <InputContainer>
-            <input type="text" />
+            <input type="text" id="display" value={value} />
           </InputContainer>
           <Grid>
-            <div className="clear">CLEAR</div>
-            <div>/</div>
-            <div>X</div>
-            <div>7</div>
-            <div>8</div>
-            <div>9</div>
-            <div>-</div>
-            <div>4</div>
-            <div>5</div>
-            <div>6</div>
-            <div>+</div>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div className="equal">=</div>
-            <div className="zero">0</div>
-            <div>.</div>
+            {Object.keys(numpads).map((q, i) => (
+              <div
+                key={i}
+                className={q}
+                id={q}
+                onClick={() => click(numpads[q])}
+              >
+                {numpads[q]}
+              </div>
+            ))}
           </Grid>
         </div>
       </Container>
@@ -54,6 +132,10 @@ const InputContainer = styled.div`
     width: 100%;
     height: 40px;
     border: none;
+    font-family: Orbitron;
+    font-size: 22px;
+    text-align: right;
+    padding-right: 10px;
   }
 `;
 
@@ -67,10 +149,11 @@ const Grid = styled.div`
     font-size: 20px;
     background-color: #a66b72;
     color: white;
+    cursor: pointer;
   }
   div:hover {
-    border: 1px solid white;
-    padding: 9px 29px 9px 29px;
+    border: 2px solid white;
+    padding: 8px 28px 8px 28px;
   }
   .clear {
     grid-column: 1/3;
@@ -78,12 +161,10 @@ const Grid = styled.div`
   .zero {
     grid-column: 1/3;
   }
-  .equal {
+  .equals {
     grid-row: 4/6;
     grid-column: 4;
     display: flex;
     align-items: center;
   }
 `;
-
-const Flex = styled.div``;

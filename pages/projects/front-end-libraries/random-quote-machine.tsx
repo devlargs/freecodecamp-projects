@@ -28,14 +28,14 @@ const Root = styled.div`
       h1,
       h2 {
         color: ${(props) => props.bg};
-        font-family: "Dancing Script", Roboto;
+        font-size: 2em;
         text-align: center;
       }
       h1 {
-        font-size: 40px;
+        font-family: "Roboto Mono";
       }
       h2 {
-        font-size: 35px;
+        font-family: "Dancing Script";
       }
     }
     .random-button {

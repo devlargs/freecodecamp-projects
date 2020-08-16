@@ -4,7 +4,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Roboto, Courier, monospace;
+  font-family: "Roboto Mono", Courier, monospace;
 }
 
 ::-webkit-scrollbar-track {
