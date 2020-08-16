@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Layout, Menu, Dropdown } from "antd";
+import { Layout, Menu } from "antd";
 import Link from "next/link";
 import styled from "styled-components";
 import "styles/global.css";
@@ -7,7 +7,7 @@ import NProgress from "nprogress";
 import { useEffect } from "react";
 
 const { SubMenu } = Menu;
-const { Header, Footer, Content } = Layout;
+const { Footer, Content } = Layout;
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
   useEffect(() => {
@@ -60,24 +60,22 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <Layout className="layout" style={{ background: "#20A76E" }}>
-      <Header style={{ padding: 0, paddingTop: 10 }}>
-        <HeaderContent>
-          <div className="header">
+      <HeaderContent>
+        <div className="header">
+          <Link href="/">
+            <a className="logo">FCC</a>
+          </Link>
+          <div className="header-right">
             <Link href="/">
-              <a className="logo">FCC</a>
+              <a>Home</a>
             </Link>
-            <div className="header-right">
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-              <Link href="/projects">
-                <a>Projects</a>
-              </Link>
-            </div>
+            <Link href="/projects">
+              <a>Projects</a>
+            </Link>
           </div>
-        </HeaderContent>
-      </Header>
-      <Content style={{ height: "calc(100vh - 64px - 70px)" }}>
+        </div>
+      </HeaderContent>
+      <Content style={{ height: "calc(100vh - 70px)" }}>
         <Component {...pageProps} />
       </Content>
 

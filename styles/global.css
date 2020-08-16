@@ -27,7 +27,7 @@ body {
 }
 
 .h-calculated {
-  height: calc(100vh - 64px - 70px);
+  height: calc(100vh - 70px);
 }
 
 #nprogress {
