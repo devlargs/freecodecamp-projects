@@ -4,12 +4,18 @@ import { motion } from "framer-motion";
 import projects from "constants/projects";
 import convertString from "utils/convertString";
 import Link from "next/link";
-import meta from "constants/meta";
 import SEO from "components/SEO";
+import { useState, useEffect } from "react";
 
 const { Meta } = Card;
 
 export default () => {
+  const [transition, setTransition] = useState(1.2);
+
+  useEffect(() => {
+    setTimeout(() => setTransition(0.5));
+  }, []);
+
   return (
     <>
       <SEO
@@ -32,15 +38,16 @@ export default () => {
                       href={`/projects/${key}/${title}`}
                     >
                       <motion.div
+                        variants={{
+                          fadeOut: { opacity: 0, x: -50 },
+                          fadeIn: { opacity: 1, x: 0 },
+                        }}
+                        initial="fadeOut"
+                        animate="fadeIn"
+                        transition={{ ease: "easeInOut", duration: transition }}
                         whileHover={{
                           scale: 1.1,
-                          transition: { duration: 0.5 },
-                        }}
-                        initial="hidden"
-                        animate="visible"
-                        variants={{
-                          visible: { opacity: 1 },
-                          hidden: { opacity: 0 },
+                          transition: { duration: transition },
                         }}
                         className="container"
                       >
