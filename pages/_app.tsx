@@ -26,38 +26,6 @@ const App = ({ Component, pageProps }) => {
     };
   }, []);
 
-  const menu = (
-    <Menu style={{ marginTop: 10 }}>
-      <SubMenu title="Front End Libraries">
-        <Menu.Item>
-          <Link href="/projects/front-end-libraries/random-quote-machine">
-            <a>Random Quote Machine</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link href="/projects/front-end-libraries/markdown-previewer">
-            <a>Markdown Previewer</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link href="/projects/front-end-libraries/drum-machine">
-            <a>Drum Machine</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link href="/projects/front-end-libraries/javascript-calculator">
-            <a>Javascript Calculator</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link href="/projects/front-end-libraries/pomodoro-clock">
-            <a>Pomodoro Clock</a>
-          </Link>
-        </Menu.Item>
-      </SubMenu>
-    </Menu>
-  );
-
   return (
     <Layout className="layout" style={{ background: "#20A76E" }}>
       <HeaderContent>
@@ -75,7 +43,11 @@ const App = ({ Component, pageProps }) => {
           </div>
         </div>
       </HeaderContent>
-      <Content style={{ height: "calc(100vh - 70px)" }}>
+      <Content
+        style={{
+          height: `calc(100vh - ${pageProps?.path === "/" ? "49" : "70"}px)`,
+        }}
+      >
         <Component {...pageProps} />
       </Content>
 

@@ -48,6 +48,10 @@ export default class MyDocument extends Document {
           href="https://fonts.googleapis.com/css?family=Roboto"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css?family=Orbitron"
+          rel="stylesheet"
+        />
         <Head>
           <script
             async
