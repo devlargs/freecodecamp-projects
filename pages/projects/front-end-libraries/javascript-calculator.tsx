@@ -45,6 +45,7 @@ const Container = styled.div`
   background-color: #ddd;
   padding: 1em;
   grid-row-gap: 10px;
+  border-radius: 6%;
 `;
 
 const InputContainer = styled.div`
