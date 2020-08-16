@@ -40,6 +40,14 @@ export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html lang="en">
+        <link
+          href="https://fonts.googleapis.com/css?family=Dancing Script"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css?family=Roboto"
+          rel="stylesheet"
+        />
         <Head>
           <script
             async

@@ -1,14 +1,10 @@
 @import "~antd/dist/antd.css";
-/* 
-@tailwind base;
-@tailwind components;
-@tailwind utilities; */
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Roboto, Courier, monospace;
 }
 
 ::-webkit-scrollbar-track {
