@@ -4,7 +4,8 @@ import meta from "constants/meta";
 import { useState } from "react";
 
 export default () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState("0");
+  const operations = ["+", "-", "X", "/"];
   const numpads = {
     clear: "CLEAR",
     divide: "/",
@@ -25,6 +26,33 @@ export default () => {
     decimal: ".",
   };
 
+  const click = (key) => {
+    console.log(key);
+    if (key === "CLEAR") {
+      setValue("0");
+      return;
+    }
+
+    if (key === "=") {
+      let newVal = value.replace("X", "*");
+      if (operations.includes(value[value.length - 1])) {
+        newVal = newVal.slice(0, -1);
+      }
+      console.log(newVal, "VALUUUUE");
+      try {
+        setValue(`${eval(newVal)}`);
+      } catch (Ex) {
+        console.log(Ex);
+      }
+      return;
+    }
+
+    if (typeof +key === "number") {
+      let newVal = `${value}${key}`.replace(/^0/, "");
+      setValue(newVal);
+    }
+  };
+
   return (
     <Root>
       <SEO
@@ -39,13 +67,16 @@ export default () => {
             <input type="text" id="display" value={value} />
           </InputContainer>
           <Grid>
-            {Object.keys(numpads).map((q, i) => {
-              return (
-                <div key={i} className={q} id={q}>
-                  {numpads[q]}
-                </div>
-              );
-            })}
+            {Object.keys(numpads).map((q, i) => (
+              <div
+                key={i}
+                className={q}
+                id={q}
+                onClick={() => click(numpads[q])}
+              >
+                {numpads[q]}
+              </div>
+            ))}
           </Grid>
         </div>
       </Container>

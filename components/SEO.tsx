@@ -24,7 +24,6 @@ export default ({
     : process.env.WEBSITE_URL;
 
   const url = `${origin}${router?.pathname}`;
-  console.log(imageLink);
   const imgUrl = imageLink ? imageLink : `${origin}${imageUrl}`;
 
   return (
