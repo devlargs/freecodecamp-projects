@@ -35,10 +35,13 @@ const App = ({ Component, pageProps }) => {
           </Link>
           <div className="header-right">
             <Link href="/">
-              <a>Home</a>
+              <a>/home</a>
             </Link>
             <Link href="/projects">
-              <a>Projects</a>
+              <a>/projects</a>
+            </Link>
+            <Link href="/certificates">
+              <a>/certificates</a>
             </Link>
           </div>
         </div>

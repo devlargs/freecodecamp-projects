@@ -33,7 +33,7 @@ const Root = styled.div`
       }
       h1 {
         font-size: 40px;
-        font-family: Roboto;
+        font-family: "Roboto Mono";
       }
       h2 {
         font-size: 35px;

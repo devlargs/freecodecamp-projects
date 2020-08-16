@@ -27,7 +27,19 @@ export default () => {
   };
 
   const click = (key) => {
-    console.log(key);
+    const operandRegex = /[+-]|[\/]|[*]/gi;
+    if (key === ".") {
+      const hasDecimal = value.split(operandRegex).filter(Boolean);
+      console.log(hasDecimal);
+      const lastValue = hasDecimal[hasDecimal.length - 1];
+      console.log(lastValue);
+      if (lastValue.includes(".")) {
+        return;
+      } else {
+        setValue((value) => `${value}.`);
+      }
+    }
+
     if (key === "CLEAR") {
       setValue("0");
       return;
@@ -42,6 +54,8 @@ export default () => {
       try {
         setValue(`${eval(newVal)}`);
       } catch (Ex) {
+        setValue(`Syntax Error`);
+        setTimeout(() => setValue("0"), 500);
         console.log(Ex);
       }
       return;
@@ -50,6 +64,7 @@ export default () => {
     if (typeof +key === "number") {
       let newVal = `${value}${key}`.replace(/^0/, "");
       setValue(newVal);
+      return;
     }
   };
 
@@ -141,5 +156,3 @@ const Grid = styled.div`
     align-items: center;
   }
 `;
-
-const Flex = styled.div``;
