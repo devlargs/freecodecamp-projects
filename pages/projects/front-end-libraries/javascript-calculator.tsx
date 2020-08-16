@@ -3,9 +3,13 @@ import SEO from "components/SEO";
 import meta from "constants/meta";
 import { useState } from "react";
 
+const operations = ["+", "-", "X", "/"];
+const operandRegex = /[+-]|[\/]|[*]/gi;
+const numbers = "1234567890";
+
 export default () => {
   const [value, setValue] = useState("0");
-  const operations = ["+", "-", "X", "/"];
+
   const numpads = {
     clear: "CLEAR",
     divide: "/",
@@ -27,17 +31,13 @@ export default () => {
   };
 
   const click = (key) => {
-    const operandRegex = /[+-]|[\/]|[*]/gi;
     if (key === ".") {
       const hasDecimal = value.split(operandRegex).filter(Boolean);
-      console.log(hasDecimal);
       const lastValue = hasDecimal[hasDecimal.length - 1];
-      console.log(lastValue);
-      if (lastValue.includes(".")) {
-        return;
-      } else {
+      if (!lastValue.includes(".")) {
         setValue((value) => `${value}.`);
       }
+      return;
     }
 
     if (key === "CLEAR") {
@@ -50,21 +50,33 @@ export default () => {
       if (operations.includes(value[value.length - 1])) {
         newVal = newVal.slice(0, -1);
       }
-      console.log(newVal, "VALUUUUE");
       try {
         setValue(`${eval(newVal)}`);
       } catch (Ex) {
         setValue(`Syntax Error`);
         setTimeout(() => setValue("0"), 500);
-        console.log(Ex);
       }
       return;
     }
 
-    if (typeof +key === "number") {
+    if (numbers.split("").includes(key)) {
       let newVal = `${value}${key}`.replace(/^0/, "");
       setValue(newVal);
       return;
+    }
+
+    if (operations.includes(key)) {
+      if (!(value[value.length - 1] === key)) {
+        if (
+          operations.includes(value[value.length - 1]) &&
+          operations.includes(value[value.length - 2])
+        ) {
+          const temp = value.slice(0, -1).replace(/.$/, `${key}`);
+          setValue(temp);
+        } else {
+          setValue(`${value}${key}`);
+        }
+      }
     }
   };
 
