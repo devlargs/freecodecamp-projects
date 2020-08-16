@@ -55,6 +55,7 @@ export default () => {
                           style={{
                             width: 300,
                             cursor: "pointer",
+                            borderTop: "none",
                           }}
                           cover={
                             <img
