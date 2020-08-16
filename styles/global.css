@@ -1,14 +1,10 @@
 @import "~antd/dist/antd.css";
-/* 
-@tailwind base;
-@tailwind components;
-@tailwind utilities; */
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Roboto, Courier, monospace;
 }
 
 ::-webkit-scrollbar-track {
@@ -31,7 +27,7 @@ body {
 }
 
 .h-calculated {
-  height: calc(100vh - 64px - 70px);
+  height: calc(100vh - 70px);
 }
 
 #nprogress {
