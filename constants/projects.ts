@@ -6,7 +6,7 @@ export default [
       "Markdown Previewer",
       "Drum Machine",
       "Javascript Calculator",
-      "Pomodoro Clock",
+      // "Pomodoro Clock",
     ],
   },
   // {

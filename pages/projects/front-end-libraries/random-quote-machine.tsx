@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import getFontColor from "utils/getFontColor";
 import getRandomColor from "utils/getRandomColor";
 import { TwitterOutlined, LoadingOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +18,7 @@ const Root = styled.div`
   background-color: ${(props) => props.bg};
 
   #quote-box {
-    background-color: ${(props) => getFontColor(props.bg)};
+    background-color: white;
     width: 60vh;
     padding: 50px;
     border-radius: 15px;
@@ -42,7 +41,7 @@ const Root = styled.div`
       border-radius: 5px;
       padding: 10px;
       background-color: ${(props) => props.bg};
-      color: ${(props) => getFontColor(props.bg)};
+      color: white;
       height: 40px;
       margin-right: 5px;
       mid-width: 40px;
@@ -64,7 +63,7 @@ export default ({ data }) => {
     setLoading(true);
     try {
       const { data } = (await axios.get(`/api/quotes/random`)) as any;
-      setRandom(data.edges);
+      setRandom(Math.random() > 0.1 ? data.edges : staticQuote());
       setLoading(false);
     } catch (ex) {
       setLoading(false);
@@ -134,25 +133,3 @@ export default ({ data }) => {
     </Root>
   );
 };
-
-export async function getServerSideProps() {
-  try {
-    const response = await axios.get(
-      `${process.env.WEBSITE_URL}/api/quotes/random`
-    );
-
-    if (response?.data?.success) {
-      return {
-        props: {
-          data: response?.data?.edges,
-        },
-      };
-    } else {
-      throw new Error();
-    }
-  } catch (ex) {
-    return {
-      props: {},
-    };
-  }
-}
