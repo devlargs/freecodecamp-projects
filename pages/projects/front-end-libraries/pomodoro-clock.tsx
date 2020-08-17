@@ -1,41 +1,112 @@
 import styled from "styled-components";
+import meta from "constants/meta";
+import SEO from "components/SEO";
+import { motion } from "framer-motion";
+import { tap } from "constants/animations";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowUp,
+  faArrowDown,
+  faPlay,
+  faPause,
+  faRedo,
+} from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from "react";
 
 export default () => {
   return (
-    <Root>
-      <div>
-        <Clock>
-          <div className="content">
-            <Timer>25:00</Timer>
-          </div>
-        </Clock>
+    <>
+      <SEO
+        title="Pomodoro Clock"
+        withFCCScript
+        description={meta.description("Pomodoro Clock")}
+        imageUrl={`/assets/images/projects/pomodoro-clock.png`}
+      />
+      <audio id="beep" src={`/assets/sounds/Rooster.mp3`}></audio>
+      <Root>
+        <div>
+          <TimerLabel style={{ padding: "1em" }} id="timer-label">
+            Pomodoro Clock
+          </TimerLabel>
+          <Clock>
+            <div className="content">
+              <Timer id="time-left">25:00</Timer>
+            </div>
+          </Clock>
 
-        <Options>
-          <div className="options-container">
-            <OptionsText>Break Time</OptionsText>
-            <Grid>
-              <Operand>-</Operand>
-              <Time>
-                <h1>5 min</h1>
-              </Time>
-              <Operand>+</Operand>
-            </Grid>
-          </div>
-          <div className="options-container">
-            <OptionsText>Break Time</OptionsText>
-            <Grid>
-              <Operand>-</Operand>
-              <Time>
-                <h1>5 min</h1>
-              </Time>
-              <Operand>+</Operand>
-            </Grid>
-          </div>
-        </Options>
-      </div>
-    </Root>
+          <Options>
+            <div className="options-container">
+              <OptionsText id="break-label">Break Length</OptionsText>
+              <Grid>
+                <Operand {...tap} onClick={() => {}} id="break-decrement">
+                  <FontAwesomeIcon icon={faArrowDown} />
+                </Operand>
+                <Time>
+                  <h1>
+                    <span id="break-length">5</span> min
+                  </h1>
+                </Time>
+                <Operand {...tap} onClick={() => {}} id="break-increment">
+                  <FontAwesomeIcon icon={faArrowUp} />
+                </Operand>
+              </Grid>
+            </div>
+            <div className="options-container">
+              <OptionsText id="session-label">Session Length</OptionsText>
+              <Grid>
+                <Operand {...tap} onClick={() => {}} id="session-decrement">
+                  <FontAwesomeIcon icon={faArrowDown} />
+                </Operand>
+                <Time>
+                  <h1>
+                    <span id="session-length">5</span> min
+                  </h1>
+                </Time>
+                <Operand {...tap} onClick={() => {}} id="session-increment">
+                  <FontAwesomeIcon icon={faArrowUp} />
+                </Operand>
+              </Grid>
+            </div>
+          </Options>
+
+          <ActionButtons>
+            <motion.div
+              {...tap}
+              id="start_stop"
+              onClick={() => {}}
+              style={{ cursor: "pointer" }}
+            >
+              <FontAwesomeIcon icon={faPlay} />
+            </motion.div>
+            <motion.div {...tap} id="reset" onClick={() => {}}>
+              <FontAwesomeIcon icon={faRedo} />
+            </motion.div>
+          </ActionButtons>
+        </div>
+      </Root>
+    </>
   );
 };
+
+const TimerLabel = styled.div`
+  padding: 1em;
+  font-size: 24px;
+`;
+
+const ActionButtons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  gap: 10px;
+  #start_stop,
+  #reset {
+    width: 70px;
+    padding: 1em;
+    background-color: #7f7caf;
+    border-radius: 1em;
+  }
+`;
 
 const Root = styled.div`
   display: flex;
@@ -45,6 +116,11 @@ const Root = styled.div`
   align-items: center;
   justify-content: center;
   color: #eeeeff;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none;
 `;
 
 const Clock = styled.div`
@@ -91,23 +167,29 @@ const Options = styled.div`
 const OptionsText = styled.div`
   font-size: 24px;
   color: black;
+  ::selection {
+    color: black;
+    background: none;
+  }
+  ::-moz-selection {
+    color: black;
+    background: none;
+  }
 `;
 
 const Grid = styled.div`
   display: grid;
   width: 90%;
   grid-template-columns: 1fr 2fr 1fr;
-  div {
-    font-size: 18px;
-  }
 `;
 
-const Operand = styled.div`
+const Operand = styled(motion.div)`
   background-color: #7f7caf;
   padding: 1em;
   border-radius: 15px;
   font-weight: bold;
   border: 2px solid #9eb3c7;
+  cursor: pointer;
 `;
 
 const Time = styled.div`
@@ -115,5 +197,13 @@ const Time = styled.div`
   h1 {
     color: black;
     margin-bottom: 0;
+  }
+  h1::selection {
+    color: black;
+    background: none;
+  }
+  h1::-moz-selection {
+    color: black;
+    background: none;
   }
 `;
