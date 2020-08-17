@@ -57,25 +57,29 @@ const App = ({ Component, pageProps }) => {
       {pageProps?.path === "/" ? (
         <></>
       ) : (
-        <Footer
-          style={{
-            textAlign: "center",
-
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            width: "100%",
-          }}
-        >
+        <StyledFooter>
           Free Code Camp Projects © 2020 Created by{" "}
           <a href="http://github.com/devlargs" target="_blank">
             Ralph Largo
           </a>
-        </Footer>
+        </StyledFooter>
       )}
     </Layout>
   );
 };
+
+const StyledFooter = styled(Footer)`
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none;
+`;
 
 const HeaderContent = styled.div`
   .header {
