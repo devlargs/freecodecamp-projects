@@ -2,6 +2,7 @@ import styled from "styled-components";
 import SEO from "components/SEO";
 import meta from "constants/meta";
 import { useState } from "react";
+import CenteredContent from "components/CenteredContent";
 
 const operations = ["+", "-", "X", "/"];
 const operandRegex = /[+-]|[\/]|[*]/gi;
@@ -81,7 +82,7 @@ export default () => {
   };
 
   return (
-    <Root>
+    <CenteredContent bgColor="#7268a6">
       <SEO
         title="Javascript Calculator"
         withFCCScript
@@ -107,16 +108,9 @@ export default () => {
           </Grid>
         </div>
       </Container>
-    </Root>
+    </CenteredContent>
   );
 };
-
-const Root = styled.div`
-  display: grid;
-  height: calc(100vh - 70px);
-  background-color: #7268a6;
-  place-items: center;
-`;
 
 const Container = styled.div`
   display: grid;

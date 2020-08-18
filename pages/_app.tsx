@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 import Link from "next/link";
 import styled from "styled-components";
 import "styles/global.css";
@@ -25,8 +25,7 @@ const item = {
   hidden: { opacity: 0, x: 1000 },
 };
 
-const { SubMenu } = Menu;
-const { Footer, Content } = Layout;
+const { Content } = Layout;
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
   useEffect(() => {
@@ -86,7 +85,6 @@ const App = ({ Component, pageProps }) => {
 const StyledContent = styled(Content)`
   height: calc(100vh - ${sizes.header}px);
   margin-top: ${sizes.header}px;
-  // position: relative;
 `;
 
 const HeaderContent = styled.div`
