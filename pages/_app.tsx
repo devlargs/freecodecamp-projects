@@ -117,7 +117,9 @@ const HeaderContent = styled.div`
   }
 
   .header a:hover {
-    color: white;
+    color: #041529;
+    background-color: white;
+    border-radius: 0px;
   }
 
   .header a.active {

@@ -1,92 +1,95 @@
 import Head from "next/head";
 import Particles from "react-particles-js";
 import styled from "styled-components";
+import CenteredContent from "components/CenteredContent";
 import links from "constants/links";
 
 export default function App() {
   return (
-    <>
+    <Homepage style={{ position: "relative" }}>
       <Head>
         <title>Free Code Camp Projects</title>
       </Head>
-      <Root>
-        <Particles
-          params={{
-            particles: {
-              number: {
-                value: 460,
-                density: {
-                  enable: false,
-                },
-              },
-              size: {
-                value: 10,
-                random: true,
-                anim: {
-                  speed: 4,
-                  size_min: 0.3,
-                },
-              },
-              line_linked: {
+      <Particles
+        params={{
+          particles: {
+            number: {
+              value: 460,
+              density: {
                 enable: false,
               },
-              move: {
-                random: true,
-                speed: 1,
-                direction: "top",
-                out_mode: "out",
+            },
+            size: {
+              value: 10,
+              random: true,
+              anim: {
+                speed: 4,
+                size_min: 0.3,
               },
             },
-            interactivity: {
-              events: {
-                onhover: {
-                  enable: true,
-                  mode: "repulse",
-                },
-                onclick: {
-                  enable: true,
-                  mode: "bubble",
-                },
+            line_linked: {
+              enable: false,
+            },
+            move: {
+              random: true,
+              speed: 1,
+              direction: "top",
+              out_mode: "out",
+            },
+          },
+          interactivity: {
+            events: {
+              onhover: {
+                enable: true,
+                mode: "repulse",
               },
-              modes: {
-                bubble: {
-                  distance: 250,
-                  duration: 2,
-                  size: 0,
-                  opacity: 0,
-                },
-                repulse: {
-                  distance: 50,
-                  duration: 2,
-                },
+              onclick: {
+                enable: true,
+                mode: "bubble",
               },
             },
-          }}
-        />
-        <div id="container">
-          <img
-            style={{ marginBottom: 20 }}
-            src="/assets/images/freecodecamp.png"
-            width={200}
-            height={200}
-          />
-          <h1>
-            Free Code Camp Projects
-            <br />
-            <span>
-              Created by{" "}
-              <a href={links.GITHUB_PROFILE} target="_blank">
-                Ralph Largo
-              </a>
-            </span>
-          </h1>
-        </div>
-      </Root>
-    </>
+            modes: {
+              bubble: {
+                distance: 250,
+                duration: 2,
+                size: 0,
+                opacity: 0,
+              },
+              repulse: {
+                distance: 50,
+                duration: 2,
+              },
+            },
+          },
+        }}
+      />
+      <CenteredContent>
+        <Root>
+          <div id="container">
+            <img
+              style={{ marginBottom: 20 }}
+              src="/assets/images/freecodecamp.png"
+              width={200}
+              height={200}
+            />
+            <h1>
+              Free Code Camp Projects
+              <br />
+              <span>
+                Created by{" "}
+                <a href={links.GITHUB_PROFILE} target="_blank">
+                  Ralph Largo
+                </a>
+              </span>
+            </h1>
+          </div>
+        </Root>
+      </CenteredContent>
+    </Homepage>
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   return {
     props: {
       path: "/",
@@ -94,14 +97,16 @@ export async function getStaticProps(context) {
   };
 }
 
+const Homepage = styled.div`
+  #tsparticles {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+  }
+`;
+
 const Root = styled.div`
-  display: flex;
-  width: 100vw;
-  margin-top: 49px;
-  height: calc(100vh - 49px);
-  align-items: center;
-  justify-content: center;
-  background-color: #20a76e;
   text-align: center;
   line-height: 5rem;
   #container {
@@ -118,11 +123,5 @@ const Root = styled.div`
         }
       }
     }
-  }
-  #tsparticles {
-    height: calc(100vh - 64px);
-    position: absolute;
-    width: 100vw;
-    z-index: 1;
   }
 `;
