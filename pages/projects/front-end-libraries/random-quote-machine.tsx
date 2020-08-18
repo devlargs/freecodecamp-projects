@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import staticQuote from "constants/quotes";
 import meta from "constants/meta";
 import SEO from "components/SEO";
+import links from "constants/links";
 
 const Root = styled.div`
   display: grid;
@@ -103,9 +104,7 @@ export default ({ data }) => {
             style={{ float: "left" }}
             className="random-button social"
             id="tweet-quote"
-            href={`https://twitter.com/intent/tweet?hashtags=quotes&text=${encodeURIComponent(
-              `"${random.quote}" \n ~ ${random.author}`
-            )}`}
+            href={links.SHARE_TWEET_URL(random)}
             target="_blank"
           >
             <TwitterOutlined />
@@ -115,7 +114,7 @@ export default ({ data }) => {
             style={{ float: "left" }}
             className="random-button social"
             target="_blank"
-            href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp,devlargs&caption=${random.author}&content=${random.quote}&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button`}
+            href={links.SHARE_TUBLER_URL(random)}
           >
             <FontAwesomeIcon icon={faTumblr} />
           </motion.a>

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import links from "constants/links";
 
 type Props = {
   withFCCScript?: boolean;
@@ -42,9 +43,7 @@ export default ({
       <meta name="twitter:url" content={url} />
       <meta name="twitter:image" content={imgUrl} />
 
-      {withFCCScript && (
-        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
-      )}
+      {withFCCScript && <script src={links.FCC_TEST_SCRIPT}></script>}
     </Head>
   );
 };

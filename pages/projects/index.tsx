@@ -2,12 +2,15 @@ import { Card } from "antd";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import projects from "constants/projects";
+import { sequence } from "constants/animations";
+import links from "constants/links";
 import convertString from "utils/convertString";
 import Link from "next/link";
 import SEO from "components/SEO";
 import { useState, useEffect } from "react";
 
 const { Meta } = Card;
+const { list, item } = sequence;
 
 export default () => {
   const [transition, setTransition] = useState(1.2);
@@ -21,7 +24,7 @@ export default () => {
       <SEO
         title="Free Code Camp Projects"
         description="List of some of the freecodecamp.org projects created by Ralph Largo"
-        imageLink={`https://www.freecodecamp.org/news/content/images/2019/11/fcc_ghost_publication_cover.png`}
+        imageLink={links.FCC_COVER}
       />
       <Root>
         {projects.map((project) => {
@@ -29,7 +32,7 @@ export default () => {
           return (
             <Container key={key}>
               <h1 style={{ color: "#041429" }}>{project.name} Projects</h1>
-              <Flexbox>
+              <Flexbox initial="hidden" animate="visible" variants={list}>
                 {project.list.map((q, i) => {
                   const title = convertString(q, "sentence", "kebab");
                   return (
@@ -38,13 +41,8 @@ export default () => {
                       href={`/projects/${key}/${title}`}
                     >
                       <motion.div
-                        variants={{
-                          fadeOut: { opacity: 0, x: -50 },
-                          fadeIn: { opacity: 1, x: 0 },
-                        }}
-                        initial="fadeOut"
-                        animate="fadeIn"
-                        transition={{ ease: "easeInOut", duration: transition }}
+                        variants={item}
+                        custom={i}
                         whileHover={{
                           scale: 1.1,
                           transition: { duration: transition },
@@ -89,7 +87,7 @@ const Root = styled.div`
   }
 `;
 
-const Flexbox = styled.div`
+const Flexbox = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
