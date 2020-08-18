@@ -6,6 +6,7 @@ import "styles/global.css";
 import NProgress from "nprogress";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import links from "constants/links";
 
 const list = {
   visible: { opacity: 1 },
@@ -82,17 +83,17 @@ const App = ({ Component, pageProps }) => {
       >
         <Component {...pageProps} />
       </Content>
-
+      {/* 
       {pageProps?.path === "/" ? (
         <></>
       ) : (
         <StyledFooter>
           Free Code Camp Projects © 2020 Created by{" "}
-          <a href="http://github.com/devlargs" target="_blank">
+          <a href={links.GITHUB_PROFILE} target="_blank">
             Ralph Largo
           </a>
         </StyledFooter>
-      )}
+      )} */}
     </Layout>
   );
 };
