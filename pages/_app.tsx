@@ -153,24 +153,9 @@ const HeaderContent = styled.div`
     float: right;
   }
 
-  @media screen and (max-width: 500px) {
-    .header a {
-      float: none;
-      display: block;
-      text-align: left;
-    }
-
-    .header-right {
-      float: none;
-    }
-  }
-
   @media screen and (max-width: 520px) {
     .header {
       display: none;
-    }
-
-    .hamburger {
     }
   }
 `;

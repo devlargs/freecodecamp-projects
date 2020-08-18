@@ -66,12 +66,7 @@ export default function App() {
       <CenteredContent>
         <Root>
           <div id="container">
-            <img
-              style={{ marginBottom: 20 }}
-              src="/assets/images/freecodecamp.png"
-              width={200}
-              height={200}
-            />
+            <img src="/assets/images/freecodecamp.png" />
             <h1>
               Free Code Camp Projects
               <br />
@@ -103,6 +98,11 @@ const Root = styled.div`
   text-align: center;
   line-height: 5rem;
   #container {
+    img {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 20px;
+    }
     h1 {
       color: white;
       font-size: 5rem;
@@ -113,6 +113,57 @@ const Root = styled.div`
         a {
           color: black;
           z-index: 999;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    line-height: 3rem;
+    #container {
+      img {
+        width: 130px;
+        height: 130px;
+        margin-bottom: 10px;
+      }
+      h1 {
+        font-size: 2rem;
+        span {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 401px) and (max-width: 768px) {
+    line-height: 4rem;
+    #container {
+      img {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 10px;
+      }
+      h1 {
+        font-size: 2.5rem;
+        span {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1400px) {
+    line-height: 4.5rem;
+    #container {
+      img {
+        width: 180px;
+        height: 180px;
+        margin-bottom: 15px;
+      }
+      h1 {
+        font-size: 3.5rem;
+        span {
+          font-size: 1.5rem;
         }
       }
     }
