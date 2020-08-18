@@ -13,8 +13,149 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import CenteredContent from "components/CenteredContent";
+import getTimeRemaining from "utils/getTimeRemaining";
+import { start } from "repl";
+
+let intervals = {
+  break: undefined,
+  session: undefined,
+};
+
+// let deadline = undefined;
+
+const defaults = {
+  timer: {
+    break: {
+      min: 5,
+      seconds: 0,
+    },
+    session: {
+      min: 25,
+      seconds: 0,
+    },
+  },
+  pause: false,
+  clock: "session",
+  timeLeft: null,
+  readableTimeLeft: {},
+  deadline: undefined,
+};
 
 export default () => {
+  const [timer, setTimer] = useState(defaults.timer);
+  const [pause, setPause] = useState(defaults.pause);
+  const [clock, setClock] = useState(defaults.clock);
+  const [timeLeft, setTimeLeft] = useState(defaults.timeLeft);
+  const [deadline, setDeadline] = useState(defaults.deadline);
+  const [readableTimeLeft, setReadableTimeLeft] = useState(
+    defaults.readableTimeLeft
+  ) as any;
+
+  const clearIntervals = () => {
+    ["break", "session"].map((q) => {
+      clearInterval(intervals[q]);
+    });
+  };
+
+  const reset = () => {
+    setTimer(defaults.timer);
+    setPause(defaults.pause);
+    setClock(defaults.clock);
+    setTimeLeft(defaults.timeLeft);
+    setReadableTimeLeft(defaults.readableTimeLeft);
+    setDeadline(defaults.deadline);
+    clearIntervals();
+  };
+
+  const operator = (key: string, add: boolean) => {
+    setTimer((time) => {
+      if (add ? time[key].min < 60 : time[key].min > 1) {
+        return {
+          ...time,
+          [key]: {
+            ...time[key],
+            min: add ? time[key].min + 1 : time[key].min - 1,
+          },
+        };
+      }
+      return time;
+    });
+  };
+
+  const getControl = (text: string) => {
+    const key = text.toLowerCase();
+    return (
+      <div className="options-container">
+        <OptionsText id={`${key}-label`}>{text} Length</OptionsText>
+        <Grid>
+          <Operand
+            {...tap}
+            onClick={() => operator(key, false)}
+            id={`${key}-decrement`}
+          >
+            <FontAwesomeIcon icon={faArrowDown} />
+          </Operand>
+          <Time>
+            <h1>
+              <span id={`${key}-length`}>{timer[key].min}</span> min
+            </h1>
+          </Time>
+          <Operand
+            {...tap}
+            onClick={() => operator(key, true)}
+            id={`${key}-increment`}
+          >
+            <FontAwesomeIcon icon={faArrowUp} />
+          </Operand>
+        </Grid>
+      </div>
+    );
+  };
+
+  const startCountdown = (e) => {
+    console.log("clock started");
+    console.log(e);
+    const updateClock = () => {
+      const t = getTimeRemaining(e);
+      console.log(t);
+      setReadableTimeLeft(t);
+      if (t.total < 0) {
+        clearInterval(intervals[clock]);
+      }
+    };
+    updateClock();
+    intervals[clock] = setInterval(updateClock, 1000);
+  };
+
+  useEffect(() => {
+    if (pause) {
+      console.log(timeLeft, "TIME LEFT");
+      console.log(deadline, "DEADLINE");
+
+      if (!timeLeft && !deadline) {
+        const initial = new Date(
+          Date.parse(new Date() as any) + timer[clock].min * 60 * 1000
+        );
+        setDeadline(initial);
+        startCountdown(initial);
+      } else {
+        console.log("resume");
+        startCountdown(new Date(Date.parse(new Date() as any) + timeLeft));
+      }
+    } else {
+      if (intervals[clock]) {
+        clearInterval(intervals[clock]);
+        console.log(timeLeft);
+        console.log(getTimeRemaining(deadline).total, "REMAINING");
+        const t = getTimeRemaining(deadline);
+        setTimeLeft(t.total);
+        console.log("paused");
+      }
+    }
+
+    return () => clearIntervals();
+  }, [pause]);
+
   return (
     <>
       <SEO
@@ -29,55 +170,29 @@ export default () => {
           <TimerLabel id="timer-label">Pomodoro Clock</TimerLabel>
           <Clock>
             <div className="content">
-              <Timer id="time-left">25:00</Timer>
+              <Timer id="time-left">
+                {readableTimeLeft?.minutes
+                  ? `${readableTimeLeft?.minutes}:${readableTimeLeft?.seconds}`
+                  : "25:00"}
+              </Timer>
             </div>
           </Clock>
 
           <Options>
-            <div className="options-container">
-              <OptionsText id="break-label">Break Length</OptionsText>
-              <Grid>
-                <Operand {...tap} onClick={() => {}} id="break-decrement">
-                  <FontAwesomeIcon icon={faArrowDown} />
-                </Operand>
-                <Time>
-                  <h1>
-                    <span id="break-length">5</span> min
-                  </h1>
-                </Time>
-                <Operand {...tap} onClick={() => {}} id="break-increment">
-                  <FontAwesomeIcon icon={faArrowUp} />
-                </Operand>
-              </Grid>
-            </div>
-            <div className="options-container">
-              <OptionsText id="session-label">Session Length</OptionsText>
-              <Grid>
-                <Operand {...tap} onClick={() => {}} id="session-decrement">
-                  <FontAwesomeIcon icon={faArrowDown} />
-                </Operand>
-                <Time>
-                  <h1>
-                    <span id="session-length">5</span> min
-                  </h1>
-                </Time>
-                <Operand {...tap} onClick={() => {}} id="session-increment">
-                  <FontAwesomeIcon icon={faArrowUp} />
-                </Operand>
-              </Grid>
-            </div>
+            {getControl("Break")}
+            {getControl("Session")}
           </Options>
 
           <ActionButtons>
             <motion.div
               {...tap}
               id="start_stop"
-              onClick={() => {}}
+              onClick={() => setPause((e) => !e)}
               style={{ cursor: "pointer" }}
             >
-              <FontAwesomeIcon icon={faPlay} />
+              <FontAwesomeIcon icon={pause ? faPause : faPlay} />
             </motion.div>
-            <motion.div {...tap} id="reset" onClick={() => {}}>
+            <motion.div {...tap} id="reset" onClick={reset}>
               <FontAwesomeIcon icon={faRedo} />
             </motion.div>
           </ActionButtons>
