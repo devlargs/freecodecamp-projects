@@ -7,6 +7,8 @@ import NProgress from "nprogress";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import sizes from "constants/sizes";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const list = {
   visible: { opacity: 1 },
@@ -46,10 +48,15 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <Layout className="layout" style={{ background: "#20A76E" }}>
+      <Buns>
+        <Patty>
+          <StyledMobileIcon icon={faBars} />
+        </Patty>
+      </Buns>
       <HeaderContent>
-        <div className="header">
+        <Header className="header">
           <Link href="/">
-            <a className="logo">FCC</a>
+            <Logo>FCC</Logo>
           </Link>
           <motion.div
             className="header-right"
@@ -73,7 +80,7 @@ const App = ({ Component, pageProps }) => {
               </motion.a>
             </Link>
           </motion.div>
-        </div>
+        </Header>
       </HeaderContent>
       <StyledContent>
         <Component {...pageProps} />
@@ -87,18 +94,44 @@ const StyledContent = styled(Content)`
   margin-top: ${sizes.header}px;
 `;
 
-const HeaderContent = styled.div`
-  .header {
-    overflow: hidden;
-    background-color: #041529;
-    padding: 0 50px 0px 50px;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100vw;
-    z-index: 99;
-  }
+const Header = styled.div`
+  overflow: hidden;
+  background-color: #041529;
+  padding: 0 50px 0px 50px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  z-index: 99;
+`;
 
+const Logo = styled.a`
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+`;
+
+const Buns = styled.div`
+  position: fixed;
+  top: 0;
+  font-size: 20px;
+  background-color: #041529;
+  width: 100%;
+  right: 0;
+  height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+`;
+
+const Patty = styled.div``;
+
+const StyledMobileIcon = styled(FontAwesomeIcon)`
+  color: white;
+`;
+
+const HeaderContent = styled.div`
   .header a {
     float: left;
     color: white;
@@ -110,21 +143,10 @@ const HeaderContent = styled.div`
     border-radius: 4px;
   }
 
-  .header a.logo {
-    color: white;
-    font-size: 25px;
-    font-weight: bold;
-  }
-
   .header a:hover {
     color: #041529;
     background-color: white;
     border-radius: 0px;
-  }
-
-  .header a.active {
-    background-color: #20a76e;
-    color: white;
   }
 
   .header-right {
@@ -140,6 +162,15 @@ const HeaderContent = styled.div`
 
     .header-right {
       float: none;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    .header {
+      display: none;
+    }
+
+    .hamburger {
     }
   }
 `;

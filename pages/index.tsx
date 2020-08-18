@@ -23,7 +23,7 @@ export default function App() {
               value: 10,
               random: true,
               anim: {
-                speed: 4,
+                speed: 1,
                 size_min: 0.3,
               },
             },
@@ -33,7 +33,7 @@ export default function App() {
             move: {
               random: true,
               speed: 1,
-              direction: "top",
+              direction: "bottom",
               out_mode: "out",
             },
           },
@@ -89,15 +89,8 @@ export default function App() {
   );
 }
 
-export async function getStaticProps() {
-  return {
-    props: {
-      path: "/",
-    },
-  };
-}
-
 const Homepage = styled.div`
+  overflow: hidden;
   #tsparticles {
     position: absolute;
     z-index: 1;
