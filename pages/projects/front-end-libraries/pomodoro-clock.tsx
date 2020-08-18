@@ -14,14 +14,13 @@ import {
 import { useState, useEffect } from "react";
 import CenteredContent from "components/CenteredContent";
 import getTimeRemaining from "utils/getTimeRemaining";
-import { start } from "repl";
+import isEmpty from "utils/isEmpty";
+import formatTime from "utils/formatTime";
 
 let intervals = {
   break: undefined,
   session: undefined,
 };
-
-// let deadline = undefined;
 
 const defaults = {
   timer: {
@@ -57,13 +56,18 @@ export default () => {
     });
   };
 
-  const reset = () => {
-    setTimer(defaults.timer);
+  const reset = (all = true) => {
+    if (all) {
+      setTimer(defaults.timer);
+      setClock(defaults.clock);
+    }
     setPause(defaults.pause);
-    setClock(defaults.clock);
     setTimeLeft(defaults.timeLeft);
     setReadableTimeLeft(defaults.readableTimeLeft);
     setDeadline(defaults.deadline);
+    const audio = document.getElementById("beep") as HTMLAudioElement;
+    audio.currentTime = 0;
+    audio?.pause();
     clearIntervals();
   };
 
@@ -113,14 +117,17 @@ export default () => {
   };
 
   const startCountdown = (e) => {
-    console.log("clock started");
-    console.log(e);
     const updateClock = () => {
       const t = getTimeRemaining(e);
-      console.log(t);
-      setReadableTimeLeft(t);
       if (t.total < 0) {
         clearInterval(intervals[clock]);
+        const audio = document.getElementById("beep") as HTMLAudioElement;
+        audio?.play();
+        setClock(clock === "session" ? "break" : "session");
+        reset(false);
+        setPause(true);
+      } else {
+        setReadableTimeLeft(t);
       }
     };
     updateClock();
@@ -129,9 +136,6 @@ export default () => {
 
   useEffect(() => {
     if (pause) {
-      console.log(timeLeft, "TIME LEFT");
-      console.log(deadline, "DEADLINE");
-
       if (!timeLeft && !deadline) {
         const initial = new Date(
           Date.parse(new Date() as any) + timer[clock].min * 60 * 1000
@@ -139,17 +143,13 @@ export default () => {
         setDeadline(initial);
         startCountdown(initial);
       } else {
-        console.log("resume");
         startCountdown(new Date(Date.parse(new Date() as any) + timeLeft));
       }
     } else {
       if (intervals[clock]) {
         clearInterval(intervals[clock]);
-        console.log(timeLeft);
-        console.log(getTimeRemaining(deadline).total, "REMAINING");
         const t = getTimeRemaining(deadline);
         setTimeLeft(t.total);
-        console.log("paused");
       }
     }
 
@@ -167,13 +167,21 @@ export default () => {
       <audio id="beep" src={`/assets/sounds/Rooster.mp3`}></audio>
       <CenteredContent bgColor="#28587b">
         <div>
-          <TimerLabel id="timer-label">Pomodoro Clock</TimerLabel>
+          <TimerLabel id="timer-label">
+            {isEmpty(readableTimeLeft)
+              ? clock === "session"
+                ? "Session time"
+                : "Break time"
+              : "Pomodoro Clock"}
+          </TimerLabel>
           <Clock>
             <div className="content">
               <Timer id="time-left">
-                {readableTimeLeft?.minutes
-                  ? `${readableTimeLeft?.minutes}:${readableTimeLeft?.seconds}`
-                  : "25:00"}
+                {!isEmpty(readableTimeLeft)
+                  ? `${formatTime(readableTimeLeft?.minutes)}:${formatTime(
+                      readableTimeLeft?.seconds
+                    )}`
+                  : `${formatTime(timer.session.min)}:00`}
               </Timer>
             </div>
           </Clock>
@@ -192,7 +200,7 @@ export default () => {
             >
               <FontAwesomeIcon icon={pause ? faPause : faPlay} />
             </motion.div>
-            <motion.div {...tap} id="reset" onClick={reset}>
+            <motion.div {...tap} id="reset" onClick={() => reset(true)}>
               <FontAwesomeIcon icon={faRedo} />
             </motion.div>
           </ActionButtons>
