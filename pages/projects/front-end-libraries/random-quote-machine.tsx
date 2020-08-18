@@ -11,13 +11,9 @@ import staticQuote from "constants/quotes";
 import meta from "constants/meta";
 import SEO from "components/SEO";
 import links from "constants/links";
+import CenteredContent from "components/CenteredContent";
 
 const Root = styled.div`
-  display: grid;
-  place-items: center;
-  height: 100%;
-  background-color: ${(props) => props.bg};
-
   #quote-box {
     background-color: white;
     width: 60vh;
@@ -32,11 +28,12 @@ const Root = styled.div`
         text-align: center;
       }
       h1 {
-        font-family: "Roboto Mono";
+        font-family: "Roboto Mono", Arial;
       }
       h2 {
-        font-family: "Dancing Script";
+        font-family: "Dancing Script", Arial;
       }
+      margin-bottom: 10px;
     }
     .random-button {
       border-radius: 5px;
@@ -74,61 +71,63 @@ export default ({ data }) => {
   };
 
   return (
-    <Root bg={randomColor}>
-      <SEO
-        title="Random Quote Machine"
-        withFCCScript
-        description={meta.description("Random Quote Machine")}
-        imageUrl={`/assets/images/projects/random-quote-machine.png`}
-      />
-      <motion.div id="quote-box">
-        <div id="text">
-          <motion.h1
-            animate={{ rotate: rotation }}
-            transition={{ ease: "easeOut", duration: 0.8 }}
-          >
-            {loading ? (
-              <LoadingOutlined />
-            ) : (
-              <>
-                <FontAwesomeIcon icon={faQuoteLeft} />
-                &nbsp;
-                {random.quote}
-              </>
-            )}
-          </motion.h1>
-          <h2 id="author">{loading ? <></> : `- ${random.author} -`}</h2>
-          <br />
-          <motion.a
-            whileHover={{ scale: 1.1 }}
-            style={{ float: "left" }}
-            className="random-button social"
-            id="tweet-quote"
-            href={links.SHARE_TWEET_URL(random)}
-            target="_blank"
-          >
-            <TwitterOutlined />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.1 }}
-            style={{ float: "left" }}
-            className="random-button social"
-            target="_blank"
-            href={links.SHARE_TUBLER_URL(random)}
-          >
-            <FontAwesomeIcon icon={faTumblr} />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.1 }}
-            onClick={generateNewQuote}
-            className="random-button"
-            id="new-quote"
-            style={{ float: "right" }}
-          >
-            <span>{loading ? <LoadingOutlined /> : "Get New Quote"}</span>
-          </motion.a>
-        </div>
-      </motion.div>
-    </Root>
+    <CenteredContent bgColor={randomColor}>
+      <Root bg={randomColor}>
+        <SEO
+          title="Random Quote Machine"
+          withFCCScript
+          description={meta.description("Random Quote Machine")}
+          imageUrl={`/assets/images/projects/random-quote-machine.png`}
+        />
+        <motion.div id="quote-box">
+          <div id="text">
+            <motion.h1
+              animate={{ rotate: rotation }}
+              transition={{ ease: "easeOut", duration: 0.8 }}
+            >
+              {loading ? (
+                <LoadingOutlined />
+              ) : (
+                <>
+                  <FontAwesomeIcon icon={faQuoteLeft} />
+                  &nbsp;
+                  {random.quote}
+                </>
+              )}
+            </motion.h1>
+            <h2 id="author">{loading ? <></> : `- ${random.author} -`}</h2>
+            <br />
+            <motion.a
+              whileHover={{ scale: 1.1 }}
+              style={{ float: "left" }}
+              className="random-button social"
+              id="tweet-quote"
+              href={links.SHARE_TWEET_URL(random)}
+              target="_blank"
+            >
+              <TwitterOutlined />
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.1 }}
+              style={{ float: "left" }}
+              className="random-button social"
+              target="_blank"
+              href={links.SHARE_TUBLER_URL(random)}
+            >
+              <FontAwesomeIcon icon={faTumblr} />
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.1 }}
+              onClick={generateNewQuote}
+              className="random-button"
+              id="new-quote"
+              style={{ float: "right" }}
+            >
+              <span>{loading ? <LoadingOutlined /> : "Get New Quote"}</span>
+            </motion.a>
+          </div>
+        </motion.div>
+      </Root>
+    </CenteredContent>
   );
 };

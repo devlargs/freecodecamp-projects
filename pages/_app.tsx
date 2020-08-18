@@ -6,7 +6,7 @@ import "styles/global.css";
 import NProgress from "nprogress";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import links from "constants/links";
+import sizes from "constants/sizes";
 
 const list = {
   visible: { opacity: 1 },
@@ -76,39 +76,17 @@ const App = ({ Component, pageProps }) => {
           </motion.div>
         </div>
       </HeaderContent>
-      <Content
-        style={{
-          height: `calc(100vh - ${pageProps?.path === "/" ? "49" : "70"}px)`,
-        }}
-      >
+      <StyledContent>
         <Component {...pageProps} />
-      </Content>
-      {/* 
-      {pageProps?.path === "/" ? (
-        <></>
-      ) : (
-        <StyledFooter>
-          Free Code Camp Projects © 2020 Created by{" "}
-          <a href={links.GITHUB_PROFILE} target="_blank">
-            Ralph Largo
-          </a>
-        </StyledFooter>
-      )} */}
+      </StyledContent>
     </Layout>
   );
 };
 
-const StyledFooter = styled(Footer)`
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  user-select: none; /* supported by Chrome and Opera */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none;
+const StyledContent = styled(Content)`
+  height: calc(100vh - ${sizes.header}px);
+  margin-top: ${sizes.header}px;
+  // position: relative;
 `;
 
 const HeaderContent = styled.div`
@@ -116,6 +94,11 @@ const HeaderContent = styled.div`
     overflow: hidden;
     background-color: #041529;
     padding: 0 50px 0px 50px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 99;
   }
 
   .header a {
