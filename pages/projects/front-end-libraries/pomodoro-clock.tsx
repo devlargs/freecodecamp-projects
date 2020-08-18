@@ -22,6 +22,8 @@ let intervals = {
   session: undefined,
 };
 
+const counter = 10;
+
 const defaults = {
   timer: {
     break: {
@@ -60,15 +62,22 @@ export default () => {
     if (all) {
       setTimer(defaults.timer);
       setClock(defaults.clock);
+      const audio = document.getElementById("beep") as HTMLAudioElement;
+      audio.currentTime = 0;
+      audio?.pause();
+    } else {
+      setClock(clock === "session" ? "break" : "session");
     }
     setPause(defaults.pause);
     setTimeLeft(defaults.timeLeft);
     setReadableTimeLeft(defaults.readableTimeLeft);
     setDeadline(defaults.deadline);
-    const audio = document.getElementById("beep") as HTMLAudioElement;
-    audio.currentTime = 0;
-    audio?.pause();
     clearIntervals();
+
+    console.table({
+      pause,
+      clock,
+    });
   };
 
   const operator = (key: string, add: boolean) => {
@@ -120,25 +129,25 @@ export default () => {
     const updateClock = () => {
       const t = getTimeRemaining(e);
       if (t.total < 0) {
-        clearInterval(intervals[clock]);
         const audio = document.getElementById("beep") as HTMLAudioElement;
         audio?.play();
-        setClock(clock === "session" ? "break" : "session");
         reset(false);
+        // setClock(clock === "session" ? "break" : "session");
         setPause(true);
+        // clearInterval(intervals[clock]);
       } else {
         setReadableTimeLeft(t);
       }
     };
     updateClock();
-    intervals[clock] = setInterval(updateClock, 1000);
+    intervals[clock] = setInterval(updateClock, counter);
   };
 
   useEffect(() => {
     if (pause) {
       if (!timeLeft && !deadline) {
         const initial = new Date(
-          Date.parse(new Date() as any) + timer[clock].min * 60 * 1000
+          Date.parse(new Date() as any) + timer[clock].min * 60 * counter
         );
         setDeadline(initial);
         startCountdown(initial);
@@ -156,6 +165,18 @@ export default () => {
     return () => clearIntervals();
   }, [pause]);
 
+  const getLabel = () => {
+    if (clock === "break") {
+      return "Break time";
+    }
+
+    if (clock === "session" && !isEmpty(readableTimeLeft)) {
+      return "Session time";
+    }
+
+    return "Pomodoro Clock";
+  };
+
   return (
     <>
       <SEO
@@ -167,13 +188,7 @@ export default () => {
       <audio id="beep" src={`/assets/sounds/Rooster.mp3`}></audio>
       <CenteredContent bgColor="#28587b">
         <div>
-          <TimerLabel id="timer-label">
-            {isEmpty(readableTimeLeft)
-              ? clock === "session"
-                ? "Session time"
-                : "Break time"
-              : "Pomodoro Clock"}
-          </TimerLabel>
+          <TimerLabel id="timer-label">{getLabel()}</TimerLabel>
           <Clock>
             <div className="content">
               <Timer id="time-left">
