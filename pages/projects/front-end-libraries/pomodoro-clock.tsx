@@ -12,6 +12,7 @@ import {
   faRedo,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
+import CenteredContent from "components/CenteredContent";
 
 export default () => {
   return (
@@ -23,11 +24,9 @@ export default () => {
         imageUrl={`/assets/images/projects/pomodoro-clock.png`}
       />
       <audio id="beep" src={`/assets/sounds/Rooster.mp3`}></audio>
-      <Root>
-        <div>
-          <TimerLabel style={{ padding: "1em" }} id="timer-label">
-            Pomodoro Clock
-          </TimerLabel>
+      <CenteredContent bgColor="#28587b">
+        <div className="unselectable">
+          <TimerLabel id="timer-label">Pomodoro Clock</TimerLabel>
           <Clock>
             <div className="content">
               <Timer id="time-left">25:00</Timer>
@@ -83,14 +82,16 @@ export default () => {
             </motion.div>
           </ActionButtons>
         </div>
-      </Root>
+      </CenteredContent>
     </>
   );
 };
 
 const TimerLabel = styled.div`
   padding: 1em;
+  text-align: center;
   font-size: 24px;
+  color: white;
 `;
 
 const ActionButtons = styled.div`
@@ -99,6 +100,8 @@ const ActionButtons = styled.div`
   align-items: center;
   height: 100px;
   gap: 10px;
+  color: white;
+  text-align: center;
   #start_stop,
   #reset {
     width: 70px;
@@ -106,21 +109,6 @@ const ActionButtons = styled.div`
     background-color: #7f7caf;
     border-radius: 1em;
   }
-`;
-
-const Root = styled.div`
-  display: flex;
-  height: calc(100vh - 49px - 70px);
-  background-color: #28587b;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  color: #eeeeff;
-  user-select: none; /* supported by Chrome and Opera */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none;
 `;
 
 const Clock = styled.div`
@@ -153,6 +141,7 @@ const Options = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
+  color: white;
   .options-container {
     border-radius: 2em;
     padding: 1em;
@@ -167,14 +156,6 @@ const Options = styled.div`
 const OptionsText = styled.div`
   font-size: 24px;
   color: black;
-  ::selection {
-    color: black;
-    background: none;
-  }
-  ::-moz-selection {
-    color: black;
-    background: none;
-  }
 `;
 
 const Grid = styled.div`

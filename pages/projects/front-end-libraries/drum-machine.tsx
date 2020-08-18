@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import meta from "constants/meta";
 import SEO from "components/SEO";
+import CenteredContent from "components/CenteredContent";
 
 export default () => {
   const [currentKey, setCurrentKey] = useState("Drum Machine");
@@ -33,95 +34,80 @@ export default () => {
   }, []);
 
   return (
-    <>
+    <CenteredContent bgColor="#ececec">
       <SEO
         title="Drum Machine"
         withFCCScript
         description={meta.description("Drum Machine")}
         imageUrl={`/assets/images/projects/drum-machine.png`}
       />
-      <Root className="h-calculated" id="drum-machine">
-        <div className="d-grid">
-          <div className="d-grid-container">
-            <h1 id="display">{currentKey?.replace("-", " ")}</h1>
-
-            <div className="grid-content">
-              {"QWEASDZXC".split("").map((q: string) => (
-                <motion.div
-                  className="drum-pad"
-                  key={q}
-                  id={`drum-pad-${q}`}
-                  onClick={() => playKey(`Key${q}`, false)}
-                  whileTap={{
-                    rotate:
-                      Math.floor(Math.random() * 20) *
-                      (Math.random() > 0.5 ? -1 : 1),
-                    scale: 1.1,
-                  }}
-                >
-                  <span>{q}</span>
-                  <audio
-                    className="clip"
-                    src={`/assets/sounds/${file[q]}.mp3`}
-                    id={q}
-                  ></audio>
-                </motion.div>
-              ))}
-            </div>
+      <Root id="drum-machine" className="unselectable">
+        <div className="d-grid-container">
+          <h1 id="display">{currentKey?.replace("-", " ")}</h1>
+          <div className="grid-content">
+            {"QWEASDZXC".split("").map((q: string) => (
+              <motion.div
+                className="drum-pad"
+                key={q}
+                id={`drum-pad-${q}`}
+                onClick={() => playKey(`Key${q}`, false)}
+                whileTap={{
+                  rotate:
+                    Math.floor(Math.random() * 20) *
+                    (Math.random() > 0.5 ? -1 : 1),
+                  scale: 1.1,
+                }}
+              >
+                <span>{q}</span>
+                <audio
+                  className="clip"
+                  src={`/assets/sounds/${file[q]}.mp3`}
+                  id={q}
+                ></audio>
+              </motion.div>
+            ))}
           </div>
         </div>
       </Root>
-    </>
+    </CenteredContent>
   );
 };
 
 const Root = styled.div`
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-color: #ececec;
-  .d-grid {
-    display: grid;
-    height: 100%;
-    place-items: center;
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .d-grid-container {
+    background-color: #e17b20;
+    border: 10px solid white;
     h1 {
-      text-align: center;
-      font-size: 2rem;
+      color: white;
+      font-weight: bold;
+      padding: 10px;
     }
-    .d-grid-container {
-      background-color: #e17b20;
-      border: 10px solid white;
-
-      h1 {
-        color: white;
-        font-weight: bold;
-        padding: 10px;
-      }
-      padding: 20px;
-      .grid-content {
-        display: grid;
-        grid-gap: 10px;
-        grid-template-columns: repeat(3, 1fr);
-        place-items: center;
-        div {
-          text-align: center;
-          width: 100px;
-          height: 100px;
-          border: 3px solid white;
-          padding: 10px;
-          background-color: #53616f;
-          font-weight: bold;
-          color: white;
-          border-radius: 10px;
-          font-size: 1.5rem;
-        }
-      }
+    padding: 20px;
+    .grid-content {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      place-items: center;
       div {
-        display: grid;
-        place-items: center;
+        text-align: center;
+        width: 100px;
+        height: 100px;
+        border: 3px solid white;
+        padding: 10px;
+        background-color: #53616f;
+        font-weight: bold;
+        color: white;
+        border-radius: 10px;
+        font-size: 1.5rem;
       }
+    }
+    div {
+      display: grid;
+      place-items: center;
     }
   }
 `;

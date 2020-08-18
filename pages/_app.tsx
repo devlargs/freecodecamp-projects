@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 import Link from "next/link";
 import styled from "styled-components";
 import "styles/global.css";
 import NProgress from "nprogress";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import sizes from "constants/sizes";
 
 const list = {
   visible: { opacity: 1 },
@@ -24,8 +25,7 @@ const item = {
   hidden: { opacity: 0, x: 1000 },
 };
 
-const { SubMenu } = Menu;
-const { Footer, Content } = Layout;
+const { Content } = Layout;
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
   useEffect(() => {
@@ -75,39 +75,16 @@ const App = ({ Component, pageProps }) => {
           </motion.div>
         </div>
       </HeaderContent>
-      <Content
-        style={{
-          height: `calc(100vh - ${pageProps?.path === "/" ? "49" : "70"}px)`,
-        }}
-      >
+      <StyledContent>
         <Component {...pageProps} />
-      </Content>
-
-      {pageProps?.path === "/" ? (
-        <></>
-      ) : (
-        <StyledFooter>
-          Free Code Camp Projects © 2020 Created by{" "}
-          <a href="http://github.com/devlargs" target="_blank">
-            Ralph Largo
-          </a>
-        </StyledFooter>
-      )}
+      </StyledContent>
     </Layout>
   );
 };
 
-const StyledFooter = styled(Footer)`
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  user-select: none; /* supported by Chrome and Opera */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none;
+const StyledContent = styled(Content)`
+  height: calc(100vh - ${sizes.header}px);
+  margin-top: ${sizes.header}px;
 `;
 
 const HeaderContent = styled.div`
@@ -115,6 +92,11 @@ const HeaderContent = styled.div`
     overflow: hidden;
     background-color: #041529;
     padding: 0 50px 0px 50px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 99;
   }
 
   .header a {

@@ -97,7 +97,8 @@ export async function getStaticProps(context) {
 const Root = styled.div`
   display: flex;
   width: 100vw;
-  height: calc(100vh - 64px);
+  margin-top: 49px;
+  height: calc(100vh - 49px);
   align-items: center;
   justify-content: center;
   background-color: #20a76e;
