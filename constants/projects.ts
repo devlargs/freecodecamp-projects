@@ -12,11 +12,11 @@ export default [
   // {
   //   name: "Data Visualization",
   //   list: [
-  // "Bar Chart",
-  // "Scatterplot Graph",
-  // "Heat Map",
-  // "Choropleth Map",
-  // "Treemap Diagram",
+  //     "Bar Chart",
+  //     "Scatterplot Graph",
+  //     "Heat Map",
+  //     "Choropleth Map",
+  //     "Treemap Diagram",
   //   ],
   // },
   // {

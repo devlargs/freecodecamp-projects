@@ -123,6 +123,11 @@ const Buns = styled.div`
   align-items: center;
   justify-content: flex-end;
   padding-right: 20px;
+  z-index: 999;
+
+  @media screen and (min-width: 520px) {
+    display: none;
+  }
 `;
 
 const Patty = styled.div``;
