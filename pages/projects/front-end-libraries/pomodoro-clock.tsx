@@ -25,7 +25,7 @@ export default () => {
       />
       <audio id="beep" src={`/assets/sounds/Rooster.mp3`}></audio>
       <CenteredContent bgColor="#28587b">
-        <div className="unselectable">
+        <div>
           <TimerLabel id="timer-label">Pomodoro Clock</TimerLabel>
           <Clock>
             <div className="content">

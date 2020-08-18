@@ -41,7 +41,7 @@ export default () => {
         description={meta.description("Drum Machine")}
         imageUrl={`/assets/images/projects/drum-machine.png`}
       />
-      <Root id="drum-machine" className="unselectable">
+      <Root id="drum-machine">
         <div className="d-grid-container">
           <h1 id="display">{currentKey?.replace("-", " ")}</h1>
           <div className="grid-content">
