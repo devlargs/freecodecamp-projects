@@ -12,6 +12,6 @@ export const sequence = {
         delay: i * 0.1,
       },
     }),
-    hidden: { opacity: 0, x: -100 },
+    hidden: { opacity: 0, x: 100 },
   },
 };

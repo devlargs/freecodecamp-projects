@@ -30,9 +30,20 @@ export default () => {
         {projects.map((project) => {
           const key = convertString(project.name, "sentence", "kebab");
           return (
-            <Container key={key}>
-              <h1 style={{ color: "#041429" }}>{project.name} Projects</h1>
-              <Flexbox initial="hidden" animate="visible" variants={list}>
+            <Container
+              key={key}
+              initial="hidden"
+              animate="visible"
+              variants={list}
+            >
+              <motion.h1
+                style={{ color: "#041429" }}
+                custom={1}
+                variants={item}
+              >
+                {project.name} Projects
+              </motion.h1>
+              <Flexbox>
                 {project.list.map((q, i) => {
                   const title = convertString(q, "sentence", "kebab");
                   return (
@@ -42,7 +53,7 @@ export default () => {
                     >
                       <motion.div
                         variants={item}
-                        custom={i}
+                        custom={i + 1}
                         whileHover={{
                           scale: 1.1,
                           transition: { duration: transition },
@@ -99,6 +110,6 @@ const Flexbox = styled(motion.div)`
   }
 `;
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   margin-bottom: 40px;
 `;
