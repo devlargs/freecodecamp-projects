@@ -6,7 +6,10 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from "next/document";
+import links from "constants/links";
 import { ServerStyleSheet } from "styled-components";
+
+const { FONTS } = links;
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -40,23 +43,11 @@ export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html lang="en">
-        <link
-          href="https://fonts.googleapis.com/css?family=Dancing Script"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css?family=Roboto+Mono"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css?family=Orbitron"
-          rel="stylesheet"
-        />
         <Head>
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-175345501-1"
-          ></script>
+          <link href={FONTS.DANCING_SCRIPT} rel="stylesheet" />
+          <link href={FONTS.ROBOTO_MONO} rel="stylesheet" />
+          <link href={FONTS.ORBITRON} rel="stylesheet" />
+          <script async src={links.GOOGLE_ANALYTICS}></script>
           <script
             dangerouslySetInnerHTML={{
               __html: `

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Particles from "react-particles-js";
 import styled from "styled-components";
+import links from "constants/links";
 
 export default function App() {
   return (
@@ -74,7 +75,7 @@ export default function App() {
             <br />
             <span>
               Created by{" "}
-              <a href="https://github.com/devlargs" target="_blank">
+              <a href={links.GITHUB_PROFILE} target="_blank">
                 Ralph Largo
               </a>
             </span>
