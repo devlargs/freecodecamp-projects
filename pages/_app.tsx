@@ -5,6 +5,24 @@ import styled from "styled-components";
 import "styles/global.css";
 import NProgress from "nprogress";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
+
+const list = {
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+};
+
+const item = {
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    rotate: 360,
+    transition: {
+      delay: i * 0.3,
+    },
+  }),
+  hidden: { opacity: 0, x: 1000 },
+};
 
 const { SubMenu } = Menu;
 const { Footer, Content } = Layout;
@@ -33,17 +51,28 @@ const App = ({ Component, pageProps }) => {
           <Link href="/">
             <a className="logo">FCC</a>
           </Link>
-          <div className="header-right">
+          <motion.div
+            className="header-right"
+            initial="hidden"
+            animate="visible"
+            variants={list}
+          >
             <Link href="/">
-              <a>/home</a>
+              <motion.a variants={item} custom={1}>
+                /home
+              </motion.a>
             </Link>
             <Link href="/projects">
-              <a>/projects</a>
+              <motion.a variants={item} custom={2}>
+                /projects
+              </motion.a>
             </Link>
             <Link href="/certificates">
-              <a>/certificates</a>
+              <motion.a variants={item} custom={3}>
+                /certificates
+              </motion.a>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </HeaderContent>
       <Content
