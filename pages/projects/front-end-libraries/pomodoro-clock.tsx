@@ -22,7 +22,7 @@ let intervals = {
   session: undefined,
 };
 
-const counter = 10;
+const counter = 1000;
 
 const defaults = {
   timer: {
@@ -55,6 +55,8 @@ export default () => {
   const clearIntervals = () => {
     ["break", "session"].map((q) => {
       clearInterval(intervals[q]);
+      intervals[q] = null;
+      delete intervals[q];
     });
   };
 
@@ -73,11 +75,6 @@ export default () => {
     setReadableTimeLeft(defaults.readableTimeLeft);
     setDeadline(defaults.deadline);
     clearIntervals();
-
-    console.table({
-      pause,
-      clock,
-    });
   };
 
   const operator = (key: string, add: boolean) => {
@@ -132,9 +129,7 @@ export default () => {
         const audio = document.getElementById("beep") as HTMLAudioElement;
         audio?.play();
         reset(false);
-        // setClock(clock === "session" ? "break" : "session");
         setPause(true);
-        // clearInterval(intervals[clock]);
       } else {
         setReadableTimeLeft(t);
       }
@@ -156,7 +151,7 @@ export default () => {
       }
     } else {
       if (intervals[clock]) {
-        clearInterval(intervals[clock]);
+        clearIntervals();
         const t = getTimeRemaining(deadline);
         setTimeLeft(t.total);
       }
