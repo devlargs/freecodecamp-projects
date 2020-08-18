@@ -36,7 +36,7 @@ body {
 }
 
 #nprogress .bar {
-  background: #20a76e;
+  background: white;
   position: fixed;
   z-index: 9999;
   top: 0;

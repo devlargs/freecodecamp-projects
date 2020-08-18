@@ -13,8 +13,165 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import CenteredContent from "components/CenteredContent";
+import getTimeRemaining from "utils/getTimeRemaining";
+import isEmpty from "utils/isEmpty";
+import formatTime from "utils/formatTime";
+
+let intervals = {
+  break: undefined,
+  session: undefined,
+};
+
+const counter = 1000;
+
+const defaults = {
+  timer: {
+    break: {
+      min: 5,
+      seconds: 0,
+    },
+    session: {
+      min: 25,
+      seconds: 0,
+    },
+  },
+  pause: false,
+  clock: "session",
+  timeLeft: null,
+  readableTimeLeft: {},
+  deadline: undefined,
+};
 
 export default () => {
+  const [timer, setTimer] = useState(defaults.timer);
+  const [pause, setPause] = useState(defaults.pause);
+  const [clock, setClock] = useState(defaults.clock);
+  const [timeLeft, setTimeLeft] = useState(defaults.timeLeft);
+  const [deadline, setDeadline] = useState(defaults.deadline);
+  const [readableTimeLeft, setReadableTimeLeft] = useState(
+    defaults.readableTimeLeft
+  ) as any;
+
+  const clearIntervals = () => {
+    ["break", "session"].map((q) => {
+      clearInterval(intervals[q]);
+      intervals[q] = null;
+      delete intervals[q];
+    });
+  };
+
+  const reset = (all = true) => {
+    if (all) {
+      setTimer(defaults.timer);
+      setClock(defaults.clock);
+      const audio = document.getElementById("beep") as HTMLAudioElement;
+      audio.currentTime = 0;
+      audio?.pause();
+    } else {
+      setClock(clock === "session" ? "break" : "session");
+    }
+    setPause(defaults.pause);
+    setTimeLeft(defaults.timeLeft);
+    setReadableTimeLeft(defaults.readableTimeLeft);
+    setDeadline(defaults.deadline);
+    clearIntervals();
+  };
+
+  const operator = (key: string, add: boolean) => {
+    setTimer((time) => {
+      if (add ? time[key].min < 60 : time[key].min > 1) {
+        return {
+          ...time,
+          [key]: {
+            ...time[key],
+            min: add ? time[key].min + 1 : time[key].min - 1,
+          },
+        };
+      }
+      return time;
+    });
+  };
+
+  const getControl = (text: string) => {
+    const key = text.toLowerCase();
+    return (
+      <div className="options-container">
+        <OptionsText id={`${key}-label`}>{text} Length</OptionsText>
+        <Grid>
+          <Operand
+            {...tap}
+            onClick={() => operator(key, false)}
+            id={`${key}-decrement`}
+          >
+            <FontAwesomeIcon icon={faArrowDown} />
+          </Operand>
+          <Time>
+            <h1>
+              <span id={`${key}-length`}>{timer[key].min}</span> min
+            </h1>
+          </Time>
+          <Operand
+            {...tap}
+            onClick={() => operator(key, true)}
+            id={`${key}-increment`}
+          >
+            <FontAwesomeIcon icon={faArrowUp} />
+          </Operand>
+        </Grid>
+      </div>
+    );
+  };
+
+  const startCountdown = (e) => {
+    const updateClock = () => {
+      const t = getTimeRemaining(e);
+      if (t.total < 0) {
+        const audio = document.getElementById("beep") as HTMLAudioElement;
+        audio?.play();
+        reset(false);
+        setPause(true);
+      } else {
+        setReadableTimeLeft(t);
+      }
+    };
+    updateClock();
+    intervals[clock] = setInterval(updateClock, counter);
+  };
+
+  useEffect(() => {
+    if (pause) {
+      if (!timeLeft && !deadline) {
+        const initial = new Date(
+          Date.parse(new Date() as any) + timer[clock].min * 60 * counter
+        );
+        setDeadline(initial);
+        startCountdown(initial);
+      } else {
+        startCountdown(new Date(Date.parse(new Date() as any) + timeLeft));
+      }
+    } else {
+      if (intervals[clock]) {
+        clearIntervals();
+        const t = getTimeRemaining(deadline);
+        setTimeLeft(t.total);
+      }
+    }
+
+    return () => clearIntervals();
+  }, [pause]);
+
+  const getLabel = () => {
+    if (clock === "break") {
+      return "Break time";
+    }
+
+    if (clock === "session" && !isEmpty(readableTimeLeft)) {
+      return "Session time";
+    }
+
+    return "Pomodoro Clock";
+  };
+
   return (
     <>
       <SEO
@@ -26,58 +183,34 @@ export default () => {
       <audio id="beep" src={`/assets/sounds/Rooster.mp3`}></audio>
       <CenteredContent bgColor="#28587b">
         <div>
-          <TimerLabel id="timer-label">Pomodoro Clock</TimerLabel>
+          <TimerLabel id="timer-label">{getLabel()}</TimerLabel>
           <Clock>
             <div className="content">
-              <Timer id="time-left">25:00</Timer>
+              <Timer id="time-left">
+                {!isEmpty(readableTimeLeft)
+                  ? `${formatTime(readableTimeLeft?.minutes)}:${formatTime(
+                      readableTimeLeft?.seconds
+                    )}`
+                  : `${formatTime(timer.session.min)}:00`}
+              </Timer>
             </div>
           </Clock>
 
           <Options>
-            <div className="options-container">
-              <OptionsText id="break-label">Break Length</OptionsText>
-              <Grid>
-                <Operand {...tap} onClick={() => {}} id="break-decrement">
-                  <FontAwesomeIcon icon={faArrowDown} />
-                </Operand>
-                <Time>
-                  <h1>
-                    <span id="break-length">5</span> min
-                  </h1>
-                </Time>
-                <Operand {...tap} onClick={() => {}} id="break-increment">
-                  <FontAwesomeIcon icon={faArrowUp} />
-                </Operand>
-              </Grid>
-            </div>
-            <div className="options-container">
-              <OptionsText id="session-label">Session Length</OptionsText>
-              <Grid>
-                <Operand {...tap} onClick={() => {}} id="session-decrement">
-                  <FontAwesomeIcon icon={faArrowDown} />
-                </Operand>
-                <Time>
-                  <h1>
-                    <span id="session-length">5</span> min
-                  </h1>
-                </Time>
-                <Operand {...tap} onClick={() => {}} id="session-increment">
-                  <FontAwesomeIcon icon={faArrowUp} />
-                </Operand>
-              </Grid>
-            </div>
+            {getControl("Break")}
+            {getControl("Session")}
           </Options>
 
           <ActionButtons>
             <motion.div
               {...tap}
               id="start_stop"
-              onClick={() => {}}
+              onClick={() => setPause((e) => !e)}
               style={{ cursor: "pointer" }}
             >
-              <FontAwesomeIcon icon={faPlay} />
+              <FontAwesomeIcon icon={pause ? faPause : faPlay} />
             </motion.div>
-            <motion.div {...tap} id="reset" onClick={() => {}}>
+            <motion.div {...tap} id="reset" onClick={() => reset(true)}>
               <FontAwesomeIcon icon={faRedo} />
             </motion.div>
           </ActionButtons>
