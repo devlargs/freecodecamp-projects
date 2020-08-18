@@ -5,7 +5,7 @@ import getRandomColor from "utils/getRandomColor";
 import { TwitterOutlined, LoadingOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTumblr } from "@fortawesome/free-brands-svg-icons";
-import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
+import { faQuoteLeft, faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import staticQuote from "constants/quotes";
 import meta from "constants/meta";
@@ -16,7 +16,7 @@ import CenteredContent from "components/CenteredContent";
 const Root = styled.div`
   #quote-box {
     background-color: white;
-    width: 60vh;
+    width: 40vw;
     padding: 50px;
     border-radius: 15px;
     box-shadow: 5px 6px lightgray;
@@ -35,6 +35,9 @@ const Root = styled.div`
       }
       margin-bottom: 10px;
     }
+    .actions {
+      text-align: center;
+    }
     .random-button {
       border-radius: 5px;
       padding: 10px;
@@ -47,6 +50,45 @@ const Root = styled.div`
     .social {
       width: 40px;
       text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    #quote-box {
+      width: 95vw;
+      padding: 1em;
+      #text {
+        h1,
+        h2 {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 401px) and (max-width: 768px) {
+    #quote-box {
+      width: 60vw;
+      padding: 1em;
+      #text {
+        h1,
+        h2 {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1400px) {
+    #quote-box {
+      width: 50vw;
+      padding: 1em;
+      #text {
+        h1,
+        h2 {
+          font-size: 2em;
+        }
+      }
     }
   }
 `;
@@ -97,34 +139,39 @@ export default ({ data }) => {
             </motion.h1>
             <h2 id="author">{loading ? <></> : `- ${random.author} -`}</h2>
             <br />
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              style={{ float: "left" }}
-              className="random-button social"
-              id="tweet-quote"
-              href={links.SHARE_TWEET_URL(random)}
-              target="_blank"
-            >
-              <TwitterOutlined />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              style={{ float: "left" }}
-              className="random-button social"
-              target="_blank"
-              href={links.SHARE_TUBLER_URL(random)}
-            >
-              <FontAwesomeIcon icon={faTumblr} />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              onClick={generateNewQuote}
-              className="random-button"
-              id="new-quote"
-              style={{ float: "right" }}
-            >
-              <span>{loading ? <LoadingOutlined /> : "Get New Quote"}</span>
-            </motion.a>
+            <div className="actions">
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                className="random-button social"
+                id="tweet-quote"
+                href={links.SHARE_TWEET_URL(random)}
+                target="_blank"
+              >
+                <TwitterOutlined />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                className="random-button social"
+                target="_blank"
+                href={links.SHARE_TUBLER_URL(random)}
+              >
+                <FontAwesomeIcon icon={faTumblr} />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                onClick={generateNewQuote}
+                className="random-button"
+                id="new-quote"
+              >
+                <span>
+                  {loading ? (
+                    <LoadingOutlined />
+                  ) : (
+                    <FontAwesomeIcon icon={faRedoAlt} />
+                  )}
+                </span>
+              </motion.a>
+            </div>
           </div>
         </motion.div>
       </Root>
