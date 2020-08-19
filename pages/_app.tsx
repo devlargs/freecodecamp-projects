@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
-import { Layout } from "antd";
+import { Layout, Modal } from "antd";
 import Link from "next/link";
 import styled from "styled-components";
 import "styles/global.css";
 import NProgress from "nprogress";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import sizes from "constants/sizes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const list = {
   visible: { opacity: 1 },
@@ -30,6 +30,8 @@ const item = {
 const { Content } = Layout;
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     const nprogressStart = () => NProgress.start();
     const nprogressDone = () => {
@@ -47,9 +49,13 @@ const App = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <Layout className="layout" style={{ background: "#20A76E" }}>
+    <Layout
+      className="layout"
+      style={{ background: "#20A76E", position: "relative" }}
+    >
       <Buns>
-        <Patty>
+        <div id="modal-container"></div>
+        <Patty whileTap={{ rotate: 180 }} onClick={() => setIsOpen(true)}>
           <StyledMobileIcon icon={faBars} />
         </Patty>
       </Buns>
@@ -85,9 +91,91 @@ const App = ({ Component, pageProps }) => {
       <StyledContent>
         <Component {...pageProps} />
       </StyledContent>
+      <StyledModal
+        visible={isOpen}
+        mask={false}
+        footer={null}
+        closable={false}
+        onCancel={() => setIsOpen(false)}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column-reverse",
+            textAlign: "center",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                height: 49,
+                backgroundColor: "#041429",
+                width: "100vw",
+                paddingTop: 13,
+                paddingRight: 20,
+                textAlign: "end",
+              }}
+              onClick={() => setIsOpen(false)}
+            >
+              <FontAwesomeIcon
+                icon={faTimes}
+                style={{ color: "white", textAlign: "right" }}
+              />
+            </div>
+            <div onClick={() => setIsOpen(false)}>
+              <Link href="/certificates">
+                <a style={{ color: "white" }}>/certificates</a>
+              </Link>
+            </div>
+            <div onClick={() => setIsOpen(false)}>
+              <Link href="/projects">
+                <a style={{ color: "white" }}>/projects</a>
+              </Link>
+            </div>
+            <div onClick={() => setIsOpen(false)}>
+              <Link href="/">
+                <a style={{ color: "white" }}>/home</a>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </StyledModal>
     </Layout>
   );
 };
+
+const StyledModal = styled(Modal)`
+  animation-duration: 0s !important;
+
+  .ant-modal-body {
+    padding: 0px;
+    background-color: gray;
+    height: 100vh;
+  }
+
+  width: 100vw !important;
+  .ant-modal {
+    width: 100vw;
+  }
+
+  .ant-modal-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .ant-modal {
+      max-width: 100vw;
+      margin: 8px auto;
+      color: black;
+    }
+  }
+`;
 
 const StyledContent = styled(Content)`
   height: calc(100vh - ${sizes.header}px);
@@ -117,7 +205,7 @@ const Buns = styled.div`
   font-size: 20px;
   background-color: #041529;
   width: 100%;
-  right: 0;
+  left: 0;
   height: 49px;
   display: flex;
   align-items: center;
@@ -130,7 +218,9 @@ const Buns = styled.div`
   }
 `;
 
-const Patty = styled.div``;
+const Patty = styled(motion.div)`
+  cursor: pointer;
+`;
 
 const StyledMobileIcon = styled(FontAwesomeIcon)`
   color: white;
