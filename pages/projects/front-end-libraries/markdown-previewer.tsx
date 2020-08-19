@@ -5,6 +5,7 @@ import { Card } from "antd";
 import markdownExample from "constants/markdown";
 import meta from "constants/meta";
 import SEO from "components/SEO";
+import sizes from "constants/sizes";
 
 export default () => {
   const [source, setSource] = useState(markdownExample);
@@ -98,5 +99,5 @@ const Content = styled.div`
 
 const Root = styled.div`
   background-color: #2993a5;
-  height: 100%;
+  height: calc(100vh - ${sizes.header}px);
 `;

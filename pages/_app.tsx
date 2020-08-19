@@ -178,7 +178,7 @@ const StyledModal = styled(Modal)`
 `;
 
 const StyledContent = styled(Content)`
-  height: calc(100vh - ${sizes.header}px);
+  height: 100%;
   margin-top: ${sizes.header}px;
 `;
 
