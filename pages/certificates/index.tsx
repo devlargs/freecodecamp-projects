@@ -1,20 +1,34 @@
+import CenteredContent from "components/CenteredContent";
 import styled from "styled-components";
 
 export default function () {
   return (
-    <Root>
-      <h1>Page is under construction!</h1>
-    </Root>
+    <CenteredContent bgColor="whitesmoke">
+      <div style={{ textAlign: "center" }}>
+        <h1 style={{ paddingTop: 20, marginBottom: 0 }}>
+          Certificates Acquired
+        </h1>
+        <StyledImage src="/assets/images/certificates/responsive-web-design.png" />
+        <StyledImage src="/assets/images/certificates/javascript-algorithms-and-data-structures.png" />
+        <StyledImage src="/assets/images/certificates/front-end-libraries.png" />
+      </div>
+    </CenteredContent>
   );
 }
 
-const Root = styled.div`
-  display: flex;
-  background-color: #ddd;
-  font-size: 2em;
-  height: calc(100vh - 49px);
-  text-align: center;
-  h1 {
-    margin: auto;
+const StyledImage = styled.img`
+  padding: 20px;
+  width: 95vw;
+  height: 90vh;
+
+  @media screen and (max-width: 400px) {
+    width: 100vw;
+    height: 100%;
+    padding: 5px;
+  }
+
+  @media screen and (min-width: 401px) and (max-width: 768px) {
+    width: 95vw;
+    height: 45vh;
   }
 `;
