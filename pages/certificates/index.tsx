@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export default function () {
   return (
-    <CenteredContent bgColor="whitesmoke">
+    <CenteredContent bgColor="ghostwhite" height="100%">
       <div style={{ textAlign: "center" }}>
         <h1 style={{ paddingTop: 20, marginBottom: 0 }}>
           Certificates Acquired
@@ -18,8 +18,8 @@ export default function () {
 
 const StyledImage = styled.img`
   padding: 20px;
-  width: 95vw;
-  height: 90vh;
+  width: 75vw;
+  height: 75vh;
 
   @media screen and (max-width: 400px) {
     width: 100vw;

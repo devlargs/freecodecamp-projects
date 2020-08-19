@@ -16,7 +16,7 @@ export default () => {
   }, []);
 
   return (
-    <CenteredContent bgColor="whitesmoke">
+    <CenteredContent bgColor="ghostwhite">
       <Root>
         <h1 id="title">Gross Domestic Product</h1>
       </Root>

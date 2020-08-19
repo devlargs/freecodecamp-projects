@@ -4,19 +4,27 @@ import { ReactNode } from "react";
 type Props = {
   children: ReactNode;
   bgColor?: string;
+  height?: string;
 };
 
-export default ({ children, bgColor }: Props) => {
+export default ({ children, bgColor, height }: Props) => {
   return (
     <>
-      <Root bgColor={bgColor}>{children}</Root>
+      <Root
+        {...{
+          bgColor,
+          height,
+        }}
+      >
+        {children}
+      </Root>
     </>
   );
 };
 
 const Root = styled.div`
   display: grid;
-  height: calc(100vh - 49px);
+  height: ${(props) => props?.height || "calc(100vh - 49px)"};
   background-color: ${(props) => props?.bgColor};
   place-items: center;
 `;

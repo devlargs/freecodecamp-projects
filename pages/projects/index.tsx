@@ -60,12 +60,7 @@ export default () => {
                         }}
                         className="container"
                       >
-                        <Card
-                          style={{
-                            width: 300,
-                            cursor: "pointer",
-                            borderTop: "none",
-                          }}
+                        <StyledCard
                           cover={
                             <img
                               height="200"
@@ -75,7 +70,7 @@ export default () => {
                           }
                         >
                           <Meta title={q} />
-                        </Card>
+                        </StyledCard>
                       </motion.div>
                     </Link>
                   );
@@ -89,8 +84,18 @@ export default () => {
   );
 };
 
+const StyledCard = styled(Card)`
+  border: 1px dashed #041529;
+  width: 300;
+  cursor: pointer;
+  .ant-card-cover {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+`;
+
 const Root = styled.div`
-  background-color: #20a76e;
+  background-color: #ffffff;
   padding: 40px;
   h1 {
     font-size: 2rem;
