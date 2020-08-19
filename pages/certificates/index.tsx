@@ -13,6 +13,7 @@ const Root = styled.div`
   background-color: #ddd;
   font-size: 2em;
   height: calc(100vh - 49px);
+  text-align: center;
   h1 {
     margin: auto;
   }
