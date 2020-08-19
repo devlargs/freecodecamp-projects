@@ -1,4 +1,8 @@
 export default {
+  DATA_VISUALIZATION: {
+    BAR_CHART:
+      "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json",
+  },
   FCC_COVER:
     "https://www.freecodecamp.org/news/content/images/2019/11/fcc_ghost_publication_cover.png",
   FCC_TEST_SCRIPT:
