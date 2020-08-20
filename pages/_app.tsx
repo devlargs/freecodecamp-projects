@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import sizes from "constants/sizes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import MobileHeader from "components/MobileHeader";
 
 const list = {
   visible: { opacity: 1 },
@@ -30,7 +31,7 @@ const item = {
 const { Content } = Layout;
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     const nprogressStart = () => NProgress.start();
@@ -54,7 +55,6 @@ const App = ({ Component, pageProps }) => {
       style={{ background: "#20A76E", position: "relative" }}
     >
       <Buns>
-        <div id="modal-container"></div>
         <Patty whileTap={{ rotate: 180 }} onClick={() => setIsOpen(true)}>
           <StyledMobileIcon icon={faBars} />
         </Patty>
@@ -91,7 +91,14 @@ const App = ({ Component, pageProps }) => {
       <StyledContent>
         <Component {...pageProps} />
       </StyledContent>
-      <StyledModal
+
+      <MobileHeader
+        {...{
+          setIsOpen,
+          isOpen,
+        }}
+      />
+      {/* <StyledModal
         visible={isOpen}
         mask={false}
         footer={null}
@@ -141,41 +148,10 @@ const App = ({ Component, pageProps }) => {
             </div>
           </div>
         </div>
-      </StyledModal>
+      </StyledModal> */}
     </Layout>
   );
 };
-
-const StyledModal = styled(Modal)`
-  animation-duration: 0s !important;
-
-  .ant-modal-body {
-    padding: 0px;
-    background-color: gray;
-    height: 100vh;
-  }
-
-  width: 100vw !important;
-  .ant-modal {
-    width: 100vw;
-  }
-
-  .ant-modal-content {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100%;
-  }
-
-  @media (max-width: 767px) {
-    .ant-modal {
-      max-width: 100vw;
-      margin: 8px auto;
-      color: black;
-    }
-  }
-`;
 
 const StyledContent = styled(Content)`
   height: 100%;
