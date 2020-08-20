@@ -85,8 +85,7 @@ export default () => {
 };
 
 const StyledCard = styled(Card)`
-  border: 1px dashed #041529;
-  width: 300;
+  width: 300px;
   cursor: pointer;
   .ant-card-cover {
     margin-right: 0px;
@@ -110,8 +109,11 @@ const Flexbox = styled(motion.div)`
   gap: 20px 20px;
 
   .container {
+    background-color: white;
+    padding: 10px;
     text-align: center;
-    width: 300px;
+    box-shadow: 0px -1px 2px rgba(58, 58, 58, 0.1),
+      1px 1px 2px rgba(58, 58, 58, 0.1);
   }
 `;
 

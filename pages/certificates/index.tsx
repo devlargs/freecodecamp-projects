@@ -18,8 +18,9 @@ export default function () {
 
 const StyledImage = styled.img`
   padding: 20px;
-  width: 75vw;
-  height: 75vh;
+  width: 80vw;
+  height: 80vh;
+}
 
   @media screen and (max-width: 400px) {
     width: 100vw;
