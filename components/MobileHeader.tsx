@@ -2,7 +2,7 @@ import Link from "next/link";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { Modal } from "antd";
+import Modal from "antd/lib/modal";
 import { motion } from "framer-motion";
 
 export default ({ isOpen, setIsOpen }) => {
