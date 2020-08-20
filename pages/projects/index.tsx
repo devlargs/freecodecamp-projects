@@ -7,6 +7,7 @@ import links from "constants/links";
 import convertString from "utils/convertString";
 import Link from "next/link";
 import SEO from "components/SEO";
+import SD from "constants/styleDefaults";
 import { useState, useEffect } from "react";
 
 const { Meta } = Card;
@@ -94,7 +95,7 @@ const StyledCard = styled(Card)`
 `;
 
 const Root = styled.div`
-  background-color: #ffffff;
+  background-color: ${SD.colors.main};
   padding: 40px;
   h1 {
     font-size: 2rem;
