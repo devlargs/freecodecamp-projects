@@ -5,13 +5,18 @@ import getRandomColor from "utils/getRandomColor";
 import { TwitterOutlined, LoadingOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTumblr } from "@fortawesome/free-brands-svg-icons";
-import { faQuoteLeft, faRedoAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faQuoteLeft,
+  faRedoAlt,
+  faPlay,
+} from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import staticQuote from "constants/quotes";
 import meta from "constants/meta";
 import SEO from "components/SEO";
 import links from "constants/links";
 import CenteredContent from "components/CenteredContent";
+import speak from "utils/speak";
 
 const Root = styled.div`
   #quote-box {
@@ -156,6 +161,14 @@ export default ({ data }) => {
                 href={links.SHARE_TUBLER_URL(random)}
               >
                 <FontAwesomeIcon icon={faTumblr} />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                className="random-button social"
+                target="_blank"
+                onClick={() => speak(`${random.quote} by ${random.author}`)}
+              >
+                <FontAwesomeIcon icon={faPlay} />
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
