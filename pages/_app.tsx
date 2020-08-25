@@ -6,7 +6,7 @@ import "styles/global.css";
 import NProgress from "nprogress";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import sizes from "constants/sizes";
+import SD from "constants/styleDefaults";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import MobileHeader from "components/MobileHeader";
@@ -52,7 +52,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <Layout
       className="layout"
-      style={{ background: "#20A76E", position: "relative" }}
+      style={{ background: SD.colors.main, position: "relative" }}
     >
       <Buns>
         <Patty whileTap={{ rotate: 180 }} onClick={() => setIsOpen(true)}>
@@ -155,7 +155,7 @@ const App = ({ Component, pageProps }) => {
 
 const StyledContent = styled(Content)`
   height: 100%;
-  margin-top: ${sizes.header}px;
+  margin-top: ${SD.sizes.header}px;
 `;
 
 const Header = styled.div`
