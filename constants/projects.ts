@@ -22,11 +22,11 @@ export default [
   {
     name: "APIs and Microservices",
     list: [
-      // "Timestamp Microservice",
+      "Timestamp Microservice",
       // "Request Header Parser",
       // "URL Shortener",
       // "Exercise Tracker",
-      "File Metadata Microservice",
+      // "File Metadata Microservice",
     ],
   },
 ];
