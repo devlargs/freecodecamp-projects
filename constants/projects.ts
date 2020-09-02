@@ -19,14 +19,14 @@ export default [
   //     "Treemap Diagram",
   //   ],
   // },
-  // {
-  //   name: "APIs and Microservices",
-  //   list: [
-  //     "Timestamp Microservice",
-  //     "Request Header Parser",
-  //     "URL Shortener",
-  //     "Exercise Tracker",
-  //     "File Metadata Microservice",
-  //   ],
-  // },
+  {
+    name: "APIs and Microservices",
+    list: [
+      // "Timestamp Microservice",
+      // "Request Header Parser",
+      // "URL Shortener",
+      // "Exercise Tracker",
+      "File Metadata Microservice",
+    ],
+  },
 ];
