@@ -6,8 +6,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
     const date = new Date(value.includes("-") ? value : +value) as any;
 
-    console.log(date, typeof `${date}`, `${date}` === "Invalid Date");
-
     if (`${date}` === "Invalid Date") {
       const newDate = new Date();
       res.json({ unix: +newDate, utc: newDate.toUTCString() });
