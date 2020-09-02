@@ -29,10 +29,12 @@ export default () => {
       <ListContainer>
         <h2>Example Usage</h2>
         <Anchor>
-          <a href="/api/timestamp/2020-10-28">/api/timestamp/2020-10-28</a>
+          <a href="/api/timestamp/2020-10-28" target="_blank">
+            /api/timestamp/2020-10-28
+          </a>
         </Anchor>
         <Anchor>
-          <a href="/api/timestamp/1603843200000">
+          <a href="/api/timestamp/1603843200000" target="_blank">
             /api/timestamp/1603843200000
           </a>
         </Anchor>
