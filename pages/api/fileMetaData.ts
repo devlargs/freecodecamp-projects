@@ -7,7 +7,7 @@ export const config = {
   },
 };
 
-var upload = multer({ dest: "uploads" });
+var upload = multer({ dest: "public/uploads" });
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
