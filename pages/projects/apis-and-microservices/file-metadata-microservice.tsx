@@ -5,7 +5,6 @@ export default () => {
   const [file, setFile] = useState([]);
   function handleFileSelected(e: React.ChangeEvent<HTMLInputElement>): void {
     const files = Array.from(e.target.files);
-    console.log("files:", files);
     setFile(files);
   }
 
