@@ -1,6 +1,16 @@
+import CORS from "cors";
 import { NextApiRequest, NextApiResponse } from "next";
+import initMiddleware from "server/helpers/initMiddleware";
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+const cors = initMiddleware(
+  CORS({
+    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH"],
+  })
+);
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  await cors(req, res);
+
   if (req.method === "GET") {
     const { value } = req.query as any;
 

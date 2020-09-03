@@ -1,15 +1,18 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import multer from "multer";
+import CORS from "cors";
+import initMiddleware from "server/helpers/initMiddleware";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+const cors = initMiddleware(
+  CORS({
+    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH"],
+  })
+);
 
-var upload = multer({ dest: "public/uploads" });
+const upload = multer({ dest: "public/uploads" });
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  await cors(req, res);
   if (req.method === "POST") {
     upload.single("file")(req as any, {} as any, (err) => {
       const { file } = req as any;
