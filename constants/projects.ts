@@ -23,7 +23,7 @@ export default [
     name: "APIs and Microservices",
     list: [
       "Timestamp Microservice",
-      // "Request Header Parser",
+      "Request Header Parser",
       // "URL Shortener",
       // "Exercise Tracker",
       // "File Metadata Microservice",

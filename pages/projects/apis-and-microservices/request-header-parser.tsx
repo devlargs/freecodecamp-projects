@@ -4,27 +4,9 @@ import UserStoriesContainer from "styles/UserStoriesContainer";
 
 export default () => {
   const data = [
-    "The API endpoint is GET [project_url]/api/timestamp/:date_string?",
-    `A date string is valid if can be successfully parsed by new Date(date_string).
-    Note that the unix timestamp needs to be an integer (not a string) specifying milliseconds.
-    In our test we will use date strings compliant with ISO-8601 (e.g. <b>2016-11-20</b>) because this will ensure an UTC timestamp.`,
-    "If the date string is empty it should be equivalent to trigger new Date(), i.e. the service uses the current timestamp.",
-    `If the date string is valid the api returns a JSON having the structure
-    {"unix": <b>date.getTime()</b>, "utc" : <b>date.toUTCString()</b> }<br />
-    e.g.<br /> 
-    <div class="code">
-    <code>
-    <pre>
-    
-{
-  "unix": 1479663089000,
-  "utc": "Sun, 20 Nov 2016 17:31:29 GMT"
-}
-    </pre>
-    </code>
-    </div>`,
-    `If the date string is invalid the api returns a JSON having the structure
-    {"error" : "Invalid Date" }.`,
+    "Your IP address should be returned in the ipaddress key.",
+    `Your preferred language should be returned in the language key.`,
+    "Your software should be returned in the software key.",
   ];
 
   const style = { background: "white", padding: "8px 10px" };
@@ -62,18 +44,8 @@ export default () => {
             <ListContainer>
               <h2>Example Usage</h2>
               <Anchor>
-                <a href="/api/timestamp/2020-10-28" target="_blank">
-                  /api/timestamp/2020-10-28
-                </a>
-              </Anchor>
-              <Anchor>
-                <a href="/api/timestamp/1603843200000" target="_blank">
-                  /api/timestamp/1603843200000
-                </a>
-              </Anchor>
-              <Anchor>
-                <a href="/api/timestamp" target="_blank">
-                  /api/timestamp
+                <a href="/api/whoami" target="_blank">
+                  /api/whoami
                 </a>
               </Anchor>
             </ListContainer>
