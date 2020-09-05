@@ -95,10 +95,8 @@ const StyledCard = styled(Card)`
 `;
 
 const Root = styled.div`
-  // TODO Remove this. This is just a temporary fix
-  height: calc(100vh - ${SD.sizes.header}px);
   background-color: ${SD.colors.main};
-  padding: 40px;
+  padding: 20px 40px 40px 40px;
   h1 {
     font-size: 2rem;
     text-align: center;
