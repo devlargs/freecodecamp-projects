@@ -10,6 +10,7 @@ import SD from "constants/styleDefaults";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import MobileHeader from "components/MobileHeader";
+import getBackground from "constants/backgrounds";
 
 const list = {
   visible: { opacity: 1 },
@@ -31,7 +32,14 @@ const item = {
 const { Content } = Layout;
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
+  const [background, setBackground] = useState(
+    getBackground(process.browser ? location.pathname : "")
+  );
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setBackground(getBackground(process.browser ? location.pathname : ""));
+  }, [process.browser && location.pathname]);
 
   useEffect(() => {
     const nprogressStart = () => NProgress.start();
@@ -52,7 +60,10 @@ const App = ({ Component, pageProps }) => {
   return (
     <Layout
       className="layout"
-      style={{ background: SD.colors.main, position: "relative" }}
+      style={{
+        background,
+        position: "relative",
+      }}
     >
       <Buns>
         <Patty whileTap={{ rotate: 180 }} onClick={() => setIsOpen(true)}>
@@ -98,57 +109,6 @@ const App = ({ Component, pageProps }) => {
           isOpen,
         }}
       />
-      {/* <StyledModal
-        visible={isOpen}
-        mask={false}
-        footer={null}
-        closable={false}
-        onCancel={() => setIsOpen(false)}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column-reverse",
-            textAlign: "center",
-          }}
-        >
-          <div>
-            <div
-              style={{
-                height: 49,
-                backgroundColor: "#041429",
-                width: "100vw",
-                paddingTop: 13,
-                paddingRight: 20,
-                textAlign: "end",
-              }}
-              onClick={() => setIsOpen(false)}
-            >
-              <FontAwesomeIcon
-                icon={faTimes}
-                style={{ color: "white", textAlign: "right" }}
-              />
-            </div>
-            <div onClick={() => setIsOpen(false)}>
-              <Link href="/certificates">
-                <a style={{ color: "white" }}>/certificates</a>
-              </Link>
-            </div>
-            <div onClick={() => setIsOpen(false)}>
-              <Link href="/projects">
-                <a style={{ color: "white" }}>/projects</a>
-              </Link>
-            </div>
-            <div onClick={() => setIsOpen(false)}>
-              <Link href="/">
-                <a style={{ color: "white" }}>/home</a>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </StyledModal> */}
     </Layout>
   );
 };
@@ -160,7 +120,7 @@ const StyledContent = styled(Content)`
 
 const Header = styled.div`
   overflow: hidden;
-  background-color: #041529;
+  background-color: ${SD.colors.header};
   padding: 0 50px 0px 50px;
   position: fixed;
   top: 0;

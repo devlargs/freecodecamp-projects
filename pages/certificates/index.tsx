@@ -5,7 +5,7 @@ export default function () {
   return (
     <CenteredContent bgColor="ghostwhite" height="100%">
       <div style={{ textAlign: "center" }}>
-        <h1 style={{ paddingTop: 20, marginBottom: 0 }}>
+        <h1 style={{ paddingTop: 20, marginBottom: 0, fontSize: "2rem" }}>
           Certificates Acquired
         </h1>
         <StyledImage src="/assets/images/certificates/responsive-web-design.png" />
