@@ -6,7 +6,7 @@ export default {
   colors: {
     header: "#041529",
     main: "cornflowerblue",
-    requestHeaderParser: "#eee",
+    requestHeaderParser: "#7E3E3E",
     timeStampMicroservice: "#00818a",
     urlShortener: "#2A324B",
   },

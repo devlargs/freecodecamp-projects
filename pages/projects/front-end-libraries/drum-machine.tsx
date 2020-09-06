@@ -86,7 +86,7 @@ const Root = styled.div`
       font-weight: bold;
       padding: 10px;
     }
-    padding: 20px;
+    padding: 15px;
     .grid-content {
       display: grid;
       grid-gap: 10px;

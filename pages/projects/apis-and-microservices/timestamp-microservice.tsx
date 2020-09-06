@@ -3,12 +3,13 @@ import styled from "styled-components";
 import StyledCard from "styles/StyledCard";
 import UserStoryList from "components/UserStoryList";
 import projectUrls from "constants/projectUrls";
-import UserStoryExample from "components/UserStoryExample";
 import SD from "constants/styleDefaults";
 import ProjectHeader from "components/ProjectHeader";
 import useSwr from "swr";
 import fetcher from "utils/fetcher";
-import JsonPrettier from "components/JsonPrettier";
+import SEO from "components/SEO";
+import meta from "constants/meta";
+
 import LinkResult from "components/LinkResult";
 
 export default () => {
@@ -23,6 +24,11 @@ export default () => {
 
   return (
     <Root>
+      <SEO
+        title="Timestamp Microservice"
+        description={meta.description("Timestamp Microservice")}
+        imageUrl={`/assets/images/projects/timestamp-microservice.png`}
+      />
       <Child>
         <ProjectHeader title="API Project: Timestamp Microservice" />
         <Row gutter={[10, 10]}>

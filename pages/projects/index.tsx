@@ -95,6 +95,8 @@ const StyledCard = styled(Card)`
 `;
 
 const Root = styled.div`
+  height: calc(100vh - ${SD.sizes.header}px);
+  overflow-y: auto;
   background-color: ${SD.colors.main};
   padding: 20px 40px 40px 40px;
   h1 {
