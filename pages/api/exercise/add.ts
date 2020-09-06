@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     // TODO add validation
     const { userId, description, duration, date } = req.body;
     const exercise = new Exercises({ 
-       userId, description, duration, date
+       userId, description, duration, date: date || new Date()
      });
     const newExercise = await exercise.save();
     res.send(newExercise);
