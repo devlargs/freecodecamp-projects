@@ -15,6 +15,6 @@ export default (pathname?: string) => {
     case `${proj}${apis}/request-header-parser`:
       return SD.colors.requestHeaderParser;
     default:
-      return "#fff";
+      return;
   }
 };

@@ -40,16 +40,14 @@ export default () => {
             <StyledCard>
               <h2>URL to be shortened</h2>
 
-              <form method="post" action="/api/shorturl/new">
-                <StyledInput
-                  placeholder="Enter Url Here"
-                  value={url}
-                  onChange={(e: any) => setUrl(e.target.value)}
-                />
-                <Button type="primary" block onClick={submit}>
-                  Shorten
-                </Button>
-              </form>
+              <StyledInput
+                placeholder="Enter Url Here"
+                value={url}
+                onChange={(e: any) => setUrl(e.target.value)}
+              />
+              <Button type="primary" block onClick={submit}>
+                Shorten
+              </Button>
             </StyledCard>
             <br />
             {result && (
