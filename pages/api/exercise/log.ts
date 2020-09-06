@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import cors from "server/helpers/cors";
 import Exercises from "server/models/Exercises";
 import connect from "server/helpers/connect";
+import dayjs from 'dayjs';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   await cors(req, res);
@@ -20,12 +21,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         }
 
 
-        // if (from && to) {
-        //     obj.date = {
-        //         "$gte": from,
-        //         "$lt": to
-        //     }
-        // }
+        if (from && to) {
+            obj.date = {
+                "$gte": dayjs(from as any).startOf('day').format(),
+                "$lt": dayjs(to as any).endOf('day').format()
+            }
+        }
 
         try {
             if (limit) {
