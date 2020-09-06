@@ -4,6 +4,7 @@ import Exercises from "server/models/Exercises";
 import ExerciseUsers from "server/models/ExerciseUsers";
 import connect from "server/helpers/connect";
 import useBodyParser from "server/helpers/useBodyParser";
+import dayjs from "dayjs";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     useBodyParser();
@@ -20,6 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const newExercise = await exercise.save();
      const temp = newExercise.toObject();
      delete temp.userId;
+     temp.date = dayjs(temp?.date || new Date()).format("ddd MMM DD YYYY")
 
     res.send({
         ...temp,
