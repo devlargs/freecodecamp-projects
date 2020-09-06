@@ -1,13 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import CORS from "cors";
-import initMiddleware from "server/helpers/initMiddleware";
+import cors from "server/helpers/cors";
 import ip from "request-ip";
-
-const cors = initMiddleware(
-  CORS({
-    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH"],
-  })
-);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   await cors(req, res);
