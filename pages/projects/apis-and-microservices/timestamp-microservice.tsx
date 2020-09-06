@@ -12,8 +12,9 @@ export default () => {
   return (
     <Root>
       <Child>
-        <h1>API Project: Timestamp Microservice</h1>
-
+        <h1 style={{ color: "white", fontSize: "2em" }}>
+          API Project: Timestamp Microservice
+        </h1>
         <Row gutter={[10, 10]}>
           <Col {...SD.sizes.column}>
             <StyledCard>
@@ -37,18 +38,12 @@ export default () => {
 };
 
 const Root = styled.div`
-  h1 {
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
+  background-color: ${SD.colors.timeStampMicroservice};
+  height: calc(100vh - ${SD.sizes.header}px);
+  overflow-y: scroll;
 `;
 
 const Child = styled.div`
   width: 80vw;
   margin: auto;
-`;
-
-const Anchor = styled.div`
-  text-align: center;
 `;

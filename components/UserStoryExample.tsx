@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
+interface StoryDetails {
+  type: string;
+  url: string;
+}
+
 type Props = {
-  data: Array<{
-    type: string;
-    url: string;
-  }>;
+  data: Array<StoryDetails>;
 };
 
 export default ({ data = [] }: Props) => {
@@ -12,8 +14,8 @@ export default ({ data = [] }: Props) => {
     <>
       <h2>Example Usage</h2>
       <Anchor>
-        {data.map((q) => (
-          <div>
+        {data.map((q: StoryDetails, i: number) => (
+          <div key={i}>
             <a href={q.url} target="_blank">
               [{q.type.toUpperCase()}] {q.url}
             </a>

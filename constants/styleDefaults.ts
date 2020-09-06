@@ -7,7 +7,7 @@ export default {
     header: "#041529",
     main: "cornflowerblue",
     requestHeaderParser: "#eee",
-    timeStampMicroservice: "#ecebf3",
+    timeStampMicroservice: "#00818a",
     urlShortener: "#2A324B",
   },
 };
