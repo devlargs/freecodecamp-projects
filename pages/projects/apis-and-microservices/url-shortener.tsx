@@ -86,7 +86,8 @@ const Root = styled.div`
     padding-top: 20px;
     padding-bottom: 20px;
   }
-  height: calc(100vh - 49px);
+  height: calc(100vh - ${SD.sizes.header}px);
+  background-color: ${SD.colors.urlShortener};
 `;
 
 const Child = styled.div`
