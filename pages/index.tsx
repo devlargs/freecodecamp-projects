@@ -3,13 +3,17 @@ import Particles from "react-particles-js";
 import styled from "styled-components";
 import CenteredContent from "components/CenteredContent";
 import links from "constants/links";
+import SD from "constants/styleDefaults";
+import SEO from "components/SEO";
 
 export default function App() {
   return (
-    <Homepage style={{ position: "relative" }}>
-      <Head>
-        <title>Free Code Camp Projects</title>
-      </Head>
+    <Homepage>
+      <SEO
+        title="Free Code Camp Projects"
+        description="A collection of freeCodeCamp.org projects created by Ralph A. Largo (@devlargs)"
+        imageLink="/assets/images/home.png"
+      />
       <Particles
         params={{
           particles: {
@@ -86,6 +90,8 @@ export default function App() {
 
 const Homepage = styled.div`
   overflow: hidden;
+  position: relative;
+  background-color: ${SD.colors.main};
   #tsparticles {
     position: absolute;
     z-index: 1;

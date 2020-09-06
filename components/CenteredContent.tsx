@@ -27,4 +27,5 @@ const Root = styled.div`
   height: ${(props: Props) => props?.height || "calc(100vh - 49px)"};
   background-color: ${(props: Props) => props?.bgColor};
   place-items: center;
+  overflow-y: auto;
 `;

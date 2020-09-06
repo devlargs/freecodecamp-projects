@@ -7,6 +7,7 @@ import axios from "axios";
 import JSONPrettier from "components/JsonPrettier";
 import UserStoryList from "components/UserStoryList";
 import UserStoryExample from "components/UserStoryExample";
+import ProjectHeader from "components/ProjectHeader";
 import projectUrls from "constants/projectUrls";
 import SEO from "components/SEO";
 import meta from "constants/meta";
@@ -33,7 +34,8 @@ export default () => {
         imageUrl={`/assets/images/projects/url-shortener.png`}
       />
       <Child>
-        <h1 style={{ color: "whitesmoke" }}>API Project: URL Shortener</h1>
+        <ProjectHeader title="API Project: URL Shortener" />
+
         <Row gutter={[10, 10]}>
           <Col {...SD.sizes.column}>
             <StyledCard>
@@ -81,12 +83,8 @@ export default () => {
 };
 
 const Root = styled.div`
-  h1 {
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-  height: calc(100vh - 49px);
+  height: calc(100vh - ${SD.sizes.header}px);
+  background-color: ${SD.colors.urlShortener};
 `;
 
 const Child = styled.div`

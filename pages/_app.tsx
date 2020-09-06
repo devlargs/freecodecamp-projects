@@ -10,7 +10,6 @@ import SD from "constants/styleDefaults";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import MobileHeader from "components/MobileHeader";
-import getBackground from "constants/backgrounds";
 
 const list = {
   visible: { opacity: 1 },
@@ -32,14 +31,7 @@ const item = {
 const { Content } = Layout;
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
-  const [background, setBackground] = useState(
-    getBackground(process.browser ? location.pathname : "")
-  );
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setBackground(getBackground(process.browser ? location.pathname : ""));
-  }, [process.browser && location.pathname]);
 
   useEffect(() => {
     const nprogressStart = () => NProgress.start();
@@ -61,7 +53,6 @@ const App = ({ Component, pageProps }) => {
     <Layout
       className="layout"
       style={{
-        background,
         position: "relative",
       }}
     >

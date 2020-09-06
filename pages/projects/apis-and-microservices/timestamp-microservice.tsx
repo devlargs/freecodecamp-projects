@@ -3,17 +3,34 @@ import styled from "styled-components";
 import StyledCard from "styles/StyledCard";
 import UserStoryList from "components/UserStoryList";
 import projectUrls from "constants/projectUrls";
-import UserStoryExample from "components/UserStoryExample";
 import SD from "constants/styleDefaults";
+import ProjectHeader from "components/ProjectHeader";
+import useSwr from "swr";
+import fetcher from "utils/fetcher";
+import SEO from "components/SEO";
+import meta from "constants/meta";
+
+import LinkResult from "components/LinkResult";
 
 export default () => {
-  const style = { background: "white", padding: "8px 10px" };
+  const { examples: ex } = projectUrls.TIMESTAMP_MICROSERVICE;
+  const first = ex[0].url;
+  const second = ex[1].url;
+  const third = ex[2].url;
+
+  const { data: firstData, error: firstError } = useSwr(first, fetcher);
+  const { data: secondData, error: secondError } = useSwr(second, fetcher);
+  const { data: thirdData, error: thirdError } = useSwr(third, fetcher);
 
   return (
     <Root>
+      <SEO
+        title="Timestamp Microservice"
+        description={meta.description("Timestamp Microservice")}
+        imageUrl={`/assets/images/projects/timestamp-microservice.png`}
+      />
       <Child>
-        <h1>API Project: Timestamp Microservice</h1>
-
+        <ProjectHeader title="API Project: Timestamp Microservice" />
         <Row gutter={[10, 10]}>
           <Col {...SD.sizes.column}>
             <StyledCard>
@@ -21,14 +38,14 @@ export default () => {
                 data={projectUrls.TIMESTAMP_MICROSERVICE.stories}
               />
             </StyledCard>
-            <StyledCard>
-              <UserStoryExample
-                data={projectUrls.TIMESTAMP_MICROSERVICE.examples}
-              />
-            </StyledCard>
           </Col>
           <Col {...SD.sizes.column}>
-            <div style={style}>ADD FORM HERE</div>
+            <StyledCard>
+              <h2>Example Usages</h2>
+              <LinkResult url={first} data={firstData} error={firstError} />
+              <LinkResult url={second} data={secondData} error={secondError} />
+              <LinkResult url={third} data={thirdData} error={thirdError} />
+            </StyledCard>
           </Col>
         </Row>
       </Child>
@@ -37,18 +54,12 @@ export default () => {
 };
 
 const Root = styled.div`
-  h1 {
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
+  background-color: ${SD.colors.timeStampMicroservice};
+  height: calc(100vh - ${SD.sizes.header}px);
+  overflow-y: auto;
 `;
 
 const Child = styled.div`
   width: 80vw;
   margin: auto;
-`;
-
-const Anchor = styled.div`
-  text-align: center;
 `;

@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import meta from "constants/meta";
+import SEO from "components/SEO";
 
 export default () => {
   const [file, setFile] = useState([]);
@@ -30,14 +32,13 @@ export default () => {
 
   return (
     <>
-      {/* <form
-      // action="/api/fileMetaData"
-      // method="POST"
-      // encType="multipart/form-data"
-      > */}
+      <SEO
+        title="File Metadata Microservice"
+        description={meta.description("File Metadata Microservice")}
+        imageUrl={`/assets/images/projects/file-metadata-microservice.png`}
+      />
       File: <input onChange={handleFileSelected} type="file" />
       <button onClick={submit}>Submit</button>
-      {/* </form> */}
     </>
   );
 };
