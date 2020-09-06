@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import cors from "server/helpers/cors";
 import Exercises from "server/models/Exercises";
+import ExerciseUsers from "server/models/ExerciseUsers";
 import connect from "server/helpers/connect";
 import useBodyParser from "server/helpers/useBodyParser";
 
@@ -15,7 +16,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const exercise = new Exercises({ 
        userId, description, duration, date: date || new Date()
      });
+     const user = await ExerciseUsers.find({ _id: userId });
     const newExercise = await exercise.save();
-    res.send(newExercise);
+     const temp = newExercise.toObject();
+     delete temp.userId;
+
+    res.send({
+        ...temp,
+        username: user[0].username
+    });
   }
 };
