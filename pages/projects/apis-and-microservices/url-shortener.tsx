@@ -29,8 +29,7 @@ export default () => {
   return (
     <Root>
       <Child>
-        <h1>API Project: URL Shortener</h1>
-
+        <h1 style={{ color: "whitesmoke" }}>API Project: URL Shortener</h1>
         <Row gutter={[10, 10]}>
           <Col className="gutter-row" {...SD.sizes.column}>
             <UserStoriesContainer>
@@ -104,6 +103,7 @@ const Root = styled.div`
     padding-top: 20px;
     padding-bottom: 20px;
   }
+  height: calc(100vh - 49px);
 `;
 
 const Child = styled.div`

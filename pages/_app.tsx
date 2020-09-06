@@ -114,8 +114,9 @@ const App = ({ Component, pageProps }) => {
 };
 
 const StyledContent = styled(Content)`
-  height: 100%;
+  height: calc(100vh - 49px);
   margin-top: ${SD.sizes.header}px;
+  overflow-y: auto;
 `;
 
 const Header = styled.div`

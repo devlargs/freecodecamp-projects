@@ -8,6 +8,6 @@ export default {
     main: "cornflowerblue",
     requestHeaderParser: "#eee",
     timeStampMicroservice: "#ecebf3",
-    urlShortener: "#eee",
+    urlShortener: "#2A324B",
   },
 };
