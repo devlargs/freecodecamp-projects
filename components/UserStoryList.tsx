@@ -10,7 +10,7 @@ const StyledList = styled(List)`
 
 export default ({ data }) => (
   <>
-    <h2>User Stories:</h2>
+    <h2>User Stories</h2>
     <StyledList
       bordered
       dataSource={data}

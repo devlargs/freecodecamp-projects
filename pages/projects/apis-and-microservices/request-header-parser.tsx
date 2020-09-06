@@ -12,7 +12,7 @@ export default () => {
 
   return (
     <Child>
-      <ProjectHeader title="API Project: Timestamp Microservice" dark />
+      <ProjectHeader title="API Project: Request Header Parser" dark />
       <Row gutter={[10, 10]}>
         <Col {...SD.sizes.column}>
           <StyledCard>
