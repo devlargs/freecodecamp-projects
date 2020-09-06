@@ -1,13 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import multer from "multer";
-import CORS from "cors";
-import initMiddleware from "server/helpers/initMiddleware";
-
-const cors = initMiddleware(
-  CORS({
-    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH"],
-  })
-);
+import cors from "server/helpers/cors";
 
 const upload = multer({ dest: "public/uploads" });
 
