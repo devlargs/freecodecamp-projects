@@ -28,7 +28,7 @@ const Root = styled.div`
     #text {
       h1,
       h2 {
-        color: ${(props) => props.bg};
+        color: ${(props: { bg: string }) => props.bg};
         font-size: 2em;
         text-align: center;
       }
@@ -46,7 +46,7 @@ const Root = styled.div`
     .random-button {
       border-radius: 5px;
       padding: 10px;
-      background-color: ${(props) => props.bg};
+      background-color: ${(props: { bg: string }) => props.bg};
       color: white;
       height: 40px;
       margin-right: 5px;
