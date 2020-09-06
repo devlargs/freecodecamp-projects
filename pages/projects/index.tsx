@@ -101,6 +101,11 @@ const Root = styled.div`
     font-size: 2rem;
     text-align: center;
   }
+  @media screen and (max-width: 520px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
 `;
 
 const Flexbox = styled(motion.div)`

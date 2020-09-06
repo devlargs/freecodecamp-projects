@@ -24,7 +24,7 @@ export default ({ children, bgColor, height }: Props) => {
 
 const Root = styled.div`
   display: grid;
-  height: ${(props) => props?.height || "calc(100vh - 49px)"};
-  background-color: ${(props) => props?.bgColor};
+  height: ${(props: Props) => props?.height || "calc(100vh - 49px)"};
+  background-color: ${(props: Props) => props?.bgColor};
   place-items: center;
 `;

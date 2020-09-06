@@ -20,7 +20,7 @@ export default function App() {
               },
             },
             size: {
-              value: 10,
+              value: 3,
               random: true,
               anim: {
                 speed: 1,
