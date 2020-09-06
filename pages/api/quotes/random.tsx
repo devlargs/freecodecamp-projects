@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case "GET":
       try {
-        const count = await Quotes.count();
+        const count = await Quotes.countDocuments();
         const quotes = await Quotes.findOne().skip(
           Math.floor(Math.random() * count)
         );
