@@ -8,6 +8,8 @@ import JSONPrettier from "components/JsonPrettier";
 import UserStoryList from "components/UserStoryList";
 import UserStoryExample from "components/UserStoryExample";
 import projectUrls from "constants/projectUrls";
+import SEO from "components/SEO";
+import meta from "constants/meta";
 
 export default () => {
   const [result, setResult] = useState() as any;
@@ -25,6 +27,11 @@ export default () => {
 
   return (
     <Root>
+      <SEO
+        title="URL Shortener"
+        description={meta.description("URL Shortener")}
+        imageUrl={`/assets/images/projects/url-shortener.png`}
+      />
       <Child>
         <h1 style={{ color: "whitesmoke" }}>API Project: URL Shortener</h1>
         <Row gutter={[10, 10]}>
