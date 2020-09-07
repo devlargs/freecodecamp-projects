@@ -12,7 +12,7 @@ export default function App() {
       <SEO
         title="Free Code Camp Projects"
         description="A collection of freeCodeCamp.org projects created by Ralph A. Largo (@devlargs)"
-        imageLink="/assets/images/home.png"
+        imageUrl="/assets/images/home.png"
       />
       <Particles
         params={{

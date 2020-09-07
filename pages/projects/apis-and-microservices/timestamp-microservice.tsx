@@ -24,11 +24,7 @@ export default () => {
 
   return (
     <Root>
-      <SEO
-        title="Timestamp Microservice"
-        description={meta.description("Timestamp Microservice")}
-        imageUrl={`/assets/images/projects/timestamp-microservice.png`}
-      />
+      <SEO title="Timestamp Microservice" />
       <Child>
         <ProjectHeader title="API Project: Timestamp Microservice" />
         <Row gutter={[10, 10]}>

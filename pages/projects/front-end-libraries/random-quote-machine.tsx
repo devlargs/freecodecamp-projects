@@ -120,12 +120,7 @@ export default ({ data }) => {
   return (
     <CenteredContent bgColor={randomColor}>
       <Root bg={randomColor}>
-        <SEO
-          title="Random Quote Machine"
-          withFCCScript
-          description={meta.description("Random Quote Machine")}
-          imageUrl={`/assets/images/projects/random-quote-machine.png`}
-        />
+        <SEO title="Random Quote Machine" withFCCScript />
         <motion.div id="quote-box">
           <div id="text">
             <motion.h1

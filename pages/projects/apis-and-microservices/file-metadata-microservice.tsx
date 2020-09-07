@@ -32,11 +32,7 @@ export default () => {
 
   return (
     <>
-      <SEO
-        title="File Metadata Microservice"
-        description={meta.description("File Metadata Microservice")}
-        imageUrl={`/assets/images/projects/file-metadata-microservice.png`}
-      />
+      <SEO title="File Metadata Microservice" />
       File: <input onChange={handleFileSelected} type="file" />
       <button onClick={submit}>Submit</button>
     </>

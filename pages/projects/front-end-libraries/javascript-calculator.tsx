@@ -83,12 +83,7 @@ export default () => {
 
   return (
     <CenteredContent bgColor="#7268a6">
-      <SEO
-        title="Javascript Calculator"
-        withFCCScript
-        description={meta.description("Javascript Calculator")}
-        imageUrl={`/assets/images/projects/javascript-calculator.png`}
-      />
+      <SEO title="Javascript Calculator" withFCCScript />
       <Container>
         <div>
           <InputContainer>

@@ -67,7 +67,7 @@ export default () => {
 
   return (
     <CenteredContent bgColor="ghostwhite">
-      <SEO title="test" description="Test" withFCCScript />
+      <SEO title="Bar Chart Visualization" withFCCScript />
       <Root>
         <div style={{ backgroundColor: "" }}>
           <h1 id="title">Gross Domestic Product</h1>

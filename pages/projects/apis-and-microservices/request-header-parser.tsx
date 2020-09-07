@@ -9,7 +9,6 @@ import ProjectHeader from "components/ProjectHeader";
 import useSWR from "swr";
 import fetcher from "utils/fetcher";
 import SEO from "components/SEO";
-import meta from "constants/meta";
 
 export default () => {
   const url = projectUrls.REQUEST_HEADER_PARSER.examples[0].url;
@@ -18,11 +17,7 @@ export default () => {
   return (
     <Root>
       <Child>
-        <SEO
-          title="Request Header Parser"
-          description={meta.description("Request Header Parser")}
-          imageUrl={`/assets/images/projects/request-header-parser.png`}
-        />
+        <SEO title="Request Header Parser" />
         <ProjectHeader title="API Project: Request Header Parser" />
         <Row gutter={[10, 10]}>
           <Col {...SD.sizes.column}>

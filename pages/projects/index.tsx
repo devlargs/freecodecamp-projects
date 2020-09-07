@@ -24,7 +24,7 @@ export default () => {
     <>
       <SEO
         title="Free Code Camp Projects"
-        description="List of some of the freecodecamp.org projects created by Ralph Largo"
+        description="List of some of the freecodecamp.org projects created by Ralph Largo (@devlargs)"
         imageLink={links.FCC_COVER}
       />
       <Root>

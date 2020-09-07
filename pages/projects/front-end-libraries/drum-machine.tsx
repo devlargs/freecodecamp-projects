@@ -35,12 +35,7 @@ export default () => {
 
   return (
     <CenteredContent bgColor="#ececec">
-      <SEO
-        title="Drum Machine"
-        withFCCScript
-        description={meta.description("Drum Machine")}
-        imageUrl={`/assets/images/projects/drum-machine.png`}
-      />
+      <SEO title="Drum Machine" withFCCScript />
       <Root id="drum-machine">
         <div className="d-grid-container">
           <h1 id="display">{currentKey?.replace("-", " ")}</h1>
