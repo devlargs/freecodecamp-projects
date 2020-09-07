@@ -1,10 +1,12 @@
+const FREECODECAMP = "https://www.freecodecamp.org";
+
 export default {
   DATA_VISUALIZATION: {
     BAR_CHART:
       "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json",
   },
-  FCC_COVER:
-    "https://www.freecodecamp.org/news/content/images/2019/11/fcc_ghost_publication_cover.png",
+  FCC_CERTIFICATES: `${FREECODECAMP}/certification/devlargs`,
+  FCC_COVER: `${FREECODECAMP}/news/content/images/2019/11/fcc_ghost_publication_cover.png`,
   FCC_TEST_SCRIPT:
     "https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js",
   FONTS: {
