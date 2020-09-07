@@ -17,12 +17,17 @@ import {
   faCalendarPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import TabHeader from "components/TabHeader";
+import { getUsers } from "store/reducers/exerciseUserReducer";
+import { useDispatch } from "react-redux";
 
 const { TabPane } = Tabs;
 
 export default () => {
-  // const url = projectUrls.EXERCISE_TRACKER.examples[0].url;
-  // const { data, error } = useSWR(url, fetcher);
+  const dispatch = useDispatch();
+  const url = projectUrls.EXERCISE_TRACKER.examples[0].url;
+  const { data, error } = useSWR(url, fetcher);
+
+  dispatch(getUsers({ users: data || [] }));
 
   return (
     <Root>

@@ -1,15 +1,17 @@
 import { useRouter } from "next/router";
-import { Layout, Modal } from "antd";
+import { useEffect, useState } from "react";
+import { Layout } from "antd";
+import { Provider } from "react-redux";
 import Link from "next/link";
 import styled from "styled-components";
 import "styles/global.css";
 import NProgress from "nprogress";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import SD from "constants/styleDefaults";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import MobileHeader from "components/MobileHeader";
+import store from "store";
 
 const list = {
   visible: { opacity: 1 },
@@ -50,57 +52,59 @@ const App = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <Layout
-      className="layout"
-      style={{
-        position: "relative",
-      }}
-    >
-      <Buns>
-        <Patty whileTap={{ rotate: 180 }} onClick={() => setIsOpen(true)}>
-          <StyledMobileIcon icon={faBars} />
-        </Patty>
-      </Buns>
-      <HeaderContent>
-        <Header className="header">
-          <Link href="/">
-            <Logo>FCC</Logo>
-          </Link>
-          <motion.div
-            className="header-right"
-            initial="hidden"
-            animate="visible"
-            variants={list}
-          >
-            <Link href="/">
-              <motion.a variants={item} custom={1}>
-                /home
-              </motion.a>
-            </Link>
-            <Link href="/projects">
-              <motion.a variants={item} custom={2}>
-                /projects
-              </motion.a>
-            </Link>
-            <Link href="/certificates">
-              <motion.a variants={item} custom={3}>
-                /certificates
-              </motion.a>
-            </Link>
-          </motion.div>
-        </Header>
-      </HeaderContent>
-      <StyledContent>
-        <Component {...pageProps} />
-      </StyledContent>
-
-      <MobileHeader
-        {...{
-          setIsOpen,
-          isOpen,
+    <Provider store={store}>
+      <Layout
+        className="layout"
+        style={{
+          position: "relative",
         }}
-      />
-    </Layout>
+      >
+        <Buns>
+          <Patty whileTap={{ rotate: 180 }} onClick={() => setIsOpen(true)}>
+            <StyledMobileIcon icon={faBars} />
+          </Patty>
+        </Buns>
+        <HeaderContent>
+          <Header className="header">
+            <Link href="/">
+              <Logo>FCC</Logo>
+            </Link>
+            <motion.div
+              className="header-right"
+              initial="hidden"
+              animate="visible"
+              variants={list}
+            >
+              <Link href="/">
+                <motion.a variants={item} custom={1}>
+                  /home
+                </motion.a>
+              </Link>
+              <Link href="/projects">
+                <motion.a variants={item} custom={2}>
+                  /projects
+                </motion.a>
+              </Link>
+              <Link href="/certificates">
+                <motion.a variants={item} custom={3}>
+                  /certificates
+                </motion.a>
+              </Link>
+            </motion.div>
+          </Header>
+        </HeaderContent>
+        <StyledContent>
+          <Component {...pageProps} />
+        </StyledContent>
+
+        <MobileHeader
+          {...{
+            setIsOpen,
+            isOpen,
+          }}
+        />
+      </Layout>
+    </Provider>
   );
 };
 

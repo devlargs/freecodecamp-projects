@@ -3,7 +3,11 @@ export default {
     examples: [
       {
         type: "GET",
-        url: "/api/exercise/logs?{userId}[&from][&to][&limit]",
+        url: "/api/exercise/users",
+      },
+      {
+        type: "POST",
+        url: "/api/exercise/new-user",
       },
     ],
     stories: [
