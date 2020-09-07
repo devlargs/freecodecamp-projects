@@ -15,12 +15,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const user = new ExerciseUsers({ username: req.body.username });
       try {
         const newUser = await user.save();
-        res.send(newUser);
+        res.status(200).send(newUser);
       } catch (ex) {
-        res.send({ status: false, error: errorHandler(`${ex}`) });
+        res.status(400).send({ status: false, error: errorHandler(`${ex}`) });
       }
     } else {
-      res.send({ status: false, error: "Username is required" });
+      res.status(400).send({ status: false, error: "Username is required" });
     }
   }
 };

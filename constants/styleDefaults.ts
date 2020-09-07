@@ -4,6 +4,8 @@ export default {
     column: { xs: 24, sm: 24, lg: 12, xl: 12, xxl: 12 },
   },
   colors: {
+    certificates: "cornflowerblue",
+    exerciseTracker: "#1b262c",
     header: "#041529",
     main: "cornflowerblue",
     requestHeaderParser: "#7E3E3E",

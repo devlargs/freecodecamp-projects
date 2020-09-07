@@ -3,17 +3,26 @@ import styled from "styled-components";
 import certificates from "constants/certificates";
 import links from "constants/links";
 import SEO from "components/SEO";
+import SD from "constants/styleDefaults";
 
 export default function () {
   return (
-    <CenteredContent bgColor="ghostwhite" height="100%">
+    <CenteredContent bgColor={SD.colors.certificates} height="100%">
       <SEO
         title="Certificates Acquired"
         description="List of all certificates acquired by Ralph Largo on freeCodeCamp.org"
         imageLink={links.FCC_CERTIFICATE_IMAGE}
       />
       <div style={{ textAlign: "center" }}>
-        <h1 style={{ paddingTop: 20, marginBottom: 0, fontSize: "2rem" }}>
+        <h1
+          style={{
+            paddingTop: 20,
+            marginBottom: 20,
+            fontSize: "2rem",
+            color: "white",
+            fontWeight: "bold",
+          }}
+        >
           Certificates Acquired
         </h1>
         {certificates.map((q, i) => (
@@ -27,8 +36,9 @@ export default function () {
 }
 
 const StyledImage: any = styled.img`
-  padding: 20px;
+  margin-bottom: 8pt;
   width: 70vw;
+  border: 1px solid black;
   height: 70vh;
 }
 

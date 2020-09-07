@@ -1,5 +1,4 @@
-import Head from "next/head";
-import Particles from "react-particles-js";
+import Particles from "components/Particles";
 import styled from "styled-components";
 import CenteredContent from "components/CenteredContent";
 import links from "constants/links";
@@ -14,59 +13,7 @@ export default function App() {
         description="A collection of freeCodeCamp.org projects created by Ralph A. Largo (@devlargs)"
         imageUrl="/assets/images/home.png"
       />
-      <Particles
-        params={{
-          particles: {
-            number: {
-              value: 460,
-              density: {
-                enable: false,
-              },
-            },
-            size: {
-              value: 3,
-              random: true,
-              anim: {
-                speed: 1,
-                size_min: 0.3,
-              },
-            },
-            line_linked: {
-              enable: false,
-            },
-            move: {
-              random: true,
-              speed: 1,
-              direction: "bottom",
-              out_mode: "out",
-            },
-          },
-          interactivity: {
-            events: {
-              onhover: {
-                enable: true,
-                mode: "repulse",
-              },
-              onclick: {
-                enable: true,
-                mode: "bubble",
-              },
-            },
-            modes: {
-              bubble: {
-                distance: 250,
-                duration: 2,
-                size: 0,
-                opacity: 0,
-              },
-              repulse: {
-                distance: 50,
-                duration: 2,
-              },
-            },
-          },
-        }}
-      />
+      <Particles />
       <CenteredContent>
         <Root>
           <div id="container">
@@ -92,12 +39,6 @@ const Homepage = styled.div`
   overflow: hidden;
   position: relative;
   background-color: ${SD.colors.main};
-  #tsparticles {
-    position: absolute;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-  }
 `;
 
 const Root = styled.div`

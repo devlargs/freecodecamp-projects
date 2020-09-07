@@ -38,7 +38,7 @@ export default () => {
               variants={list}
             >
               <motion.h1
-                style={{ color: "#041429" }}
+                style={{ color: "white", fontWeight: "bold" }}
                 custom={1}
                 variants={item}
               >
