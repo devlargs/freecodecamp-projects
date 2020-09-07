@@ -4,10 +4,7 @@ import StyledCard from "styles/StyledCard";
 import UserStoryList from "components/UserStoryList";
 import SD from "constants/styleDefaults";
 import projectUrls from "constants/projectUrls";
-import LinkResult from "components/LinkResult";
 import ProjectHeader from "components/ProjectHeader";
-import useSWR from "swr";
-import fetcher from "utils/fetcher";
 import SEO from "components/SEO";
 import { Tabs } from "antd";
 import {
@@ -17,18 +14,11 @@ import {
   faCalendarPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import TabHeader from "components/TabHeader";
-import { getUsers } from "store/reducers/exerciseUserReducer";
-import { useDispatch } from "react-redux";
+import Users from "./components/Users";
 
 const { TabPane } = Tabs;
 
 export default () => {
-  const dispatch = useDispatch();
-  const url = projectUrls.EXERCISE_TRACKER.examples[0].url;
-  const { data, error } = useSWR(url, fetcher);
-
-  dispatch(getUsers({ users: data || [] }));
-
   return (
     <Root>
       <Child>
@@ -49,7 +39,7 @@ export default () => {
                   tab={<TabHeader title="Users" icon={faUsers} />}
                   key="1"
                 >
-                  Get Users
+                  <Users />
                 </TabPane>
                 <TabPane
                   tab={<TabHeader title="Add User" icon={faUserPlus} />}

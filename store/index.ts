@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import exerciseUsersReducer from "./reducers/exerciseUserReducer";
+import exerciseReducer from "./reducers/exercise";
 
 export default configureStore({
   reducer: {
-    exerciseUser: exerciseUsersReducer,
+    exercise: exerciseReducer,
   },
   devTools: true,
 });
