@@ -18,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       userId,
       description,
       duration,
-      date: date || new Date(),
+      date: date ? Date.parse(date) : new Date(),
     });
     const user = await ExerciseUsers.find({ _id: userId });
     const newExercise = await exercise.save();
