@@ -7,25 +7,30 @@ import useBodyParser from "server/helpers/useBodyParser";
 import dayjs from "dayjs";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-    useBodyParser();
-    await cors(req, res);
-    await connect();
+  useBodyParser();
+  await cors(req, res);
+  await connect();
 
   if (req.method === "POST") {
     // TODO add validation
     const { userId, description, duration, date } = req.body;
-    const exercise = new Exercises({ 
-       userId, description, duration, date: date || new Date()
-     });
-     const user = await ExerciseUsers.find({ _id: userId });
+    const exercise = new Exercises({
+      userId,
+      description,
+      duration,
+      date: date || new Date(),
+    });
+    const user = await ExerciseUsers.find({ _id: userId });
     const newExercise = await exercise.save();
-     const temp = newExercise.toObject();
-     delete temp.userId;
-     temp.date = dayjs(temp?.date || new Date()).format("ddd MMM DD YYYY")
+    const temp = newExercise.toObject();
+    delete temp.userId;
+    temp.date = `${dayjs(temp?.date || new Date()).format(
+      "YYYY-MM-DD"
+    )}T00:00:00.000Z`;
 
     res.send({
-        ...temp,
-        username: user[0].username
+      ...temp,
+      username: user[0].username,
     });
   }
 };
