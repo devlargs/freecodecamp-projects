@@ -29,6 +29,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.send({
       ...temp,
       username: user[0].username,
+      _id: user[0]._id,
     });
   }
 };
