@@ -4,19 +4,28 @@ import JsonPrettier from "components/JsonPrettier";
 import { Button, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, selectUsers } from "store/reducers/exercise";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default () => {
   const { loading, error } = useSelector(selectUsers);
+  const [submitted, setSubmitted] = useState(false);
 
   const dispatch = useDispatch();
   const { register, handleSubmit, reset } = useForm(); // initialize the hook
+
+  useEffect(() => {
+    if (!loading && submitted) {
+      message[error ? "error" : "success"](
+        error ? error : "User successfully added"
+      );
+      reset();
+      setSubmitted(false);
+    }
+  }, [loading, error, submitted]);
+
   const onSubmit = (data: any) => {
     dispatch(addUser(data));
-    message[error ? "error" : "success"](
-      error ? error : "User successfully added"
-    );
-    reset();
+    setSubmitted(true);
   };
 
   return (
