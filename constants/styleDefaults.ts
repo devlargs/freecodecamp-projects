@@ -5,6 +5,7 @@ export default {
   },
   colors: {
     certificates: "cornflowerblue",
+    exerciseTracker: "#1b262c",
     header: "#041529",
     main: "cornflowerblue",
     requestHeaderParser: "#7E3E3E",

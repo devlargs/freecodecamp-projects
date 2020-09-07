@@ -25,7 +25,7 @@ export default [
       "Timestamp Microservice",
       "Request Header Parser",
       "URL Shortener",
-      // "Exercise Tracker",
+      "Exercise Tracker",
       // "File Metadata Microservice",
     ],
   },
