@@ -24,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const newExercise = await exercise.save();
     const temp = newExercise.toObject();
     delete temp.userId;
-    temp.date = dayjs(temp.date).format("ddd MMM D YYYY");
+    temp.date = temp.toDateString();
 
     res.send({
       ...temp,
