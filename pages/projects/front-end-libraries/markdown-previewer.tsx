@@ -12,12 +12,7 @@ export default () => {
 
   return (
     <Root>
-      <SEO
-        title="Markdown Previewer"
-        withFCCScript
-        description={meta.description("Markdown Previewer")}
-        imageUrl={`/assets/images/projects/markdown-previewer.png`}
-      />
+      <SEO title="Markdown Previewer" withFCCScript />
       <StyledHeading>Markdown Previewer</StyledHeading>
       <Content>
         <div id="editor-div">

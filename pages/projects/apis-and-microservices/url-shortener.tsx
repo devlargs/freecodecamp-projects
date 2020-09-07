@@ -28,11 +28,7 @@ export default () => {
 
   return (
     <Root>
-      <SEO
-        title="URL Shortener"
-        description={meta.description("URL Shortener")}
-        imageUrl={`/assets/images/projects/url-shortener.png`}
-      />
+      <SEO title="URL Shortener" />
       <Child>
         <ProjectHeader title="API Project: URL Shortener" />
 

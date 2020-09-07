@@ -1,25 +1,35 @@
 import CenteredContent from "components/CenteredContent";
 import styled from "styled-components";
+import certificates from "constants/certificates";
+import links from "constants/links";
+import SEO from "components/SEO";
 
 export default function () {
   return (
     <CenteredContent bgColor="ghostwhite" height="100%">
+      <SEO
+        title="Certificates Acquired"
+        description="List of all certificates acquired by Ralph Largo on freeCodeCamp.org"
+        imageLink={links.FCC_CERTIFICATE_IMAGE}
+      />
       <div style={{ textAlign: "center" }}>
         <h1 style={{ paddingTop: 20, marginBottom: 0, fontSize: "2rem" }}>
           Certificates Acquired
         </h1>
-        <StyledImage src="/assets/images/certificates/responsive-web-design.png" />
-        <StyledImage src="/assets/images/certificates/javascript-algorithms-and-data-structures.png" />
-        <StyledImage src="/assets/images/certificates/front-end-libraries.png" />
+        {certificates.map((q, i) => (
+          <a key={i} href={`${links.FCC_CERTIFICATES}/${q}`} target="_blank">
+            <StyledImage src={`/assets/images/certificates/${q}.png`} alt={q} />
+          </a>
+        ))}
       </div>
     </CenteredContent>
   );
 }
 
-const StyledImage = styled.img`
+const StyledImage: any = styled.img`
   padding: 20px;
-  width: 80vw;
-  height: 80vh;
+  width: 70vw;
+  height: 70vh;
 }
 
   @media screen and (max-width: 400px) {

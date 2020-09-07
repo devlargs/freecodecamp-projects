@@ -174,12 +174,7 @@ export default () => {
 
   return (
     <>
-      <SEO
-        title="Pomodoro Clock"
-        withFCCScript
-        description={meta.description("Pomodoro Clock")}
-        imageUrl={`/assets/images/projects/pomodoro-clock.png`}
-      />
+      <SEO title="Pomodoro Clock" withFCCScript />
       <audio id="beep" src={`/assets/sounds/Rooster.mp3`}></audio>
       <CenteredContent bgColor="#28587b">
         <div>
