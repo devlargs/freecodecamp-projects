@@ -1,6 +1,6 @@
 import Table from "antd/lib/table";
 import styled from "styled-components";
-import { loadExercise, selectUsers } from "store/reducers/exercise";
+import { loadUser, selectUsers } from "store/reducers/exercise";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import JsonPrettier from "components/JsonPrettier";
@@ -10,7 +10,7 @@ export default () => {
   const { loading, users } = useSelector(selectUsers);
 
   useEffect(() => {
-    dispatch(loadExercise());
+    dispatch(loadUser());
   }, [dispatch]);
 
   const columns = [
@@ -34,6 +34,7 @@ export default () => {
         dataSource={users}
         columns={columns}
         pagination={false}
+        rowKey="_id"
       />
     </Root>
   );

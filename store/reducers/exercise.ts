@@ -5,8 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 import projectUrls from "constants/projectUrls";
 
-export const loadExercise = createAsyncThunk(
-  "exercise/loadExercise",
+export const loadUser = createAsyncThunk(
+  "exercise/loadUser",
   async (_, thunkAPI) => {
     try {
       const url = projectUrls.EXERCISE_TRACKER.examples[0].url;
@@ -27,14 +27,14 @@ const exerciseSlice = createSlice({
   },
   reducers: {},
   extraReducers: {
-    [loadExercise.fulfilled as any]: (state, action) => {
+    [loadUser.fulfilled as any]: (state, action) => {
       state.users = action.payload;
       state.loading = false;
     },
-    [loadExercise.pending as any]: (state) => {
+    [loadUser.pending as any]: (state) => {
       state.loading = true;
     },
-    [loadExercise.rejected as any]: (state) => {
+    [loadUser.rejected as any]: (state) => {
       state.loading = false;
       state.users = [];
     },

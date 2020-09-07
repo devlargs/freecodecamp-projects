@@ -15,6 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import TabHeader from "components/TabHeader";
 import Users from "./components/Users";
+import AddUser from "./components/AddUser";
 
 const { TabPane } = Tabs;
 
@@ -45,7 +46,7 @@ export default () => {
                   tab={<TabHeader title="Add User" icon={faUserPlus} />}
                   key="2"
                 >
-                  Create User
+                  <AddUser />
                 </TabPane>
                 <TabPane
                   tab={<TabHeader title="Get Exercises" icon={faHeartbeat} />}
