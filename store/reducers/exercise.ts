@@ -5,6 +5,13 @@ import {
 } from "@reduxjs/toolkit";
 import projectUrls from "constants/projectUrls";
 
+interface AddExerciseProps {
+  userId: string;
+  duration: number;
+  description: string;
+  date?: string;
+}
+
 export const loadUser = createAsyncThunk(
   "exercise/loadUser",
   async (_, thunkAPI) => {
@@ -18,6 +25,19 @@ export const loadUser = createAsyncThunk(
     }
   }
 );
+
+// export const load = createAsyncThunk(
+//   "exercise/load",
+//   async ({ from, to, limit, userId }, thunkAPI) => {
+//     try {
+//       const response = await fetch("/api/exercises/logs");
+
+//       return response.json();
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue({ error: error.message });
+//     }
+//   }
+// );
 
 export const addUser = createAsyncThunk(
   "exercise/addUser",
@@ -43,11 +63,37 @@ export const addUser = createAsyncThunk(
   }
 );
 
+export const addExercise = createAsyncThunk(
+  "exercise/add",
+  async (newExercise: AddExerciseProps, thunkAPI) => {
+    try {
+      const response = await fetch("/api/exercise/add", {
+        method: "POST",
+        body: JSON.stringify(newExercise),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        return thunkAPI.rejectWithValue({ error: error.error });
+      }
+
+      return response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
+
 const exerciseSlice = createSlice({
   name: "exercise",
   initialState: {
     users: [],
     loading: true,
+    exercises: [],
+    exerciseLoading: false,
   },
   reducers: {},
   extraReducers: {
@@ -59,6 +105,16 @@ const exerciseSlice = createSlice({
       state.loading = false;
     },
     [addUser.rejected as any]: (state: any, action) => {
+      state.error = action.payload.error;
+      state.loading = false;
+    },
+    [addExercise.pending as any]: (state) => {
+      state.exerciseLoading = true;
+    },
+    [addExercise.fulfilled as any]: (state: any, action) => {
+      state.exerciseLoading = false;
+    },
+    [addExercise.rejected as any]: (state: any, action) => {
       state.error = action.payload.error;
       state.loading = false;
     },
@@ -80,6 +136,15 @@ export const selectUsers = createSelector(
   (state: any) => ({
     users: state.exercise.users,
     loading: state.exercise.loading,
+    error: state.exercise.error,
+  }),
+  (state) => state
+);
+
+export const selectExercises = createSelector(
+  (state: any) => ({
+    data: state.exercise.exercises,
+    loading: state.exercise.exerciseLoading,
     error: state.exercise.error,
   }),
   (state) => state

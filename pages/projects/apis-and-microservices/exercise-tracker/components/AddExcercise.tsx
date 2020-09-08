@@ -1,105 +1,84 @@
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
 import JsonPrettier from "components/JsonPrettier";
-import { Button, message } from "antd";
+import { Button, message, DatePicker } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, selectUsers } from "store/reducers/exercise";
+import { addExercise, selectExercises } from "store/reducers/exercise";
 import { useEffect, useState } from "react";
+import dayjs from "dayjs";
 import UserSelect from "./UserSelect";
 
 export default () => {
-  // const { loading, error } = useSelector(selectUsers);
-  // const [submitted, setSubmitted] = useState(false);
+  const { loading, error } = useSelector(selectExercises);
+  const [submitted, setSubmitted] = useState(false);
 
-  // const dispatch = useDispatch();
-  const { register, handleSubmit, reset, setValue, control } = useForm();
+  const dispatch = useDispatch();
+  const { register, handleSubmit, reset, setValue, getValues } = useForm();
 
   useEffect(() => {
     register({ name: "userId" }, { required: true });
+    register({ name: "date" });
   }, [register]);
 
-  // useEffect(() => {
-  //   if (!loading && submitted) {
-  //     message[error ? "error" : "success"](
-  //       error ? error : "User successfully added"
-  //     );
-  //     reset();
-  //     setSubmitted(false);
-  //   }
-  // }, [loading, error, submitted]);
+  useEffect(() => {
+    if (!loading && submitted) {
+      message[error ? "error" : "success"](
+        error ? error : "Exercise successfully added"
+      );
+      reset();
+      setSubmitted(false);
+    }
+  }, [loading, error, submitted]);
 
   const onSubmit = (data: any) => {
-    console.log(data);
-    // console.log(data);
-    // dispatch(addUser(data));
-    // setSubmitted(true);
+    const temp = { ...data };
+    if (temp.date) {
+      temp.date = dayjs(temp.date).format("YYYY-MM-DD");
+    }
+
+    dispatch(addExercise(data));
+    setSubmitted(true);
   };
-
-  // function onChange(value) {
-  //   console.log(`selected ${value}`);
-  // }
-
-  function onBlur() {
-    console.log("blur");
-  }
-
-  function onFocus() {
-    console.log("focus");
-  }
-
-  function onSearch(val) {
-    console.log("search:", val);
-  }
 
   return (
     <Root>
       <JsonPrettier data="[POST] /api/exercise/new-user" />
-      <form
-        onSubmit={
-          handleSubmit(onSubmit)
-          // console.log("gago")
-        }
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <UserSelect
           onChange={(e) => setValue("userId", e)}
-          onSearch={onSearch}
+          value={getValues("userId")}
         />
 
-        {/* <input
-          type="text"
-          name="uerId"
-          ref={register}
-          placeholder="Please Enter Username"
-          // required
-        /> */}
-        {/* {" "}
         <input
           type="text"
-          name="descrition"
+          name="description"
           ref={register}
-          placeholder="Please Enter Username"
+          placeholder="Enter Description"
           required
-        />{" "}
+        />
+
         <input
-          type="text"
-          name="username"
+          type="number"
+          name="duration"
           ref={register}
-          placeholder="Please Enter Username"
+          placeholder="Enter Duration"
           required
-        />{" "}
-        <input
-          type="text"
-          name="username"
-          ref={register}
-          placeholder="Please Enter Username"
-          required
-        />{" "} */}
+        />
+
+        <StyledPicker
+          value={getValues("date")}
+          placeholder="Select date (optional)"
+          style={{ width: "100%", marginBottom: 16, fontSize: 20 }}
+          onChange={(e: any) => setValue("date", e)}
+        />
+
         <div className="add-user-btn">
           <Button
             htmlType="submit"
             type="primary"
             block
-            // disabled={loading}
+            disabled={loading}
+            loading={loading}
           >
             Add Exercise
           </Button>
@@ -113,5 +92,13 @@ const Root = styled.div`
   .add-user-btn {
     width: 50%;
     margin: auto;
+  }
+`;
+
+const StyledPicker = styled(DatePicker)`
+  width: 100%;
+  margin-bottom: 16px;
+  input {
+    font-size: 16px !important;
   }
 `;
