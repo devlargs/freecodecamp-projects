@@ -14,7 +14,7 @@ type Props = {
 
 export default ({ value, onChange, error }: Props) => {
   const dispatch = useDispatch();
-  const { loading, users } = useSelector(selectUsers);
+  const { loading, users = [] } = useSelector(selectUsers);
 
   useEffect(() => {
     dispatch(loadUser());

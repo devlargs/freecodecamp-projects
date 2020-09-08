@@ -51,6 +51,7 @@ export const loadExercises = createAsyncThunk(
     }
 
     try {
+      console.log(`/api/exercise/log?userId=${userId}${extra}`);
       const response = await fetch(
         `/api/exercise/log?userId=${userId}${extra}`
       );

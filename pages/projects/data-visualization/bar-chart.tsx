@@ -10,8 +10,6 @@ export default () => {
 
   useEffect(() => {
     d3.json(links.DATA_VISUALIZATION.BAR_CHART).then((q) => {
-      console.log(q);
-
       const dataset = q.data.map((r) => [r[0].split("-")[0], r[1]]);
       const w = 700;
       const h = 500;
@@ -38,18 +36,15 @@ export default () => {
         .enter()
         .append("rect")
         .attr("x", (d, i) => {
-          console.log(d[0], "X");
           return i;
         })
         .attr("y", (d) => {
-          console.log(h - parseInt(d[1]), "Y");
           return parseInt(d[1]);
         })
         .attr("width", 25)
         .attr("height", (D) => D[0]);
 
       const xAxis = d3.axisBottom(xScale);
-      console.log(xAxis);
 
       const yAxis = d3.axisLeft(yScale);
 

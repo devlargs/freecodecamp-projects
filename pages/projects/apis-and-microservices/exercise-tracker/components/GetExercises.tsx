@@ -1,5 +1,3 @@
-import Table from "antd/lib/table";
-import Button from "antd/lib/button";
 import styled from "styled-components";
 import {
   loadExercises,
@@ -10,31 +8,22 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import JsonPrettier from "components/JsonPrettier";
-import dayjs from "dayjs";
 import UserSelect from "./UserSelect";
-import { Empty } from "antd";
+import { Empty, Row, Col, Form, Input, Table } from "antd";
 
 export default () => {
-  const { loading, error, data } = useSelector(selectExercises);
+  const { loading, data } = useSelector(selectExercises);
   const dispatch = useDispatch();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setValue,
-    getValues,
-    errors,
-  } = useForm();
+  const { register, setValue, getValues, errors } = useForm();
+
+  const values = getValues();
 
   useEffect(() => {
     dispatch(resetExercises());
     register({ name: "userId" }, { required: true });
+    register({ name: "limit" }, { required: true });
   }, []);
-
-  const onSubmit = (data: any) => {
-    dispatch(loadExercises(data));
-  };
 
   const columns = [
     {
@@ -55,49 +44,60 @@ export default () => {
     },
   ];
 
+  const loadExerciseLog = (key: string, value: string) => {
+    setValue(key, value);
+    dispatch(loadExercises(getValues() as any));
+  };
+
   return (
     <Root>
       <JsonPrettier data="[GET] /api/exercise/log?{userId}[&from][&to][&limit]" />
       <form>
         <UserSelect
-          onChange={(e) => {
-            setValue("userId", e);
-            dispatch(loadExercises(getValues() as any));
-          }}
+          onChange={(e: string) => loadExerciseLog("userId", e)}
           value={getValues("userId")}
           error={errors.userId && "User is required"}
         />
-
-        {/* <div className="add-user-btn">
-          <Button
-            htmlType="submit"
-            type="primary"
-            block
-            disabled={loading}
-            loading={loading}
-          >
-            Fetch Exercise Logs
-          </Button>
-        </div>
-        <div className="add-user-btn">
-          <Button
-            onClick={() => dispatch(resetExercises())}
-            type="primary"
-            block
-            disabled={loading}
-            loading={loading}
-          >
-            Reset
-          </Button>
-        </div> */}
+        <Row gutter={24}>
+          <Col span={8}>
+            <Form.Item label="Limit">
+              <Input
+                disabled={!Boolean(values.userId)}
+                type="number"
+                placeholder="Enter Limit"
+                onChange={(e) => {
+                  loadExerciseLog("limit", e.target.value);
+                }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item label="From">
+              <Input type="number" placeholder="Enter Limit" />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item label="To">
+              <Input type="number" placeholder="Enter Limit" />
+            </Form.Item>
+          </Col>
+        </Row>
       </form>
 
-      <StyledTable
-        dataSource={data.log}
-        {...{ loading, columns }}
-        pagination={false}
-        rowKey="_id"
-      />
+      {values?.userId ? (
+        data.log.length ? (
+          <StyledTable
+            dataSource={data.log}
+            {...{ loading, columns }}
+            pagination={false}
+            rowKey="_id"
+          />
+        ) : (
+          <Empty description="No data found" />
+        )
+      ) : (
+        <></>
+      )}
     </Root>
   );
 };

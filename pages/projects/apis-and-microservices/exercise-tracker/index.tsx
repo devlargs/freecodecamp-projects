@@ -23,7 +23,6 @@ import GetExercises from "./components/GetExercises";
 const { TabPane } = Tabs;
 
 export default () => {
-  const [tabKey, setTabKey] = useState("3");
   return (
     <Root>
       <Child>
@@ -39,30 +38,30 @@ export default () => {
             <StyledCard>
               <h2>Example Usage</h2>
 
-              <Tabs activeKey={tabKey} onChange={(e) => setTabKey(e)}>
+              <Tabs defaultActiveKey="1">
                 <TabPane
                   tab={<TabHeader title="Users" icon={faUsers} />}
                   key="1"
                 >
-                  {tabKey === "1" && <Users />}
+                  <Users />
                 </TabPane>
                 <TabPane
                   tab={<TabHeader title="Add User" icon={faUserPlus} />}
                   key="2"
                 >
-                  {tabKey === "2" && <AddUser />}
+                  <AddUser />
                 </TabPane>
                 <TabPane
                   tab={<TabHeader title="Get Exercises" icon={faHeartbeat} />}
                   key="3"
                 >
-                  {tabKey === "3" && <GetExercises />}
+                  <GetExercises />
                 </TabPane>
                 <TabPane
                   tab={<TabHeader title="Add Exercise" icon={faCalendarPlus} />}
                   key="4"
                 >
-                  {tabKey === "4" && <AddExcercise />}
+                  <AddExcercise />
                 </TabPane>
               </Tabs>
             </StyledCard>
