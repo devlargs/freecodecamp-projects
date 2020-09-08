@@ -29,4 +29,14 @@ export default [
       // "File Metadata Microservice",
     ],
   },
+  {
+    name: "Quality Assurance",
+    list: [
+      // "Metric Imperial Converter",
+      "Issue Tracker",
+      // "Personal Library",
+      // "Soduku Solver",
+      // "American British Translator",
+    ],
+  },
 ];
