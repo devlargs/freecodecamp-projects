@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Row, Col } from "antd";
 import styled from "styled-components";
 import StyledCard from "styles/StyledCard";
@@ -14,12 +15,15 @@ import {
   faCalendarPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import TabHeader from "components/TabHeader";
-import Users from "./components/Users";
+import AddExcercise from "./components/AddExcercise";
 import AddUser from "./components/AddUser";
+import Users from "./components/Users";
+import GetExercises from "./components/GetExercises";
 
 const { TabPane } = Tabs;
 
 export default () => {
+  const [tabKey, setTabKey] = useState("1");
   return (
     <Root>
       <Child>
@@ -35,7 +39,7 @@ export default () => {
             <StyledCard>
               <h2>Example Usage</h2>
 
-              <Tabs defaultActiveKey="1">
+              <Tabs activeKey={tabKey} onChange={(e) => setTabKey(e)}>
                 <TabPane
                   tab={<TabHeader title="Users" icon={faUsers} />}
                   key="1"
@@ -52,13 +56,13 @@ export default () => {
                   tab={<TabHeader title="Get Exercises" icon={faHeartbeat} />}
                   key="3"
                 >
-                  Get Exercises By User
+                  <GetExercises isActive={tabKey === "3"} />
                 </TabPane>
                 <TabPane
                   tab={<TabHeader title="Add Exercise" icon={faCalendarPlus} />}
                   key="4"
                 >
-                  Add Exercise
+                  <AddExcercise />
                 </TabPane>
               </Tabs>
             </StyledCard>

@@ -46,6 +46,7 @@ body {
   height: 3px;
 }
 
+input[type="number"],
 input[type="text"] {
   display: block;
   margin-bottom: 8pt;
@@ -53,4 +54,5 @@ input[type="text"] {
   padding: 10px;
   border: 1px solid lightgray;
   margin: 0px 0px 14px;
+  height: 32px;
 }
