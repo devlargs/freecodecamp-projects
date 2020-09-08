@@ -28,7 +28,7 @@ export default () => {
         imageLink={links.FCC_COVER}
       />
       <Root>
-        {projects.map((project) => {
+        {projects.map((project, p) => {
           const key = convertString(project.name, "sentence", "kebab");
           return (
             <Container
@@ -39,7 +39,6 @@ export default () => {
             >
               <motion.h1
                 style={{ color: "white", fontWeight: "bold" }}
-                custom={1}
                 variants={item}
               >
                 {project.name} Projects
@@ -54,7 +53,7 @@ export default () => {
                     >
                       <motion.div
                         variants={item}
-                        custom={i + 1}
+                        custom={i * p}
                         whileHover={{
                           scale: 1.1,
                           transition: { duration: transition },

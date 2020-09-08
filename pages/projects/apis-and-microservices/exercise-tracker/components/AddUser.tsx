@@ -11,7 +11,7 @@ export default () => {
   const [submitted, setSubmitted] = useState(false);
 
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset } = useForm(); // initialize the hook
+  const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
     if (!loading && submitted) {
@@ -39,12 +39,19 @@ export default () => {
           placeholder="Please Enter Username"
           required
         />{" "}
-        <Button htmlType="submit" type="primary" block disabled={loading}>
-          Submit
-        </Button>
+        <div className="add-user-btn">
+          <Button htmlType="submit" type="primary" block disabled={loading}>
+            Add User
+          </Button>
+        </div>
       </form>
     </Root>
   );
 };
 
-const Root = styled.div``;
+const Root = styled.div`
+  .add-user-btn {
+    width: 50%;
+    margin: auto;
+  }
+`;

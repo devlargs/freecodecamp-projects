@@ -14,8 +14,9 @@ import {
   faCalendarPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import TabHeader from "components/TabHeader";
-import Users from "./components/Users";
+import AddExcercise from "./components/AddExcercise";
 import AddUser from "./components/AddUser";
+import Users from "./components/Users";
 
 const { TabPane } = Tabs;
 
@@ -35,7 +36,7 @@ export default () => {
             <StyledCard>
               <h2>Example Usage</h2>
 
-              <Tabs defaultActiveKey="1">
+              <Tabs defaultActiveKey="4">
                 <TabPane
                   tab={<TabHeader title="Users" icon={faUsers} />}
                   key="1"
@@ -58,7 +59,7 @@ export default () => {
                   tab={<TabHeader title="Add Exercise" icon={faCalendarPlus} />}
                   key="4"
                 >
-                  Add Exercise
+                  <AddExcercise />
                 </TabPane>
               </Tabs>
             </StyledCard>
