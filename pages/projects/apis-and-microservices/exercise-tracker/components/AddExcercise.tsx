@@ -3,7 +3,11 @@ import styled from "styled-components";
 import JsonPrettier from "components/JsonPrettier";
 import { Button, message, DatePicker } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { addExercise, selectExercises } from "store/reducers/exercise";
+import {
+  addExercise,
+  selectExercises,
+  resetExercises,
+} from "store/reducers/exercise";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import UserSelect from "./UserSelect";
@@ -34,6 +38,7 @@ export default () => {
       );
       reset();
       setSubmitted(false);
+      dispatch(resetExercises());
     }
   }, [loading, error, submitted]);
 

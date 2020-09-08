@@ -4,6 +4,7 @@ import {
   createSelector,
 } from "@reduxjs/toolkit";
 import projectUrls from "constants/projectUrls";
+import dayjs from "dayjs";
 
 interface AddExerciseProps {
   userId: string;
@@ -38,12 +39,10 @@ export const loadExercises = createAsyncThunk(
   async ({ from, to, limit, userId }: GetExerciseParamsProps, thunkAPI) => {
     let extra = "";
 
-    if (from) {
-      extra += `&from=${from}`;
-    }
-
-    if (to) {
-      extra += `&to=${to}`;
+    if (to && from) {
+      extra += `&to=${dayjs(to).format("YYYY-MM-DD")}&from=${dayjs(from).format(
+        "YYYY-MM-DD"
+      )}`;
     }
 
     if (limit) {
@@ -51,7 +50,6 @@ export const loadExercises = createAsyncThunk(
     }
 
     try {
-      console.log(`/api/exercise/log?userId=${userId}${extra}`);
       const response = await fetch(
         `/api/exercise/log?userId=${userId}${extra}`
       );
