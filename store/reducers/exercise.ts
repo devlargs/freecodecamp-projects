@@ -12,6 +12,13 @@ interface AddExerciseProps {
   date?: string;
 }
 
+interface GetExerciseParamsProps {
+  from?: string;
+  userId: string;
+  to?: string;
+  limit?: number;
+}
+
 export const loadUser = createAsyncThunk(
   "exercise/loadUser",
   async (_, thunkAPI) => {
@@ -26,18 +33,34 @@ export const loadUser = createAsyncThunk(
   }
 );
 
-// export const load = createAsyncThunk(
-//   "exercise/load",
-//   async ({ from, to, limit, userId }, thunkAPI) => {
-//     try {
-//       const response = await fetch("/api/exercises/logs");
+export const loadExercises = createAsyncThunk(
+  "exercise/loadExercises",
+  async ({ from, to, limit, userId }: GetExerciseParamsProps, thunkAPI) => {
+    let extra = "";
 
-//       return response.json();
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue({ error: error.message });
-//     }
-//   }
-// );
+    if (from) {
+      extra += `&from=${from}`;
+    }
+
+    if (to) {
+      extra += `&to=${to}`;
+    }
+
+    if (limit) {
+      extra += `&limit=${limit}`;
+    }
+
+    try {
+      const response = await fetch(
+        `/api/exercise/log?userId=${userId}${extra}`
+      );
+
+      return response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
 
 export const addUser = createAsyncThunk(
   "exercise/addUser",
@@ -92,10 +115,17 @@ const exerciseSlice = createSlice({
   initialState: {
     users: [],
     loading: true,
-    exercises: [],
+    exercises: {
+      log: [],
+    },
     exerciseLoading: false,
   },
-  reducers: {},
+  reducers: {
+    resetExercises: (state) => {
+      state.exercises = { log: [] };
+      state.exerciseLoading = false;
+    },
+  },
   extraReducers: {
     [addUser.pending as any]: (state) => {
       state.loading = true;
@@ -129,6 +159,19 @@ const exerciseSlice = createSlice({
       state.loading = false;
       state.users = [];
     },
+    [loadExercises.fulfilled as any]: (state, action) => {
+      state.exercises = action.payload;
+      state.exerciseLoading = false;
+    },
+    [loadExercises.pending as any]: (state) => {
+      state.exerciseLoading = true;
+    },
+    [loadExercises.rejected as any]: (state) => {
+      state.exerciseLoading = false;
+      state.exercises = {
+        log: [],
+      };
+    },
   },
 });
 
@@ -149,5 +192,7 @@ export const selectExercises = createSelector(
   }),
   (state) => state
 );
+
+export const { resetExercises } = exerciseSlice.actions;
 
 export default exerciseSlice.reducer;

@@ -44,5 +44,5 @@ const Root = styled.div``;
 
 const StyledTable = styled(Table)`
   height: 350px;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;

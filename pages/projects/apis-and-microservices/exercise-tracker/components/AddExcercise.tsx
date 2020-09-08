@@ -1,4 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import JsonPrettier from "components/JsonPrettier";
 import { Button, message, DatePicker } from "antd";
@@ -46,8 +46,6 @@ export default () => {
     dispatch(addExercise(data));
     setSubmitted(true);
   };
-
-  console.log(errors);
 
   return (
     <Root>
