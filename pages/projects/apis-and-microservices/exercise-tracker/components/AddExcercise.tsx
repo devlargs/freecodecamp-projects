@@ -13,7 +13,14 @@ export default () => {
   const [submitted, setSubmitted] = useState(false);
 
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset, setValue, getValues } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    getValues,
+    errors,
+  } = useForm();
 
   useEffect(() => {
     register({ name: "userId" }, { required: true });
@@ -40,6 +47,8 @@ export default () => {
     setSubmitted(true);
   };
 
+  console.log(errors);
+
   return (
     <Root>
       <JsonPrettier data="[POST] /api/exercise/new-user" />
@@ -47,6 +56,7 @@ export default () => {
         <UserSelect
           onChange={(e) => setValue("userId", e)}
           value={getValues("userId")}
+          error={errors.userId && "User is required"}
         />
 
         <input
