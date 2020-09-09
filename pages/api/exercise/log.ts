@@ -9,12 +9,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   await cors(req, res);
   await connect();
 
-  // !BUG Fix formatting
-
   if (req.method === "GET") {
     if (req.query.userId) {
       const { userId, from, to, limit } = req.query;
-      // TODO fix props of obj
       const obj: any = {
         userId,
       };

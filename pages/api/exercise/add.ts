@@ -4,7 +4,6 @@ import Exercises from "server/models/Exercises";
 import ExerciseUsers from "server/models/ExerciseUsers";
 import connect from "server/helpers/connect";
 import useBodyParser from "server/helpers/useBodyParser";
-import dayjs from "dayjs";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   useBodyParser();
@@ -12,7 +11,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   await connect();
 
   if (req.method === "POST") {
-    // TODO add validation
     const { userId, description, duration, date } = req.body;
     const exercise = new Exercises({
       userId,
