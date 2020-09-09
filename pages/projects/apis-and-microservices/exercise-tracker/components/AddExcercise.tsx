@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import UserSelect from "./UserSelect";
 
-export default () => {
+export default ({ isActive }: { isActive: boolean }) => {
   const { loading, error } = useSelector(selectExercises);
   const [submitted, setSubmitted] = useState(false);
 
@@ -30,6 +30,12 @@ export default () => {
     register({ name: "userId" }, { required: true });
     register({ name: "date" });
   }, [register]);
+
+  useEffect(() => {
+    if (!isActive) {
+      reset();
+    }
+  }, [isActive]);
 
   useEffect(() => {
     if (!loading && submitted) {

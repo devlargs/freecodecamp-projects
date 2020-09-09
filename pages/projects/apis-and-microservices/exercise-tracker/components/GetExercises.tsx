@@ -33,11 +33,6 @@ export default ({ isActive }: Props) => {
 
   useEffect(() => {
     if (!isActive) {
-      // resetExercises();
-      // setValue("userId", null);
-      // setValue("limit", null);
-      // setValue("from", null);
-      // setValue("to", null);
       reset();
     }
   }, [isActive]);

@@ -62,7 +62,7 @@ export default () => {
                   tab={<TabHeader title="Add Exercise" icon={faCalendarPlus} />}
                   key="4"
                 >
-                  <AddExcercise />
+                  <AddExcercise isActive={tabKey === "4"} />
                 </TabPane>
               </Tabs>
             </StyledCard>
