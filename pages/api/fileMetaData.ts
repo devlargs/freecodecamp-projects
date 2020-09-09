@@ -10,9 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     upload.single("file")(req as any, {} as any, (err) => {
       const { file } = req as any;
       if (err) {
-        res
-          .status(400)
-          .json({ , message: "Something went wrong" });
+        res.status(400).json({ message: "Something went wrong" });
       } else {
         res.status(200).json({
           name: file?.originalname,
