@@ -56,7 +56,7 @@ export default () => {
                   tab={<TabHeader title="Get Exercises" icon={faHeartbeat} />}
                   key="3"
                 >
-                  <GetExercises isActive={tabKey === "3"} />
+                  {tabKey === "3" && <GetExercises />}
                 </TabPane>
                 <TabPane
                   tab={<TabHeader title="Add Exercise" icon={faCalendarPlus} />}
