@@ -6,17 +6,25 @@ import KanbanIssuesSchema from "server/models/KanbanIssues";
 import errorHandler from "server/helpers/errorHandler";
 import RS from "server/helpers/requiredStatus";
 
+type QueryProps = {
+  open?: boolean;
+  assigned_to?: string;
+};
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   useBodyParser();
   await cors(req, res);
   await connect();
 
   if (req.method === "GET") {
-    const data = await new Promise((resolve, reject) => {
-      const { open } = req.query;
-      let obj: {
-        open?: boolean;
-      } = {};
+    console.log("eto ?");
+    const data = await new Promise((resolve) => {
+      const { open, assigned_to } = req.query;
+      let obj: QueryProps = {};
+
+      if (assigned_to) {
+        obj.assigned_to = `${assigned_to}`;
+      }
 
       if (open && (open === "true" || open === "false")) {
         obj.open = JSON.parse(open);
@@ -29,6 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       KanbanIssuesSchema.find(obj)
         .populate("assigned_to", { username: 1 })
         .exec((error, data) => {
+          console.log(error);
           if (error) {
             resolve({ error });
           } else {

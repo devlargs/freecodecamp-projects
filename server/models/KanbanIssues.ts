@@ -1,5 +1,7 @@
 import { model, models, Schema } from "mongoose";
 import timestamps from "constants/timestamps";
+import KanbanUsersSchema from "./KanbanUsers";
+import KanbanStatusSchema from "./KanbanStatus";
 
 const { ObjectId } = Schema.Types;
 
@@ -16,9 +18,9 @@ const KanbanIssuesSchema = new Schema(
     },
     assigned_to: {
       type: ObjectId,
-      ref: "kanban_users",
+      ref: KanbanUsersSchema,
     },
-    status_text: { type: ObjectId, ref: "kanban_statuses" },
+    status_text: { type: ObjectId, ref: KanbanStatusSchema },
     open: {
       type: Boolean,
       default: true,
