@@ -15,12 +15,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const status = new KanbanStatusSchema({ title: req.body.title });
       try {
         const newStatus = await status.save();
-        res.status(200).send({ data: newStatus, status: true });
+        res.status(200).send({ data: newStatus });
       } catch (ex) {
-        res.status(400).send({ status: false, error: errorHandler(`${ex}`) });
+        res.status(400).send({ error: errorHandler(`${ex}`) });
       }
     } else {
-      res.status(400).send({ status: false, error: "Title is required" });
+      res.status(400).send({ error: "Title is required" });
     }
   }
 };

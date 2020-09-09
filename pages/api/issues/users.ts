@@ -15,12 +15,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const status = new KanbanUsersSchema({ username: req.body.username });
       try {
         const newUser = await status.save();
-        res.status(200).send({ data: newUser, status: true });
+        res.status(200).send({ data: newUser });
       } catch (ex) {
-        res.status(400).send({ status: false, error: errorHandler(`${ex}`) });
+        res.status(400).send({ error: errorHandler(`${ex}`) });
       }
     } else {
-      res.status(400).send({ status: false, error: "Username is required" });
+      res.status(400).send({ error: "Username is required" });
     }
   }
 };

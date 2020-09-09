@@ -5,7 +5,6 @@ import useBodyParser from "server/helpers/useBodyParser";
 import KanbanIssuesSchema from "server/models/KanbanIssues";
 import errorHandler from "server/helpers/errorHandler";
 import RS from "server/helpers/requiredStatus";
-import { model, models, Schema } from "mongoose";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   useBodyParser();
@@ -13,17 +12,32 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   await connect();
 
   if (req.method === "GET") {
-    console.log(models);
-    KanbanIssuesSchema.find()
-      .populate("assigned_to")
-      .exec((err, result) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(result);
-        }
-      });
-    // console.log(issues);
+    const data = await new Promise((resolve, reject) => {
+      const { open } = req.query;
+      let obj: {
+        open?: boolean;
+      } = {};
+
+      if (open && (open === "true" || open === "false")) {
+        obj.open = JSON.parse(open);
+      }
+
+      if (typeof open === "boolean") {
+        obj.open = open;
+      }
+
+      KanbanIssuesSchema.find(obj)
+        .populate("assigned_to", { username: 1 })
+        .exec((error, data) => {
+          if (error) {
+            resolve({ error });
+          } else {
+            resolve({ data });
+          }
+        });
+    });
+
+    res.send(data);
   }
 
   if (req.method === "POST") {
@@ -40,9 +54,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const issues = new KanbanIssuesSchema(req.body);
     try {
       const newIssue = await issues.save();
-      res.status(200).send({ data: newIssue, status: true });
+      return res.status(200).send({ data: newIssue });
     } catch (ex) {
-      res.status(400).send({ status: false, error: errorHandler(`${ex}`) });
+      return res.status(400).send({ error: errorHandler(`${ex}`) });
     }
   }
 };

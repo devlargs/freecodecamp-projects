@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       if (err) {
         res
           .status(400)
-          .json({ status: false, message: "Something went wrong" });
+          .json({ , message: "Something went wrong" });
       } else {
         res.status(200).json({
           name: file?.originalname,
