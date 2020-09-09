@@ -1,25 +1,25 @@
-import mongoose from "mongoose";
+import { Schema, models, model } from "mongoose";
 
-const ExerciseSchema = new mongoose.Schema(
+const name = "exercises";
+const ExerciseSchema = new Schema(
   {
     userId: {
-        type: String,
-        required: [true, "User ID is required"]
+      type: String,
+      required: [true, "User ID is required"],
     },
     description: {
-        type: String,
-        required: [true, "Description is required"]
+      type: String,
+      required: [true, "Description is required"],
     },
     duration: {
-        type: Number,
-        required: [true, "Duration is required"]
+      type: Number,
+      required: [true, "Duration is required"],
     },
-    date: Date
+    date: Date,
   },
   {
     versionKey: false,
   }
 );
 
-export default mongoose.models["exercises"] ||
-  mongoose.model("exercises", ExerciseSchema);
+export default models[name] || model(name, ExerciseSchema);

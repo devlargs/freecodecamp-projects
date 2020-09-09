@@ -1,5 +1,5 @@
 export const UNIQUE_KEY = {
-  message: "Username already exists",
+  message: "MongoError: E11000 duplicate key error collection",
   key: "MongoError: E11000 duplicate key error collection",
 };
 
