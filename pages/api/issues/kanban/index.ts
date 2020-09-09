@@ -17,7 +17,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   await connect();
 
   if (req.method === "GET") {
-    console.log("eto ?");
     const data = await new Promise((resolve) => {
       const { open, assigned_to } = req.query;
       let obj: QueryProps = {};
@@ -37,7 +36,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       KanbanIssuesSchema.find(obj)
         .populate("assigned_to", { username: 1 })
         .exec((error, data) => {
-          console.log(error);
           if (error) {
             resolve({ error });
           } else {
