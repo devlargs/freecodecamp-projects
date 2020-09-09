@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema, model, models } from "mongoose";
 
-const ExerciseUsersSchema = new mongoose.Schema(
+const name = "exercise_users";
+
+const ExerciseUsersSchema = new Schema(
   {
     username: {
       type: String,
@@ -12,5 +14,4 @@ const ExerciseUsersSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models["exercise_users"] ||
-  mongoose.model("exercise_users", ExerciseUsersSchema);
+export default models[name] || model(name, ExerciseUsersSchema);

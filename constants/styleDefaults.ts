@@ -8,6 +8,7 @@ export default {
     exerciseTracker: "#1b262c",
     header: "#041529",
     main: "cornflowerblue",
+    personalLibrary: "azure",
     requestHeaderParser: "#7E3E3E",
     timeStampMicroservice: "#00818a",
     urlShortener: "#2A324B",
