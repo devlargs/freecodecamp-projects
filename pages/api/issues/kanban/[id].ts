@@ -34,21 +34,28 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (method === "DELETE") {
-    const response = await new Promise((resolve) => {
-      KanbanIssuesSchema.findOne({ _id: id }).then((q) => {
-        if (!q) {
-          return resolve({ error: "No issue found" });
-        } else {
-          KanbanIssuesSchema.deleteOne({ _id: id }, (error) => {
-            if (error) {
-              return resolve({ error });
-            } else {
-              return resolve({ data: `Deleted ${id}` });
-            }
-          });
-        }
+    try {
+      const response = await new Promise((resolve) => {
+        KanbanIssuesSchema.findOne({ _id: id }).then((q) => {
+          if (!q) {
+            return resolve({ error: "No issue found" });
+          } else {
+            KanbanIssuesSchema.deleteOne({ _id: id }, (error) => {
+              if (error) {
+                return resolve({ error });
+              } else {
+                return resolve({ data: `Deleted ${id}` });
+              }
+            });
+          }
+        });
       });
-    });
-    res.send(response);
+      res.send(response);
+    } catch (error) {
+      res.send({
+        error,
+        message: "Something went wrong. [DELETE] /api/issues/kanban/:id",
+      });
+    }
   }
 };

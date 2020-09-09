@@ -12,11 +12,7 @@ import JsonPrettier from "components/JsonPrettier";
 import UserSelect from "./UserSelect";
 import dayjs from "dayjs";
 
-type Props = {
-  isActive: boolean;
-};
-
-export default ({ isActive }: Props) => {
+export default () => {
   const { loading, data } = useSelector(selectExercises);
   const dispatch = useDispatch();
 
@@ -30,12 +26,6 @@ export default ({ isActive }: Props) => {
     register({ name: "from" }, { required: true });
     register({ name: "to" }, { required: true });
   }, []);
-
-  useEffect(() => {
-    if (!isActive) {
-      reset();
-    }
-  }, [isActive]);
 
   const columns = [
     {
