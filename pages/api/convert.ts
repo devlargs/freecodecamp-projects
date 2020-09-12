@@ -30,9 +30,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         if (Object.keys(units).includes(tempUnit)) {
           let response = ({ returnNum, returnUnit }) => ({
             initNum: tempNum,
-            initUnit: tempUnit,
+            initUnit: tempUnit.toLowerCase(),
             returnNum: +returnNum.toFixed(5),
-            returnUnit,
+            returnUnit: returnUnit.toLowerCase(),
             string: `${tempNum} ${
               units[tempUnit]
             } converts to ${returnNum.toFixed(5)} ${units[returnUnit]}`,
