@@ -10,7 +10,8 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       mi: "miles",
       km: "kilometer",
     };
-    const { unit } = req.query;
+
+    const { input: unit } = req.query;
     const splitter = `${unit}`.match(/[a-z]+|[^a-z]+/gi);
 
     if (splitter.length !== 2) {
