@@ -18,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const splitter = `${unit}`.match(/[a-z]+|[^a-z]+/gi);
 
     if (splitter.length !== 2) {
-      res.send("invalid unit");
+      res.send({ error: "invalid unit" });
     } else {
       const tempNum = +splitter[0];
       const tempUnit = splitter[1];
@@ -97,10 +97,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               break;
           }
         } else {
-          res.send("invalid unit");
+          res.send({ error: "invalid unit" });
         }
       } else {
-        res.send("invalid number and unit");
+        res.send({ error: "invalid number and unit" });
       }
     }
   }
