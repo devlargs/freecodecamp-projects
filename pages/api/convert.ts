@@ -97,7 +97,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               break;
           }
         } else {
-          res.send({ error: "invalid unit" });
+          res.send("invalid unit");
         }
       } else {
         res.send({ error: "invalid number and unit" });
