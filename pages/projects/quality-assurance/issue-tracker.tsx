@@ -117,6 +117,7 @@ const Content = styled.div`
 
 const Category = styled.div`
   width: 300px;
+  overflow-y: hidden;
   padding-bottom: 10px;
   border-radius: 10px;
   background-color: #1f2e3c;
@@ -138,6 +139,8 @@ const CategoryCount = styled.div`
 `;
 
 const Lists = styled.div`
+  max-height: 75vh;
+  overflow: auto;
   .lists {
     padding: 10px;
     background-color: #2c3f51;
@@ -147,7 +150,6 @@ const Lists = styled.div`
     p {
       font-size: 14px;
       margin-bottom: 0;
-      // padding-left: 5px;
       color: rgba(227, 251, 255, 0.75);
     }
   }
