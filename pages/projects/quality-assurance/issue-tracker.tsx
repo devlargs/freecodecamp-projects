@@ -18,25 +18,35 @@ export default () => {
     { id: 2, name: "fiona" },
   ]);
 
+  console.log(categories);
+
   return (
     <Root>
       <Header></Header>
       <Content>
-        <Category>
-          <CategoryHeader>
-            <CategoryTitle>To Do</CategoryTitle>
-            <CategoryCount>5 cards</CategoryCount>
-          </CategoryHeader>
-          <Lists>
-            <ReactSortable list={state} setList={setState}>
-              {state.map((item) => (
-                <div className="lists" key={item.id}>
-                  <p>{item.name}</p>
-                </div>
-              ))}
-            </ReactSortable>
-          </Lists>
-        </Category>
+        {categories.length ? (
+          <>
+            {categories.map((q: any) => (
+              <Category key={q._id}>
+                <CategoryHeader>
+                  <CategoryTitle>{q.title || "no title"}</CategoryTitle>
+                  <CategoryCount>5 cards</CategoryCount>
+                </CategoryHeader>
+                <Lists>
+                  <ReactSortable list={state} setList={setState}>
+                    {state.map((item) => (
+                      <div className="lists" key={item.id}>
+                        <p>{item.name}</p>
+                      </div>
+                    ))}
+                  </ReactSortable>
+                </Lists>
+              </Category>
+            ))}
+          </>
+        ) : (
+          <p>Add category component</p>
+        )}
       </Content>
     </Root>
   );
@@ -75,10 +85,14 @@ const CategoryHeader = styled.div`
   padding: 10px;
 `;
 
-const CategoryTitle = styled.div`
+const CategoryTitle = styled.p`
   color: white;
   font-size: 14px;
   font-weight: 600;
+  margin-bottom: 0;
+  ::first-letter {
+    text-transform: uppercase;
+  }
 `;
 
 const CategoryCount = styled.div`

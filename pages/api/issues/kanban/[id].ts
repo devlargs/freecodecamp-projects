@@ -3,6 +3,7 @@ import cors from "server/helpers/cors";
 import connect from "server/helpers/connect";
 import useBodyParser from "server/helpers/useBodyParser";
 import KanbanIssuesSchema from "server/models/KanbanIssues";
+import KanbanStatusSchema from "server/models/KanbanStatus";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
@@ -10,6 +11,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   useBodyParser();
   await cors(req, res);
   await connect();
+
+  if (method === "GET") {
+    if (req.query.id === "status") {
+      try {
+        const data = await KanbanStatusSchema.find();
+        res.status(200).json({ data });
+      } catch (error) {
+        res.status(400).json({ success: false, error });
+      }
+    }
+  }
 
   if (method === "PUT") {
     try {

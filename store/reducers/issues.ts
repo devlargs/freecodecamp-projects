@@ -8,7 +8,7 @@ export const loadCategories = createAsyncThunk(
   "issues/loadCategories",
   async (_, thunkAPI) => {
     try {
-      const url = "/api/issues/kanban";
+      const url = "/api/issues/kanban/status";
       const response = await fetch(url);
 
       return response.json();
