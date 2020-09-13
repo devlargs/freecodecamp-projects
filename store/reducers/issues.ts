@@ -18,9 +18,23 @@ export const loadCategories = createAsyncThunk(
   }
 );
 
+export const loadIssueByStatus = createAsyncThunk(
+  "issues/loadIssueByStatus",
+  async (status: string, thunkAPI) => {
+    try {
+      const url = `/api/issues/kanban?status_text=${status}`;
+      const response = await fetch(url);
+      return response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
+
 const issuesSlice = createSlice({
   name: "issues",
   initialState: {
+    lists: {},
     category: {
       data: [],
       loading: false,
@@ -30,7 +44,6 @@ const issuesSlice = createSlice({
   reducers: {},
   extraReducers: {
     [loadCategories.fulfilled as any]: (state, action) => {
-      console.log(action);
       state.category.data = action.payload.data;
       state.category.loading = false;
     },
@@ -40,6 +53,26 @@ const issuesSlice = createSlice({
     },
     [loadCategories.pending as any]: (state) => {
       state.category.loading = true;
+    },
+    [loadIssueByStatus.fulfilled as any]: (state, action) => {
+      state.lists[action.meta.arg] = {
+        ...state.lists[action.meta.arg],
+        loading: false,
+        data: action.payload.data,
+      };
+    },
+    [loadIssueByStatus.rejected as any]: (state, action) => {
+      state.lists[action.meta.arg] = {
+        ...state.lists[action.meta.arg],
+        loading: false,
+        error: action.payload.error,
+      };
+    },
+    [loadIssueByStatus.pending as any]: (state, action) => {
+      state.lists[action.meta.arg] = {
+        ...state.lists[action.meta.arg],
+        loading: true,
+      };
     },
   },
 });
@@ -55,5 +88,18 @@ export const selectCategories = createSelector(
   },
   (state) => state
 );
+
+export const selectIssueByStatus = (id: string) =>
+  createSelector(
+    (state: any) => {
+      const { lists } = state.issues;
+      return {
+        data: lists[id]?.data || [],
+        loading: lists[id]?.loading || false,
+        error: lists[id]?.error || null,
+      };
+    },
+    (state) => state
+  );
 
 export default issuesSlice.reducer;

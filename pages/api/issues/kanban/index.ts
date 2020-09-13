@@ -9,6 +9,7 @@ import RS from "server/helpers/requiredStatus";
 type QueryProps = {
   open?: boolean;
   assigned_to?: string;
+  status_text?: string;
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -18,11 +19,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "GET") {
     const data = await new Promise((resolve) => {
-      const { open, assigned_to } = req.query;
+      const { open, assigned_to, status_text } = req.query as any;
       let obj: QueryProps = {};
 
       if (assigned_to) {
         obj.assigned_to = `${assigned_to}`;
+      }
+
+      if (status_text) {
+        obj.status_text = status_text;
       }
 
       if (open && (open === "true" || open === "false")) {
