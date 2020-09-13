@@ -1,7 +1,23 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import SD from "constants/styleDefaults";
+import { ReactSortable } from "react-sortablejs";
+import { selectCategories, loadCategories } from "store/reducers/issues";
+import { useDispatch, useSelector } from "react-redux";
 
 export default () => {
+  const dispatch = useDispatch();
+  const { data: categories, loading, error } = useSelector(selectCategories);
+
+  useEffect(() => {
+    dispatch(loadCategories());
+  }, [dispatch]);
+
+  const [state, setState] = useState([
+    { id: 1, name: "golfo" },
+    { id: 2, name: "fiona" },
+  ]);
+
   return (
     <Root>
       <Header></Header>
@@ -12,81 +28,13 @@ export default () => {
             <CategoryCount>5 cards</CategoryCount>
           </CategoryHeader>
           <Lists>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-          </Lists>
-        </Category>
-
-        <Category>
-          <CategoryHeader>
-            <CategoryTitle>To Do</CategoryTitle>
-            <CategoryCount>5 cards</CategoryCount>
-          </CategoryHeader>
-          <Lists>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-          </Lists>
-        </Category>
-
-        <Category>
-          <CategoryHeader>
-            <CategoryTitle>To Do</CategoryTitle>
-            <CategoryCount>5 cards</CategoryCount>
-          </CategoryHeader>
-          <Lists>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-          </Lists>
-        </Category>
-
-        <Category>
-          <CategoryHeader>
-            <CategoryTitle>To Do</CategoryTitle>
-            <CategoryCount>5 cards</CategoryCount>
-          </CategoryHeader>
-          <Lists>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
-            <div className="lists">
-              <p>Dance with my father</p>
-            </div>
+            <ReactSortable list={state} setList={setState}>
+              {state.map((item) => (
+                <div className="lists" key={item.id}>
+                  <p>{item.name}</p>
+                </div>
+              ))}
+            </ReactSortable>
           </Lists>
         </Category>
       </Content>

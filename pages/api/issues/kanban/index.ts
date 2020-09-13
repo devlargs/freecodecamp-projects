@@ -34,7 +34,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       KanbanIssuesSchema.find(obj)
-        .populate("assigned_to", { username: 1 })
+        .populate([
+          {
+            path: "assigned_to",
+            select: ["username"],
+          },
+          {
+            path: "status_text",
+            select: { title: 1 },
+          },
+        ])
         .exec((error, data) => {
           if (error) {
             resolve({ error });
