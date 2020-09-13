@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "GET") {
     const units = {
-      L: "liters",
+      l: "liters",
       gal: "gallons",
       lbs: "pounds",
       kg: "kilograms",
@@ -21,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.send({ error: "invalid unit" });
     } else {
       const tempNum = +splitter[0];
-      const tempUnit = splitter[1];
+      const tempUnit = splitter[1].toLowerCase();
       if (
         typeof tempUnit === "string" &&
         typeof tempNum === "number" &&
@@ -35,11 +35,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             returnUnit: returnUnit.toLowerCase(),
             string: `${tempNum} ${
               units[tempUnit]
-            } converts to ${returnNum.toFixed(5)} ${units[returnUnit]}`,
+            } converts to ${returnNum.toFixed(5)} ${
+              units[returnUnit.toLowerCase()]
+            }`,
           });
 
-          switch (tempUnit) {
-            case "L": {
+          switch (tempUnit.toLowerCase()) {
+            case "l": {
               res.send(
                 response({
                   returnNum: tempNum / 3.78541,
