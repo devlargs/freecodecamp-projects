@@ -30,7 +30,7 @@ export default {
     },
     {
       k: "Mile/s",
-      v: "ml",
+      v: "mi",
     },
     {
       k: "Nautical Mile/s",
