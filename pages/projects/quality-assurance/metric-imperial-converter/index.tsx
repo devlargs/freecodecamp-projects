@@ -9,8 +9,10 @@ import {
   faThermometerHalf,
 } from "@fortawesome/free-solid-svg-icons";
 import TabHeader from "components/TabHeader";
-import Length from "./Length";
+
 import Area from "./Area";
+import Length from "./Length";
+import Volume from "./Volume";
 
 const { TabPane } = Tabs;
 
@@ -51,12 +53,7 @@ export default () => {
             }
             key="3"
           >
-            <Alert
-              message="Info"
-              description="Work in progress"
-              type="info"
-              showIcon
-            />
+            <Volume />
           </TabPane>
 
           <TabPane

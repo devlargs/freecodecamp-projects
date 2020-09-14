@@ -75,4 +75,42 @@ export default {
       v: "mi2",
     },
   ],
+  volume: [
+    {
+      k: "Cubic Centimeter(s)",
+      v: "cm3",
+    },
+    {
+      k: "Cubic Metre(s)",
+      v: "m3",
+    },
+    {
+      k: "Litre(s)",
+      v: "l",
+    },
+    {
+      k: "Hectolitre(s)",
+      v: "hl",
+    },
+    {
+      k: "Cubic Inch(s)",
+      v: "in3",
+    },
+    {
+      k: "Cubic Feet",
+      v: "ft3",
+    },
+    {
+      k: "Fluid Ounce(s)",
+      v: "fl-oz",
+    },
+    {
+      k: "Pint(s)",
+      v: "pt",
+    },
+    {
+      k: "Gallon(s)",
+      v: "gal",
+    },
+  ],
 };

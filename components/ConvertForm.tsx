@@ -46,7 +46,7 @@ export default ({ type }: { type: string }) => {
               setAnswer("");
             }}
             placeholder="Select unit"
-            style={{ width: 180 }}
+            style={{ width: 200 }}
           >
             {conversion[type].map((q) => (
               <Option key={q.k} value={q.v}>
@@ -63,7 +63,7 @@ export default ({ type }: { type: string }) => {
               setAnswer("");
               setSecond(e);
             }}
-            style={{ width: 180 }}
+            style={{ width: 200 }}
           >
             {conversion[type].map((q) => (
               <Option key={q.k} value={q.v}>

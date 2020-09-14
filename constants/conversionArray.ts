@@ -83,48 +83,52 @@ const conversion = {
       },
     ],
   },
-  volume: [
-    {
-      m: "1 cu cm [cm3]",
-      i: "0.0610 in3",
-    },
-    {
-      m: "1 cu decimetre [dm3]",
-      i: "0.0353 ft3",
-    },
-    {
-      m: "1 cu metre [m3]",
-      i: "1.3080 yd3",
-    },
-    {
-      m: "1 litre [l]",
-      i: "1.76 pt",
-    },
-    {
-      m: "1 hectolitre [hl]",
-      i: "21.997 gal",
-    },
-    {
-      i: "1 cu inch [in3]",
-      m: "16.387 cm3",
-    },
-    {
-      i: "1 cu foot [ft3]",
-      m: "0.0283 m3",
-    },
-    {
-      i: "1 fluid ounce [fl oz]",
-      m: "28.413 ml",
-    },
-    {
-      i: "1 pint [pt]",
-      m: "0.5683 l",
-    },
-    {
-      i: "1 gallon [gal]",
-      m: "4.5461 l",
-    },
-  ],
+  volume: {
+    first: [
+      {
+        m: "1 cu cm [cm3]",
+        i: "0.0610 in3",
+      },
+      {
+        m: "1 cu decimetre [dm3]",
+        i: "0.0353 ft3",
+      },
+      {
+        m: "1 cu metre [m3]",
+        i: "1.3080 yd3",
+      },
+      {
+        m: "1 litre [l]",
+        i: "1.76 pt",
+      },
+      {
+        m: "1 hectolitre [hl]",
+        i: "21.997 gal",
+      },
+    ],
+    second: [
+      {
+        i: "1 cu inch [in3]",
+        m: "16.387 cm3",
+      },
+      {
+        i: "1 cu foot [ft3]",
+        m: "0.0283 m3",
+      },
+      {
+        i: "1 fluid ounce [fl oz]",
+        m: "28.413 ml",
+      },
+      {
+        i: "1 pint [pt]",
+        m: "0.5683 l",
+      },
+      {
+        i: "1 gallon [gal]",
+        m: "4.5461 l",
+      },
+    ],
+  },
 };
 
 export default conversion;
