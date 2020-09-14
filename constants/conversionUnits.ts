@@ -139,4 +139,22 @@ export default {
       v: "s",
     },
   ],
+  temperature: [
+    {
+      k: "Celcius",
+      v: "C",
+    },
+    {
+      k: "Fahrenheit",
+      v: "F",
+    },
+    {
+      k: "Kelvin",
+      v: "K",
+    },
+    {
+      k: "Rankine Scale",
+      v: "R",
+    },
+  ],
 };

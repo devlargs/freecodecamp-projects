@@ -13,6 +13,7 @@ import TabHeader from "components/TabHeader";
 import Area from "./Area";
 import Length from "./Length";
 import Mass from "./Mass";
+import Temperature from "./Temperature";
 import Volume from "./Volume";
 
 const { TabPane } = Tabs;
@@ -76,12 +77,7 @@ export default () => {
             }
             key="5"
           >
-            <Alert
-              message="Info"
-              description="Work in progress"
-              type="info"
-              showIcon
-            />
+            <Temperature />
           </TabPane>
         </Tabs>
       </Root>
