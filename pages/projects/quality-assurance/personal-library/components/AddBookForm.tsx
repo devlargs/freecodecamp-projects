@@ -30,7 +30,7 @@ export default () => {
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
-        <Button htmlType="submit" type="primary" block>
+        <Button htmlType="submit" type="primary" block loading={loading}>
           Add
         </Button>
       </form>
@@ -39,6 +39,6 @@ export default () => {
 };
 
 const Root = styled.div`
-  background-color: white;
+  background-color: azure;
   padding: 10px;
 `;

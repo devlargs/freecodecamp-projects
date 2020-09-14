@@ -63,6 +63,7 @@ export default () => {
             type="default"
             style={{ color: "darkgreen", marginLeft: 5 }}
             onClick={() => setAddCommentForm((q) => !q)}
+            loading={loading}
           >
             {" "}
             <FontAwesomeIcon
