@@ -1,16 +1,45 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectComments, deleteBookById } from "store/reducers/books";
-import { List, Spin, Alert, Popconfirm } from "antd";
+import {
+  selectComments,
+  deleteBookById,
+  addComment,
+} from "store/reducers/books";
+import { List, Spin, Alert, Popconfirm, Form, Input, Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClock,
+  faPlus,
+  faTrash,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
 
 export default () => {
   const dispatch = useDispatch();
   const { data, loading, error, currentBook } = useSelector(selectComments);
+  const [addCommentForm, setAddCommentForm] = useState(false);
+  const [comment, setComment] = useState("");
 
-  console.log(data.comments);
+  //   console.log(data);
+
+  useEffect(() => {
+    if (!loading) {
+      setComment("");
+      setAddCommentForm(false);
+    }
+  }, [loading]);
+
+  const submit = (e) => {
+    e.preventDefault();
+    dispatch(
+      addComment({
+        id: currentBook,
+        text: comment,
+      })
+    );
+  };
 
   if (error) {
     return <Alert message="Failed to fetch book lists" type="error" showIcon />;
@@ -19,23 +48,48 @@ export default () => {
   return (
     <>
       {currentBook && (
-        <Card>
-          <h4>
-            {data.title} |
-            <Popconfirm
-              title="Are you sure delete this book?"
-              onConfirm={() => dispatch(deleteBookById(currentBook))}
-              okText="Yes"
-              cancelText="No"
-            >
-              <a style={{ color: "#E74C3C" }}>
-                {" "}
-                <FontAwesomeIcon icon={faTrash} /> Remove book
-              </a>
-            </Popconfirm>
-          </h4>
-        </Card>
+        <div>
+          <h3>{data.title}</h3>
+          <Popconfirm
+            title="Are you sure delete this book?"
+            onConfirm={() => dispatch(deleteBookById(currentBook))}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="default" style={{ color: "darkred" }}>
+              <FontAwesomeIcon icon={faTrash} />
+              &nbsp;Remove book
+            </Button>
+          </Popconfirm>
+          <Button
+            type="default"
+            style={{ color: "darkgreen", marginLeft: 5 }}
+            onClick={() => setAddCommentForm((q) => !q)}
+          >
+            {" "}
+            <FontAwesomeIcon
+              icon={!addCommentForm ? faPlus : faTimes}
+            /> &nbsp; {!addCommentForm ? "Add Comment" : "Cancel"}
+          </Button>
+          {addCommentForm && (
+            <AddBookForm>
+              <form onSubmit={submit}>
+                <input
+                  type="text"
+                  placeholder="Write a comment.."
+                  required
+                  onChange={(e) => setComment(e.target.value)}
+                  value={comment}
+                />
+                <Button block type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </form>
+            </AddBookForm>
+          )}
+        </div>
       )}
+
       <Root>
         {currentBook ? (
           <Spin spinning={loading}>
@@ -68,8 +122,13 @@ export default () => {
 
 const Root = styled.div`
   background-color: white;
-  max-height: 70vh;
+  max-height: 60vh;
   overflow-y: auto;
+  margin-top: 10px;
 `;
 
-const Card = styled.div``;
+const AddBookForm = styled.div`
+  margin: 10px 0 0 0;
+  background-color: white;
+  padding: 10px;
+`;

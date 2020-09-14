@@ -46,6 +46,27 @@ export const deleteBookById = createAsyncThunk(
   }
 );
 
+export const addComment = createAsyncThunk(
+  "books/addComment",
+  async ({ id, text }: { id: string; text: string }, thunkAPI) => {
+    try {
+      const url = `/api/books/${id}`;
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          text,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
+
 const bookSlice = createSlice({
   name: "books",
   initialState: {
@@ -73,6 +94,32 @@ const bookSlice = createSlice({
     [loadBooks.rejected as any]: (state: any, action) => {
       state.books.error = action.payload.error;
       state.books.loading = false;
+    },
+    [addComment.pending as any]: (state) => {
+      state.comments.loading = true;
+    },
+    [addComment.fulfilled as any]: (state: any, action) => {
+      state.comments.data.comments = [
+        ...state.comments.data.comments,
+        action.payload.data,
+      ];
+      const count = state.comments.data.comments.length;
+      state.comments.data.commentcount = count;
+      state.comments.loading = false;
+      state.books.data = state.books.data.map((q) => {
+        if (q._id === action.meta.arg.id) {
+          console.log(action, q);
+          return {
+            ...q,
+            commentcount: count,
+          };
+        }
+        return q;
+      });
+    },
+    [addComment.rejected as any]: (state: any, action) => {
+      state.comments.error = action.payload.error;
+      state.comments.loading = false;
     },
     [loadBookById.pending as any]: (state) => {
       state.comments.loading = true;
