@@ -16,7 +16,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         BooksSchema.find()
           .populate("comments")
           .exec((error, data) => {
-            console.log(data);
             if (error) {
               resolve({ error });
             } else {

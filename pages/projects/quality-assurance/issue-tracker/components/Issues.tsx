@@ -8,7 +8,6 @@ import { Spin } from "antd";
 export default ({ id }: { id: string }) => {
   const dispatch = useDispatch();
   const { loading, data, error } = useSelector(selectIssueByStatus(id));
-  console.log(data);
 
   useEffect(() => {
     dispatch(loadIssueByStatus(id));
@@ -17,11 +16,7 @@ export default ({ id }: { id: string }) => {
   return (
     <Spin spinning={loading}>
       <Lists>
-        <ReactSortable
-          list={[...data]}
-          group="shared"
-          setList={(e) => console.log(e)}
-        >
+        <ReactSortable list={[...data]} group="shared" setList={() => {}}>
           {[...data].map((item) => (
             <div className="lists" key={item._id}>
               <p>{item.issue_title}</p>

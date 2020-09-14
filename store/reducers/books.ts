@@ -17,9 +17,28 @@ export const loadBooks = createAsyncThunk(
   }
 );
 
+export const loadBookById = createAsyncThunk(
+  "books/loadBookById",
+  async (id: { id: string }, thunkAPI) => {
+    try {
+      const url = `/api/books/${id}`;
+      const response = await fetch(url);
+      return response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
+
 const bookSlice = createSlice({
   name: "books",
   initialState: {
+    comments: {
+      data: [],
+      loading: false,
+      error: null,
+    },
+    currentBook: null,
     books: {
       data: [],
       loading: false,
@@ -38,6 +57,18 @@ const bookSlice = createSlice({
     [loadBooks.rejected as any]: (state: any, action) => {
       state.books.error = action.payload.error;
       state.books.loading = false;
+    },
+    [loadBookById.pending as any]: (state) => {
+      state.comments.loading = true;
+    },
+    [loadBookById.fulfilled as any]: (state: any, action) => {
+      state.comments.data = action.payload.data[0].comments;
+      state.currentBook = action.meta.arg;
+      state.comments.loading = false;
+    },
+    [loadBookById.rejected as any]: (state: any, action) => {
+      state.comments.error = action.payload.error;
+      state.comments.loading = false;
     },
   },
 });
