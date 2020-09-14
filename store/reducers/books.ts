@@ -1,3 +1,4 @@
+import { message } from "antd";
 import {
   createSlice,
   createAsyncThunk,
@@ -23,6 +24,21 @@ export const loadBookById = createAsyncThunk(
     try {
       const url = `/api/books/${id}`;
       const response = await fetch(url);
+      return response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
+
+export const deleteBookById = createAsyncThunk(
+  "books/deleteBookById",
+  async (id: { id: string }, thunkAPI) => {
+    try {
+      const url = `/api/books/${id}`;
+      const response = await fetch(url, {
+        method: "DELETE",
+      });
       return response.json();
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });
@@ -69,6 +85,23 @@ const bookSlice = createSlice({
     [loadBookById.rejected as any]: (state: any, action) => {
       state.comments.error = action.payload.error;
       state.comments.loading = false;
+    },
+    [deleteBookById.pending as any]: (state) => {
+      state.comments.loading = true;
+    },
+    [deleteBookById.fulfilled as any]: (state: any, action) => {
+      state.comments.data = [];
+      state.currentBook = null;
+      state.comments.loading = false;
+      state.books.data = state.books.data.filter(
+        (q) => action.meta.arg !== q._id
+      );
+      message.success("Succesfully deleted book");
+    },
+    [deleteBookById.rejected as any]: (state: any, action) => {
+      state.comments.error = action.payload.error;
+      state.comments.loading = false;
+      message.error("Delete book failed");
     },
   },
 });

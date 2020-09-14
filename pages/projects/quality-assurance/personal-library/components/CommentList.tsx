@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectComments, loadBooks, loadBookById } from "store/reducers/books";
+import { selectComments, deleteBookById } from "store/reducers/books";
 import { List, Spin, Alert, Popconfirm } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faTrash } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
 
 export default () => {
@@ -24,7 +24,7 @@ export default () => {
             {data.title} |
             <Popconfirm
               title="Are you sure delete this book?"
-              onConfirm={() => console.log("asd")}
+              onConfirm={() => dispatch(deleteBookById(currentBook))}
               okText="Yes"
               cancelText="No"
             >
