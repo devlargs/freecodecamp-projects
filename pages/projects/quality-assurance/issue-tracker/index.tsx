@@ -4,7 +4,7 @@ import SD from "constants/styleDefaults";
 
 import { selectCategories, loadCategories } from "store/reducers/issues";
 import { useDispatch, useSelector } from "react-redux";
-import { Spin } from "antd";
+import { notification, Spin } from "antd";
 import Issues from "./components/Issues";
 
 export default () => {
@@ -14,12 +14,26 @@ export default () => {
   );
 
   useEffect(() => {
+    notification.info({
+      message: `WIP`,
+      description:
+        "Hi there! This screen is still in progress but the API for this is already functional.",
+      placement: "bottomRight",
+    });
     dispatch(loadCategories());
   }, [dispatch]);
 
+  const addCategoryComponent = "<AddCategoryComponent>";
+
   return (
     <Root>
-      <Header></Header>
+      <Header>
+        <div></div>
+        <div>
+          <h1>Issue Tracker (WIP)</h1>
+        </div>
+        <div></div>
+      </Header>
       <Spin spinning={categoryLoading}>
         <Content>
           {categories.length ? (
@@ -35,7 +49,7 @@ export default () => {
               ))}
             </>
           ) : (
-            <p>Add category component</p>
+            <p style={{ color: "white" }}>{addCategoryComponent}</p>
           )}
         </Content>
       </Spin>
@@ -96,4 +110,14 @@ const Header = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   height: 49px;
+  div:nth-child(2) {
+    display: grid;
+    place-items: center;
+    h1 {
+      text-align: center;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+  }
 `;

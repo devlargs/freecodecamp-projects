@@ -15,21 +15,21 @@ export default ({ id }: { id: string }) => {
   }, []);
 
   return (
-    // <Spin spinning={loading}>
-    <Lists>
-      <ReactSortable
-        list={[...data]}
-        group="shared"
-        setList={(e) => console.log(e)}
-      >
-        {[...data].map((item) => (
-          <div className="lists" key={item._id}>
-            <p>{item.issue_title}</p>
-          </div>
-        ))}
-      </ReactSortable>
-    </Lists>
-    // </Spin>
+    <Spin spinning={loading}>
+      <Lists>
+        <ReactSortable
+          list={[...data]}
+          group="shared"
+          setList={(e) => console.log(e)}
+        >
+          {[...data].map((item) => (
+            <div className="lists" key={item._id}>
+              <p>{item.issue_title}</p>
+            </div>
+          ))}
+        </ReactSortable>
+      </Lists>
+    </Spin>
   );
 };
 const Lists = styled.div`
