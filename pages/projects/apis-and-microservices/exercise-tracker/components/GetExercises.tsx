@@ -1,16 +1,11 @@
 import { Empty, Row, Col, Form, Input, Table, DatePicker } from "antd";
 import styled from "styled-components";
-import {
-  loadExercises,
-  selectExercises,
-  resetExercises,
-} from "store/reducers/exercise";
-import { useForm } from "react-hook-form";
+import { loadExercises, selectExercises } from "store/reducers/exercise";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import JsonPrettier from "components/JsonPrettier";
 import UserSelect from "./UserSelect";
-import dayjs from "dayjs";
 
 export default () => {
   const { loading, data } = useSelector(selectExercises);
