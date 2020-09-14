@@ -129,7 +129,6 @@ const bookSlice = createSlice({
       state.comments.loading = false;
       state.books.data = state.books.data.map((q) => {
         if (q._id === action.meta.arg.id) {
-          console.log(action, q);
           return {
             ...q,
             commentcount: count,
@@ -175,7 +174,6 @@ const bookSlice = createSlice({
       state.books.loading = true;
     },
     [addBook.fulfilled as any]: (state: any, action) => {
-      console.log(action.payload);
       state.books.data = [...state.books.data, action.payload];
       state.books.loading = false;
       message.success("Book created successfully");
