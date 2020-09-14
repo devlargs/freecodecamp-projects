@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import exerciseReducer from "./reducers/exercise";
-import issuesReducer from "./reducers/issues";
+import books from "./reducers/books";
+import exercise from "./reducers/exercise";
+import issues from "./reducers/issues";
 
 export default configureStore({
   reducer: {
-    exercise: exerciseReducer,
-    issues: issuesReducer,
+    books,
+    exercise,
+    issues,
   },
   devTools: true,
 });

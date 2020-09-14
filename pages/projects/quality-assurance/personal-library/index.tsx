@@ -1,28 +1,40 @@
 import styled from "styled-components";
 import SD from "constants/styleDefaults";
 import BookList from "./components/BookList";
+import SEO from "components/SEO";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook } from "@fortawesome/free-solid-svg-icons";
 
 export default () => {
   return (
     <Root>
-      <AddBookStyle>1</AddBookStyle>
-      <BookListStyle>
-        <BookList />
-      </BookListStyle>
-      <BookCommentsStyle>3</BookCommentsStyle>
+      <SEO title="Personal Library" />
+      <h1 style={{ textAlign: "center", margin: 0, paddingTop: 10 }}>
+        Personal Library
+      </h1>
+      <Content>
+        <AddBookStyle>1</AddBookStyle>
+        <BookListStyle>
+          <h3>
+            <FontAwesomeIcon icon={faBook} /> Book List
+          </h3>
+          <BookList />
+        </BookListStyle>
+        <BookCommentsStyle>3</BookCommentsStyle>
+      </Content>
     </Root>
   );
 };
 
 const Root = styled.div`
   background-color: ${SD.colors.personalLibrary};
-  // height: calc(100vh - ${SD.sizes.header}px);
+  height: calc(100vh - ${SD.sizes.header}px);
+  overflow: hidden;
+`;
+
+const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
-  // div {
-  //   padding: 1em;
-  //   border: 1px solid black;
-  // }
 `;
 
 const AddBookStyle = styled.div`
@@ -37,11 +49,16 @@ const BookListStyle = styled.div`
   padding: 1em;
   flex: 2;
   background-color: lightgray;
+  max-height: 80vh;
+  h3 {
+    color: black;
+    font-weight: 400;
+  }
 `;
 
 const BookCommentsStyle = styled.div`
   margin: 10px;
   padding: 1em;
   flex: 2;
-  background-color: azure;
+  // background-color: azure;
 `;
