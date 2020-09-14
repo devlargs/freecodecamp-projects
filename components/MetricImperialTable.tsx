@@ -1,5 +1,6 @@
 import { Table } from "antd";
 import conversion from "constants/conversionArray";
+import styled from "styled-components";
 
 export default ({ field }: { field: string }) => (
   <>
@@ -7,7 +8,7 @@ export default ({ field }: { field: string }) => (
       <>
         {Object.keys(conversion[field]).map((q) => {
           return (
-            <Table
+            <StyledTable
               key={q}
               columns={
                 q === "first"
@@ -34,3 +35,10 @@ export default ({ field }: { field: string }) => (
     )}
   </>
 );
+
+const StyledTable = styled(Table)`
+  thead[class*="ant-table-thead"] th {
+    background-color: #041429 !important;
+    color: white;
+  }
+`;

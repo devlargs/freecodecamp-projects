@@ -45,15 +45,19 @@ export default ({ type }: { type: string }) => {
               setFirst(e);
               setAnswer("");
             }}
+            placeholder="Select unit"
             style={{ width: 180 }}
           >
             {conversion[type].map((q) => (
-              <Option value={q.v}>{q.k}</Option>
+              <Option key={q.k} value={q.v}>
+                {q.k}
+              </Option>
             ))}
           </Select>
         </Form.Item>
         <Form.Item>
           <Select
+            placeholder="Select unit"
             value={second}
             onChange={(e) => {
               setAnswer("");
@@ -62,7 +66,9 @@ export default ({ type }: { type: string }) => {
             style={{ width: 180 }}
           >
             {conversion[type].map((q) => (
-              <Option value={q.v}>{q.k}</Option>
+              <Option key={q.k} value={q.v}>
+                {q.k}
+              </Option>
             ))}
           </Select>
         </Form.Item>
@@ -88,6 +94,6 @@ export default ({ type }: { type: string }) => {
 };
 
 const Root = styled.div`
-  background-color: #e7d7c1;
+  background-color: #041429;
   padding: 10px 10px 0 10px;
 `;
