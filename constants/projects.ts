@@ -34,7 +34,7 @@ export default [
     list: [
       // "Metric Imperial Converter",
       "Issue Tracker",
-      // "Personal Library",
+      "Personal Library",
       // "Soduku Solver",
       // "American British Translator",
     ],
