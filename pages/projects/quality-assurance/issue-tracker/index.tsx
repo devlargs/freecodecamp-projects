@@ -68,8 +68,9 @@ const Category = styled.div`
   width: 300px;
   overflow-y: hidden;
   padding-bottom: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #1f2e3c;
+  height: 100%;
 `;
 
 const CategoryHeader = styled.div`
