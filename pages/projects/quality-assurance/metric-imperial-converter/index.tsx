@@ -12,6 +12,7 @@ import TabHeader from "components/TabHeader";
 
 import Area from "./Area";
 import Length from "./Length";
+import Mass from "./Mass";
 import Volume from "./Volume";
 
 const { TabPane } = Tabs;
@@ -64,12 +65,7 @@ export default () => {
             }
             key="4"
           >
-            <Alert
-              message="Info"
-              description="Work in progress"
-              type="info"
-              showIcon
-            />
+            <Mass />
           </TabPane>
 
           <TabPane

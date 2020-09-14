@@ -17,7 +17,11 @@ export default ({ type }: { type: string }) => {
       const converted = convert(+num)
         .from(first)
         .to(second);
-      setAnswer(`${num} ${first} is equivalent to ${converted} ${second}`);
+      setAnswer(
+        `${num} ${
+          convert().describe(first).plural
+        } is equivalent to ${converted} ${convert().describe(second).plural}`
+      );
     } catch (ex) {
       setAnswer(`Conversion of "${first}" or "${second}" not yet supported`);
     }
@@ -36,6 +40,7 @@ export default ({ type }: { type: string }) => {
               setNum(e.target.value);
               setAnswer("");
             }}
+            style={{ marginBottom: 10 }}
           />
         </Form.Item>
         <Form.Item>
@@ -46,7 +51,7 @@ export default ({ type }: { type: string }) => {
               setAnswer("");
             }}
             placeholder="Select unit"
-            style={{ width: 200 }}
+            style={{ width: 200, marginBottom: 10 }}
           >
             {conversion[type].map((q) => (
               <Option key={q.k} value={q.v}>
@@ -63,7 +68,7 @@ export default ({ type }: { type: string }) => {
               setAnswer("");
               setSecond(e);
             }}
-            style={{ width: 200 }}
+            style={{ width: 200, marginBottom: 10 }}
           >
             {conversion[type].map((q) => (
               <Option key={q.k} value={q.v}>
@@ -86,7 +91,6 @@ export default ({ type }: { type: string }) => {
             type={answer.includes("not yet") ? "error" : "success"}
             showIcon
           />
-          <br />
         </>
       )}
     </Root>
@@ -95,5 +99,5 @@ export default ({ type }: { type: string }) => {
 
 const Root = styled.div`
   background-color: #041429;
-  padding: 10px 10px 0 10px;
+  padding: 10px;
 `;

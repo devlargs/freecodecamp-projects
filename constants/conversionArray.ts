@@ -129,6 +129,40 @@ const conversion = {
       },
     ],
   },
+  mass: {
+    first: [
+      {
+        m: "1 milligram [mg]",
+        i: "0.0154 grain",
+      },
+      {
+        m: "1 gram [g]",
+        i: "0.0353 oz",
+      },
+      {
+        m: "1 kilogram [kg]",
+        i: "2.2046 lb",
+      },
+      {
+        m: "1 tonne [t]",
+        i: "0.9842 ton",
+      },
+    ],
+    second: [
+      {
+        i: "1 ounce [oz]",
+        m: "28.35 g",
+      },
+      {
+        i: "1 pound [lb]",
+        m: "0.4536 kg",
+      },
+      {
+        i: "1 stone",
+        m: "6.3503 kg",
+      },
+    ],
+  },
 };
 
 export default conversion;

@@ -113,4 +113,30 @@ export default {
       v: "gal",
     },
   ],
+  mass: [
+    {
+      k: "Milligram(s)",
+      v: "mg",
+    },
+    {
+      k: "Gram(s)",
+      v: "g",
+    },
+    {
+      k: "Tonne(s)",
+      v: "t",
+    },
+    {
+      k: "Ounce(s)",
+      v: "oz",
+    },
+    {
+      k: "Pound(s)",
+      v: "lb",
+    },
+    {
+      k: "Stone(s)",
+      v: "s",
+    },
+  ],
 };
