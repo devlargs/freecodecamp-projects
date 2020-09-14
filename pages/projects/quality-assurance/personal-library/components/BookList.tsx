@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectBooks, loadBooks, loadBookById } from "store/reducers/books";
 import { List, Spin, Alert } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from "@fortawesome/free-solid-svg-icons";
+import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 
 export default () => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default () => {
                 }
               />
               <div style={{ height: 8 }} />
-              <FontAwesomeIcon icon={faComments} /> {item?.commentcount || 0}{" "}
+              <FontAwesomeIcon icon={faCommentDots} /> {item?.commentcount || 0}{" "}
               {item?.commentcount > 1 ? "comments" : "comment"}
             </List.Item>
           )}
@@ -52,6 +52,6 @@ const Root = styled.div`
 const StyledList = styled(List)`
   cursor: pointer;
   .ant-list-item:hover {
-    background-color: lightblue;
+    background-color: #e6f7ff;
   }
 `;

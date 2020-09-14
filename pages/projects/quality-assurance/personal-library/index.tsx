@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import SD from "constants/styleDefaults";
 import BookList from "./components/BookList";
+import CommentList from "./components/CommentList";
 import SEO from "components/SEO";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faComments } from "@fortawesome/free-solid-svg-icons";
 
 export default () => {
   return (
@@ -20,7 +21,12 @@ export default () => {
           </h3>
           <BookList />
         </BookListStyle>
-        <BookCommentsStyle>3</BookCommentsStyle>
+        <BookCommentsStyle>
+          <h3>
+            <FontAwesomeIcon icon={faComments} /> Comment List
+          </h3>
+          <CommentList />
+        </BookCommentsStyle>
       </Content>
     </Root>
   );
@@ -40,7 +46,7 @@ const Content = styled.div`
 const AddBookStyle = styled.div`
   flex: 1;
   padding: 1em;
-  background-color: red;
+  background-color: ${SD.colors.personalLibraryGrids};
   margin: 10px;
 `;
 
@@ -48,7 +54,7 @@ const BookListStyle = styled.div`
   margin: 10px;
   padding: 1em;
   flex: 2;
-  background-color: lightgray;
+  background-color: ${SD.colors.personalLibraryGrids};
   max-height: 80vh;
   h3 {
     color: black;
@@ -60,5 +66,9 @@ const BookCommentsStyle = styled.div`
   margin: 10px;
   padding: 1em;
   flex: 2;
-  // background-color: azure;
+  background-color: ${SD.colors.personalLibraryGrids};
+  h3 {
+    color: black;
+    font-weight: 400;
+  }
 `;

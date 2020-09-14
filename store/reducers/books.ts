@@ -62,7 +62,7 @@ const bookSlice = createSlice({
       state.comments.loading = true;
     },
     [loadBookById.fulfilled as any]: (state: any, action) => {
-      state.comments.data = action.payload.data[0].comments;
+      state.comments.data = action.payload.data[0];
       state.currentBook = action.meta.arg;
       state.comments.loading = false;
     },
@@ -80,6 +80,19 @@ export const selectBooks = createSelector(
       data,
       loading,
       error,
+    };
+  },
+  (state) => state
+);
+
+export const selectComments = createSelector(
+  (state: any) => {
+    const { data, loading, error } = state.books.comments;
+    return {
+      data,
+      loading,
+      error,
+      currentBook: state.books.currentBook,
     };
   },
   (state) => state
