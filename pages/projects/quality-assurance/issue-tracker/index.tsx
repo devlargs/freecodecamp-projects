@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import SD from "constants/styleDefaults";
-
+import SEO from "components/SEO";
 import { selectCategories, loadCategories } from "store/reducers/issues";
 import { useDispatch, useSelector } from "react-redux";
 import { notification, Spin } from "antd";
@@ -27,6 +27,7 @@ export default () => {
 
   return (
     <Root>
+      <SEO title="Issue Tracker" />
       <Header>
         <div></div>
         <div>
