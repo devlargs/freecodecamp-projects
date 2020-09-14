@@ -32,7 +32,7 @@ export default [
   {
     name: "Quality Assurance",
     list: [
-      // "Metric Imperial Converter",
+      "Metric Imperial Converter",
       "Issue Tracker",
       "Personal Library",
       // "Soduku Solver",
