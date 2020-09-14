@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import meta from "constants/meta";
 import SEO from "components/SEO";
 
 export default () => {
