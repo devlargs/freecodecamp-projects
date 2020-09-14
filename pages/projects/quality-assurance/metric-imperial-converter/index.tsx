@@ -1,7 +1,6 @@
 import { Alert, Tabs } from "antd";
 import SEO from "components/SEO";
 import styled from "styled-components";
-import Length from "./Length";
 import {
   faBalanceScale,
   faCircle,
@@ -10,6 +9,8 @@ import {
   faThermometerHalf,
 } from "@fortawesome/free-solid-svg-icons";
 import TabHeader from "components/TabHeader";
+import Length from "./Length";
+import Area from "./Area";
 
 const { TabPane } = Tabs;
 
@@ -40,12 +41,7 @@ export default () => {
             }
             key="2"
           >
-            <Alert
-              message="Info"
-              description="Work in progress"
-              type="info"
-              showIcon
-            />
+            <Area />
           </TabPane>
           <TabPane
             tab={

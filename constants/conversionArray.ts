@@ -41,44 +41,48 @@ const conversion = {
       },
     ],
   },
-  area: [
-    {
-      m: "1 sq cm [cm2]",
-      i: "0.1550 in2",
-    },
-    {
-      m: "1 sq m [m2]",
-      i: "1.1960 yd2",
-    },
-    {
-      m: "1 hectare [ha]",
-      i: "2.4711 acres",
-    },
-    {
-      m: "1 sq km [km2]",
-      i: "0.3861 mile2",
-    },
-    {
-      i: "1 sq inch [in2]",
-      m: "6.4516 cm2",
-    },
-    {
-      i: "1 sq foot [sq ft]",
-      m: "0.0929 m2",
-    },
-    {
-      i: "1 sq yd [yd2]",
-      m: "0.8361 m2",
-    },
-    {
-      i: "1 acre",
-      m: "4046.9 m2",
-    },
-    {
-      i: "1 sq mile [mile2]",
-      m: "2.59 km2",
-    },
-  ],
+  area: {
+    first: [
+      {
+        m: "1 sq cm [cm2]",
+        i: "0.1550 in2",
+      },
+      {
+        m: "1 sq m [m2]",
+        i: "1.1960 yd2",
+      },
+      {
+        m: "1 hectare [ha]",
+        i: "2.4711 acres",
+      },
+      {
+        m: "1 sq km [km2]",
+        i: "0.3861 mile2",
+      },
+    ],
+    second: [
+      {
+        i: "1 sq inch [in2]",
+        m: "6.4516 cm2",
+      },
+      {
+        i: "1 sq foot [sq ft]",
+        m: "0.0929 m2",
+      },
+      {
+        i: "1 sq yd [yd2]",
+        m: "0.8361 m2",
+      },
+      {
+        i: "1 acre",
+        m: "4046.9 m2",
+      },
+      {
+        i: "1 sq mile [mile2]",
+        m: "2.59 km2",
+      },
+    ],
+  },
   volume: [
     {
       m: "1 cu cm [cm3]",
