@@ -81,7 +81,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               if (error) {
                 return resolve({ error });
               } else {
-                return resolve({ data: `Deleted ${id}` });
+                CommentsSchema.deleteMany(
+                  {
+                    book_id: id,
+                  },
+                  (err) => {
+                    if (err) {
+                      return resolve({ error: err });
+                    } else {
+                      return resolve({ data: `Deleted ${id}` });
+                    }
+                  }
+                );
               }
             });
           }
