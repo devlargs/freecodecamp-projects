@@ -22,8 +22,6 @@ export default () => {
   const [addCommentForm, setAddCommentForm] = useState(false);
   const [comment, setComment] = useState("");
 
-  //   console.log(data);
-
   useEffect(() => {
     if (!loading) {
       setComment("");
@@ -110,7 +108,7 @@ export default () => {
         ) : (
           <Alert
             message="Info"
-            description="Please select a book to show its comments"
+            description="Please select a book"
             type="info"
             showIcon
           />

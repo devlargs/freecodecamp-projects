@@ -1,10 +1,15 @@
 import styled from "styled-components";
 import SD from "constants/styleDefaults";
-import BookList from "./components/BookList";
-import CommentList from "./components/CommentList";
 import SEO from "components/SEO";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faComments } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBook,
+  faComments,
+  faPlusSquare,
+} from "@fortawesome/free-solid-svg-icons";
+import BookList from "./components/BookList";
+import CommentList from "./components/CommentList";
+import AddBookForm from "./components/AddBookForm";
 
 export default () => {
   return (
@@ -14,7 +19,12 @@ export default () => {
         Personal Library
       </h1>
       <Content>
-        <AddBookStyle>1</AddBookStyle>
+        <AddBookStyle>
+          <h3>
+            <FontAwesomeIcon icon={faPlusSquare} /> Add Book
+          </h3>
+          <AddBookForm />
+        </AddBookStyle>
         <BookListStyle>
           <h3>
             <FontAwesomeIcon icon={faBook} /> Book List
@@ -45,6 +55,7 @@ const Content = styled.div`
 
 const AddBookStyle = styled.div`
   flex: 1;
+  height: 100%;
   padding: 1em;
   background-color: ${SD.colors.personalLibraryGrids};
   margin: 10px;
@@ -53,6 +64,7 @@ const AddBookStyle = styled.div`
 const BookListStyle = styled.div`
   margin: 10px;
   padding: 1em;
+  height: 100%;
   flex: 2;
   background-color: ${SD.colors.personalLibraryGrids};
   max-height: 80vh;
@@ -66,6 +78,7 @@ const BookCommentsStyle = styled.div`
   margin: 10px;
   padding: 1em;
   flex: 2;
+  height: 100%;
   background-color: ${SD.colors.personalLibraryGrids};
   h3 {
     color: black;

@@ -67,6 +67,27 @@ export const addComment = createAsyncThunk(
   }
 );
 
+export const addBook = createAsyncThunk(
+  "books/addBook",
+  async (title: string, thunkAPI) => {
+    try {
+      const url = `/api/books`;
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
+
 const bookSlice = createSlice({
   name: "books",
   initialState: {
@@ -149,6 +170,20 @@ const bookSlice = createSlice({
       state.comments.error = action.payload.error;
       state.comments.loading = false;
       message.error("Delete book failed");
+    },
+    [addBook.pending as any]: (state) => {
+      state.books.loading = true;
+    },
+    [addBook.fulfilled as any]: (state: any, action) => {
+      console.log(action.payload);
+      state.books.data = [...state.books.data, action.payload];
+      state.books.loading = false;
+      message.success("Book created successfully");
+    },
+    [addBook.rejected as any]: (state: any, action) => {
+      state.books.error = action.payload.error;
+      state.books.loading = false;
+      message.error("Add book failed");
     },
   },
 });

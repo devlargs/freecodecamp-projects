@@ -20,25 +20,35 @@ export default () => {
 
   return (
     <Root>
-      <Spin spinning={loading}>
-        <StyledList
-          bordered
-          dataSource={data}
-          renderItem={(item: any) => (
-            <List.Item onClick={() => dispatch(loadBookById(item._id))}>
-              <List.Item.Meta
-                title={item.title}
-                description={
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                }
-              />
-              <div style={{ height: 8 }} />
-              <FontAwesomeIcon icon={faCommentDots} /> {item?.commentcount || 0}{" "}
-              {item?.commentcount > 1 ? "comments" : "comment"}
-            </List.Item>
-          )}
+      {data.length ? (
+        <Spin spinning={loading}>
+          <StyledList
+            bordered
+            dataSource={data}
+            renderItem={(item: any) => (
+              <List.Item onClick={() => dispatch(loadBookById(item._id))}>
+                <List.Item.Meta
+                  title={item.title}
+                  description={
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+                  }
+                />
+                <div style={{ height: 8 }} />
+                <FontAwesomeIcon icon={faCommentDots} />{" "}
+                {item?.commentcount || 0}{" "}
+                {item?.commentcount > 1 ? "comments" : "comment"}
+              </List.Item>
+            )}
+          />
+        </Spin>
+      ) : (
+        <Alert
+          message="No Book Found"
+          description="Please add a book"
+          type="info"
+          showIcon
         />
-      </Spin>
+      )}
     </Root>
   );
 };
