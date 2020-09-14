@@ -20,7 +20,7 @@ export default () => {
 
   return (
     <Root>
-      {data.length ? (
+      {data.length || loading ? (
         <Spin spinning={loading}>
           <StyledList
             bordered
