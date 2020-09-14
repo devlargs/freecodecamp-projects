@@ -1,5 +1,5 @@
 import { Table } from "antd";
-import conversion from "constants/conversion";
+import conversion from "constants/conversionArray";
 
 export default ({ field }: { field: string }) => (
   <>

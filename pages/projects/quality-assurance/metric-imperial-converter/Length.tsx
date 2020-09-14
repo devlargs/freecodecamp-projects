@@ -4,7 +4,7 @@ import MetricImperialTable from "components/MetricImperialTable";
 export default () => {
   return (
     <>
-      <ConvertForm />
+      <ConvertForm type="length" />
       <br />
       <MetricImperialTable field="length" />
     </>
