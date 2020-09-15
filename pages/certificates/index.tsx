@@ -7,7 +7,7 @@ import SD from "constants/styleDefaults";
 
 export default function () {
   return (
-    <CenteredContent bgColor={SD.colors.certificates} height="100%">
+    <CenteredContent bgColor={SD.colors.certificates} svg={true} height="100%">
       <SEO
         title="Certificates Acquired"
         description="List of all certificates acquired by Ralph Largo on freeCodeCamp.org"
