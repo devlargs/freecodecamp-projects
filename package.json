@@ -34,6 +34,7 @@
     "node-url-shortener": "^1.1.11",
     "nprogress": "^0.2.0",
     "react": "16.13.1",
+    "react-cool-img": "^1.2.4",
     "react-dom": "16.13.1",
     "react-hook-form": "^6.7.2",
     "react-json-pretty": "^2.2.0",

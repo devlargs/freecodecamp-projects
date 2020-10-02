@@ -9,6 +9,7 @@ import Link from "next/link";
 import SEO from "components/SEO";
 import SD from "constants/styleDefaults";
 import { useState, useEffect } from "react";
+import Img from "react-cool-img";
 
 const { Meta } = Card;
 const { list, item } = sequence;
@@ -64,6 +65,7 @@ export default () => {
                           cover={
                             <img
                               height="200"
+                              placeholder="/assets/images/loader.gif"
                               alt={`${title}-image`}
                               src={`/assets/images/projects/${title}.png`}
                             />
