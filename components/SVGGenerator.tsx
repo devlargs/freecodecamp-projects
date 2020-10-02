@@ -3,8 +3,8 @@ const svgs = [
     id="b74f039e-7d6a-4faf-9af8-185aab588417"
     data-name="Layer 1"
     xmlns="http://www.w3.org/2000/svg"
-    width="250"
-    height="250"
+    width="300"
+    height="300"
     viewBox="0 0 929.01319 743.5"
   >
     <path

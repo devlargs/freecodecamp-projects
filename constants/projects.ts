@@ -35,8 +35,8 @@ export default [
       "Metric Imperial Converter",
       "Issue Tracker",
       "Personal Library",
-      // "Soduku Solver",
-      // "American British Translator",
+      "Soduku Solver",
+      "American British Translator",
     ],
   },
 ];
