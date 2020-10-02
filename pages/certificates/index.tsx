@@ -36,7 +36,7 @@ export default function () {
 }
 
 const StyledImage: any = styled.img`
-  margin-bottom: 8pt;
+  margin-bottom: 30px;
   width: 70vw;
   border: 1px solid black;
   height: 70vh;
