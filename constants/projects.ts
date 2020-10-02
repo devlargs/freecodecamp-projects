@@ -26,7 +26,7 @@ export default [
       "Request Header Parser",
       "URL Shortener",
       "Exercise Tracker",
-      // "File Metadata Microservice",
+      "File Metadata Microservice",
     ],
   },
   {
