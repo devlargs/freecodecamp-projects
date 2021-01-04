@@ -16,7 +16,6 @@ export default class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
   ): Promise<DocumentInitialProps> {
-    console.log(ctx);
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -59,7 +58,7 @@ export default class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `
               if (!(location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
-                console.log("gago")
+                console.log("google analytics is connected")
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
