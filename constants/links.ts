@@ -20,7 +20,7 @@ export default {
   GOOGLE_ADSENSE:
     "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
   GOOGLE_ANALYTICS:
-    "https://www.googletagmanager.com/gtag/js?id=UA-175345501-1",
+    "https://www.googletagmanager.com/gtag/js?id=UA-186388859-1",
   MARKDOWN_IMAGE:
     "https://assets.mycast.io/actor_images/actor-johnny-sins-75125_large.jpg?1586055334",
   SAMPLE_URL: "https://ralphlargo.com",

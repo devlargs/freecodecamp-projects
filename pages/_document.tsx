@@ -8,6 +8,7 @@ import Document, {
 } from "next/document";
 import links from "constants/links";
 import { ServerStyleSheet } from "styled-components";
+import Router from "next/router";
 
 const { FONTS } = links;
 
@@ -15,6 +16,7 @@ export default class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
   ): Promise<DocumentInitialProps> {
+    console.log(ctx);
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -56,10 +58,13 @@ export default class MyDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'UA-175345501-1');
+              if (!(location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
+                console.log("gago")
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'UA-186388859-1');
+              }
             `,
             }}
           />
