@@ -16,6 +16,9 @@ export default {
     ROBOTO_MONO: "https://fonts.googleapis.com/css?family=Roboto+Mono",
   },
   GITHUB_PROFILE: "https://github.com/devlargs",
+  GOOGLE_AD_CLIENT: "ca-pub-1798621837228697",
+  GOOGLE_ADSENSE:
+    "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
   GOOGLE_ANALYTICS:
     "https://www.googletagmanager.com/gtag/js?id=UA-175345501-1",
   MARKDOWN_IMAGE:

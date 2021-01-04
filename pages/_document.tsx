@@ -49,6 +49,11 @@ export default class MyDocument extends Document {
           <link href={FONTS.ORBITRON} rel="stylesheet" />
           <script async src={links.GOOGLE_ANALYTICS}></script>
           <script
+            data-ad-client={links.GOOGLE_AD_CLIENT}
+            async
+            src={links.GOOGLE_ADSENSE}
+          ></script>
+          <script
             dangerouslySetInnerHTML={{
               __html: `
               window.dataLayer = window.dataLayer || [];
