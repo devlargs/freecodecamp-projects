@@ -5,7 +5,7 @@ import { useState } from "react";
 import CenteredContent from "components/CenteredContent";
 
 const operations = ["+", "-", "X", "/"];
-const operandRegex = /[+-]|[\/]|[*]/gi;
+const operandRegex = /[-+/*X]/gi;
 const numbers = "1234567890";
 
 export default () => {
@@ -33,8 +33,8 @@ export default () => {
 
   const click = (key) => {
     if (key === ".") {
-      const hasDecimal = value.split(operandRegex).filter(Boolean);
-      const lastValue = hasDecimal[hasDecimal.length - 1];
+      const operands = value.split(operandRegex);
+      const lastValue = operands[operands.length - 1] || "";
       if (!lastValue.includes(".")) {
         setValue((value) => `${value}.`);
       }
@@ -47,11 +47,14 @@ export default () => {
     }
 
     if (key === "=") {
-      let newVal = value.replace("X", "*");
+      let newVal = value.split("X").join("*");
       if (operations.includes(value[value.length - 1])) {
         newVal = newVal.slice(0, -1);
       }
       try {
+        if (!/^[\d+\-*/.]+$/.test(newVal)) {
+          throw new Error("Unexpected characters in expression");
+        }
         setValue(`${eval(newVal)}`);
       } catch (Ex) {
         setValue(`Syntax Error`);
@@ -61,23 +64,32 @@ export default () => {
     }
 
     if (numbers.split("").includes(key)) {
-      let newVal = `${value}${key}`.replace(/^0/, "");
-      setValue(newVal);
+      setValue((value) => (value === "0" ? key : `${value}${key}`));
       return;
     }
 
     if (operations.includes(key)) {
-      if (!(value[value.length - 1] === key)) {
-        if (
-          operations.includes(value[value.length - 1]) &&
-          operations.includes(value[value.length - 2])
-        ) {
-          const temp = value.slice(0, -1).replace(/.$/, `${key}`);
-          setValue(temp);
-        } else {
-          setValue(`${value}${key}`);
-        }
+      const last = value[value.length - 1];
+
+      if (last === key) {
+        return;
       }
+
+      if (!operations.includes(last)) {
+        setValue(`${value}${key}`);
+        return;
+      }
+
+      if (key === "-" && !operations.includes(value[value.length - 2])) {
+        setValue(`${value}${key}`);
+        return;
+      }
+
+      let base = value;
+      while (operations.includes(base[base.length - 1])) {
+        base = base.slice(0, -1);
+      }
+      setValue(`${base}${key}`);
     }
   };
 
@@ -87,7 +99,7 @@ export default () => {
       <Container>
         <div>
           <InputContainer>
-            <input type="text" id="display" value={value} />
+            <input type="text" id="display" value={value} readOnly />
           </InputContainer>
           <Grid>
             {Object.keys(numpads).map((q, i) => (

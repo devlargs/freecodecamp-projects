@@ -2,6 +2,7 @@ export default {
   colors: {
     certificates: "cornflowerblue",
     exerciseTracker: "#1b262c",
+    fileMetadataMicroservice: "#31473A",
     header: "#041529",
     main: "#6495ed",
     personalLibrary: "#E6F7FF",

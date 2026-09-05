@@ -98,17 +98,18 @@ const Root = styled.div`
   }
 `;
 
-export default ({ data }) => {
+export default ({ data, color }) => {
   const [random, setRandom] = useState(data?.author ? data : staticQuote());
   const [loading, setLoading] = useState(false);
-  const [randomColor, setRandomColor] = useState(getRandomColor());
+  const [randomColor, setRandomColor] = useState(color);
   const [rotation, setRotation] = useState(360);
 
   const generateNewQuote = async () => {
     setLoading(true);
     try {
       const { data } = (await axios.get(`/api/quotes/random`)) as any;
-      setRandom(Math.random() > 0.1 ? data.edges : staticQuote());
+      const quote = data?.edges;
+      setRandom(quote?.quote && Math.random() > 0.1 ? quote : staticQuote());
       setLoading(false);
     } catch (ex) {
       setLoading(false);
@@ -186,3 +187,10 @@ export default ({ data }) => {
     </CenteredContent>
   );
 };
+
+export const getServerSideProps = async () => ({
+  props: {
+    data: staticQuote(),
+    color: getRandomColor(),
+  },
+});

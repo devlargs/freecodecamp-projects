@@ -4,8 +4,7 @@ import certificates from "constants/certificates";
 import links from "constants/links";
 import SEO from "components/SEO";
 import SD from "constants/styleDefaults";
-import Img from "react-cool-img";
-// import loadingImage from "./loader.gif";
+import SkeletonImage from "components/SkeletonImage";
 
 export default function () {
   return (
@@ -15,47 +14,107 @@ export default function () {
         description="List of all certificates acquired by Ralph Largo on freeCodeCamp.org"
         imageLink={links.FCC_CERTIFICATE_IMAGE}
       />
-      <div style={{ textAlign: "center" }}>
-        <h1
-          style={{
-            paddingTop: 20,
-            marginBottom: 20,
-            fontSize: "2rem",
-            color: "white",
-            fontWeight: "bold",
-          }}
-        >
-          Certificates Acquired
-        </h1>
-        {certificates.map((q, i) => (
-          <a key={i} href={`${links.FCC_CERTIFICATES}/${q}`} target="_blank">
-            <StyledImage
-              placeholder="/assets/images/loader.gif"
-              src={`/assets/images/certificates/${q}.png`}
-              alt={q}
-            />
-          </a>
-        ))}
-      </div>
+      <Root>
+        <Header>
+          <h1>Certificates Acquired</h1>
+          <p>
+            {certificates.length} certifications earned on freeCodeCamp.org.
+            Select any certificate to verify it.
+          </p>
+        </Header>
+        <Grid>
+          {certificates.map((q) => (
+            <Card
+              key={q.slug}
+              href={`${links.FCC_CERTIFICATES}/${q.slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <SkeletonImage
+                src={`/assets/images/certificates/${q.slug}.png`}
+                alt={`${q.name} certificate`}
+              />
+              <div className="caption">
+                <h2>{q.name}</h2>
+                <span>View certification</span>
+              </div>
+            </Card>
+          ))}
+        </Grid>
+      </Root>
     </CenteredContent>
   );
 }
 
-const StyledImage: any = styled(Img)`
-  margin-bottom: 30px;
-  width: 70vw;
-  border: 1px solid black;
-  height: 70vh;
-}
+const Root = styled.div`
+  width: 92vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0 60px 0;
+`;
 
-  @media screen and (max-width: 400px) {
-    width: 100vw;
-    height: 100%;
-    padding: 5px;
+const Header = styled.div`
+  text-align: center;
+  margin-bottom: 32px;
+
+  h1 {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
   }
 
-  @media screen and (min-width: 401px) and (max-width: 768px) {
-    width: 95vw;
-    height: 45vh;
+  p {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+  }
+
+  @media screen and (max-width: 520px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+
+  @media screen and (max-width: 420px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+`;
+
+const Card = styled.a`
+  display: block;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.26);
+  }
+
+  .caption {
+    padding: 14px 16px 16px 16px;
+    border-top: 1px solid #eef2f7;
+
+    h2 {
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 0 0 4px 0;
+      color: #1f2a37;
+    }
+
+    span {
+      font-size: 0.85rem;
+      color: ${SD.colors.main};
+    }
   }
 `;

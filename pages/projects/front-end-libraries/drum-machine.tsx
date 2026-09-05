@@ -22,8 +22,11 @@ export default () => {
   const playKey = (e, keypress = true) => {
     const key = (keypress ? e.code : e).split("Key")[1];
     setCurrentKey(file[key]);
-    var audio = document.getElementById(key) as HTMLAudioElement;
-    audio?.play();
+    const audio = document.getElementById(key) as HTMLAudioElement;
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play();
+    }
   };
 
   useEffect(() => {

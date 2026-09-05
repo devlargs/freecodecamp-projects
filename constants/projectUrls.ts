@@ -1,4 +1,17 @@
 export default {
+  FILE_METADATA_MICROSERVICE: {
+    examples: [
+      {
+        type: "POST",
+        url: "/api/fileMetaData",
+      },
+    ],
+    stories: [
+      "I can submit a form object that includes a file upload.",
+      `The form file input field has the <b>name</b> attribute set to <b>upfile</b>.`,
+      `When I submit something, I will receive the file <b>name</b>, <b>type</b> and <b>size</b> in bytes within the JSON response.`,
+    ],
+  },
   EXERCISE_TRACKER: {
     examples: [
       {
