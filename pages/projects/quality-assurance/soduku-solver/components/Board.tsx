@@ -2,13 +2,18 @@ import styled from "styled-components";
 import { EMPTY, normalize } from "utils/sudoku";
 
 type Props = {
-  puzzle: string;
-  solved: number[];
-  invalid: number[];
-  onChange: (index: number, value: string) => void;
+  puzzle?: string;
+  solved?: number[];
+  invalid?: number[];
+  onChange?: (index: number, value: string) => void;
 };
 
-export default ({ puzzle, solved, invalid, onChange }: Props) => (
+export default ({
+  puzzle = "",
+  solved = [],
+  invalid = [],
+  onChange = () => {},
+}: Props) => (
   <Grid>
     {normalize(puzzle).map((cell, i) => {
       const row = Math.floor(i / 9);

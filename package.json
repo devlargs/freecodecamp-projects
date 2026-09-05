@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "author": "Ralph Largo",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev -p 8000",
     "build": "next build",
