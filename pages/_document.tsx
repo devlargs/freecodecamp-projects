@@ -45,6 +45,12 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin=""
+          />
           <link href={FONTS.DANCING_SCRIPT} rel="stylesheet" />
           <link href={FONTS.ROBOTO_MONO} rel="stylesheet" />
           <link href={FONTS.ORBITRON} rel="stylesheet" />

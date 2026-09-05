@@ -1,0 +1,18 @@
+export default [
+  "/projects/apis-and-microservices/exercise-tracker/components/AddExcercise",
+  "/projects/apis-and-microservices/exercise-tracker/components/AddUser",
+  "/projects/apis-and-microservices/exercise-tracker/components/GetExercises",
+  "/projects/apis-and-microservices/exercise-tracker/components/UserSelect",
+  "/projects/apis-and-microservices/exercise-tracker/components/Users",
+  "/projects/quality-assurance/issue-tracker/components/Column",
+  "/projects/quality-assurance/issue-tracker/components/IssueForm",
+  "/projects/quality-assurance/metric-imperial-converter/Area",
+  "/projects/quality-assurance/metric-imperial-converter/Length",
+  "/projects/quality-assurance/metric-imperial-converter/Mass",
+  "/projects/quality-assurance/metric-imperial-converter/Temperature",
+  "/projects/quality-assurance/metric-imperial-converter/Volume",
+  "/projects/quality-assurance/personal-library/components/AddBookForm",
+  "/projects/quality-assurance/personal-library/components/BookList",
+  "/projects/quality-assurance/personal-library/components/CommentList",
+  "/projects/quality-assurance/soduku-solver/components/Board",
+];

@@ -13,40 +13,59 @@ type Props = {
   imgAlt?: string;
 };
 
+const SITE_NAME = "Free Code Camp Projects";
+
+const getOrigin = () => {
+  if (process.browser) {
+    return window.location.origin;
+  }
+  if (process.env.WEBSITE_URL) {
+    return process.env.WEBSITE_URL;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return "";
+};
+
 export default ({
   description,
   withFCCScript = false,
   title,
-  imageUrl,
   imageLink,
   imgAlt,
 }: Props) => {
   const desc = description || meta.description(title);
   const router = useRouter();
-  const origin = process.browser
-    ? window.location.origin
-    : process.env.WEBSITE_URL;
-
-  const url = `${origin}${router?.pathname}`;
-  const imgUrl = imageLink
+  const origin = getOrigin();
+  const path = `${router?.asPath || "/"}`.split("?")[0].split("#")[0];
+  const url = origin ? `${origin}${path}` : "";
+  const image = imageLink
     ? imageLink
-    : `${origin}/assets/images/projects/${cs(title, "sentence", "kebab")}.png`;
+    : origin
+    ? `${origin}/assets/images/projects/${cs(title, "sentence", "kebab")}.png`
+    : "";
 
   return (
     <Head>
       <title>{title}</title>
-      <meta name="og:type" content="article" />
-      <meta name="robots" content="index, follow" />
       <meta name="description" content={desc} />
-      <meta name="og:title" property="og:title" content={title} />
-      <meta name="og:description" content={desc} />
-      <meta name="twitter:card" content="summary" />
+      {url && <link rel="canonical" href={url} />}
+
+      <meta property="og:type" content="article" />
+      <meta property="og:site_name" content={SITE_NAME} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={desc} />
+      {url && <meta property="og:url" content={url} />}
+      {image && <meta property="og:image" content={image} />}
+      {image && (
+        <meta property="og:image:alt" content={imgAlt || `${title} preview`} />
+      )}
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={desc} />
-      <meta name="og:url" content={url} />
-      <meta name="og:image" content={imgUrl} />
-      <meta name="og:image_alt" content={imgAlt || "freecodecamp-image"} />
-      <meta name="twitter:url" content={url} />
-      <meta name="twitter:image" content={imgUrl} />
+      {image && <meta name="twitter:image" content={image} />}
 
       {withFCCScript && <script src={links.FCC_TEST_SCRIPT}></script>}
     </Head>

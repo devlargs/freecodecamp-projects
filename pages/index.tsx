@@ -17,7 +17,7 @@ export default function App() {
       <CenteredContent>
         <Root>
           <div id="container">
-            <img src="/assets/images/freecodecamp.png" />
+            <img src="/assets/images/freecodecamp.png" alt="freeCodeCamp logo" />
             <h1>
               Free Code Camp Projects
               <br />

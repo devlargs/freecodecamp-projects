@@ -52,7 +52,8 @@ export default () => {
                       key={`${key}-${i}`}
                       href={`/projects/${key}/${title}`}
                     >
-                      <motion.div
+                      <motion.a
+                        href={`/projects/${key}/${title}`}
                         variants={item}
                         custom={i * p}
                         whileHover={{
@@ -73,7 +74,7 @@ export default () => {
                         >
                           <Meta title={q} />
                         </StyledCard>
-                      </motion.div>
+                      </motion.a>
                     </Link>
                   );
                 })}
@@ -119,6 +120,8 @@ const Flexbox = styled(motion.div)`
   gap: 20px 20px;
 
   .container {
+    display: block;
+    color: inherit;
     background-color: white;
     padding: 10px;
     text-align: center;

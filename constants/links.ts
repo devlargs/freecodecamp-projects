@@ -11,9 +11,11 @@ export default {
   FCC_TEST_SCRIPT:
     "https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js",
   FONTS: {
-    DANCING_SCRIPT: "https://fonts.googleapis.com/css?family=Dancing Script",
-    ORBITRON: "https://fonts.googleapis.com/css?family=Orbitron",
-    ROBOTO_MONO: "https://fonts.googleapis.com/css?family=Roboto+Mono",
+    DANCING_SCRIPT:
+      "https://fonts.googleapis.com/css?family=Dancing+Script&display=swap",
+    ORBITRON: "https://fonts.googleapis.com/css?family=Orbitron&display=swap",
+    ROBOTO_MONO:
+      "https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap",
   },
   GITHUB_PROFILE: "https://github.com/devlargs",
   GOOGLE_AD_CLIENT: "ca-pub-1798621837228697",
